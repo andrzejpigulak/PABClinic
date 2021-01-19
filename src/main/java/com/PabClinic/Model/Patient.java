@@ -8,7 +8,7 @@ public class Patient {
     private String login;
     private String email;
     private int telephoneNumber;
-    private String adress;
+    private String adressssss;
     private String postCode;
     private String City;
 
