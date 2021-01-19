@@ -8,23 +8,23 @@ public class Patient {
     private String login;
     private String email;
     private int telephoneNumber;
-    private String adress;
+    private String address;
     private String postCode;
-    private String City;
+    private String city;
 
     public Patient() {
     }
 
-    public Patient(String firstName, String lastName, long pesel, String login, String email, int telephoneNumber, String adress, String postCode, String city) {
+    public Patient(String firstName, String lastName, long pesel, String login, String email, int telephoneNumber, String address, String postCode, String city) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pesel = pesel;
         this.login = login;
         this.email = email;
         this.telephoneNumber = telephoneNumber;
-        this.adress = adress;
+        this.address = address;
         this.postCode = postCode;
-        City = city;
+        this.city = city;
     }
 
     public String getFirstName() {
@@ -75,12 +75,12 @@ public class Patient {
         this.telephoneNumber = telephoneNumber;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getPostCode() {
@@ -92,11 +92,11 @@ public class Patient {
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
     public void setCity(String city) {
-        City = city;
+        this.city = city;
     }
 
     @Override
@@ -108,9 +108,9 @@ public class Patient {
                 ", login='" + login + '\'' +
                 ", email='" + email + '\'' +
                 ", telephoneNumber=" + telephoneNumber +
-                ", adress='" + adress + '\'' +
+                ", address='" + address + '\'' +
                 ", postCode='" + postCode + '\'' +
-                ", City='" + City + '\'' +
+                ", city='" + city + '\'' +
                 '}';
     }
 }
