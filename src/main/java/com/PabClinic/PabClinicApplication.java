@@ -10,4 +10,6 @@ public class PabClinicApplication {
 		SpringApplication.run(PabClinicApplication.class, args);
 	}
 
+	// Andrzej, trzeba jeszcze zmodyfikować stronę główną i dodać przycisk do zalogowania na swoje konto.
+	// tego brakuje na tej stronie wcm-remedium.pl
 }
