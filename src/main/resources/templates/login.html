@@ -22,14 +22,27 @@
     <input type="text" placeholder="Szukaj">
 </div>
 
+<div class="imgcontainer">
+    <img src="images/avatar.png" alt="Avatar" class="avatar">
+</div>
+
 <form action="#" th:action="@{/login}" method="post">
-    <label>Login lub adres e-mail. </label><br>
-    <input type="text" th:field="${patientLogin.login}"><br>
-    <label>Hasło: </label><br>
-    <input type="password" th:field="${patientLogin.password}"><br>
-    <br><input type="submit" value = "Submit">
+    <div class="container">
+        <label class="label"><b>Login:</b></label>
+        <input type="text" th:field="${patientLogin.login}" placeholder="Podaj Login" required>
+    </div>
+    <div class="container">
+        <label class="label"><b>Hasło:</b></label>
+        <input type="password" th:field="${patientLogin.password}" placeholder="Podaj hasło" required>
+    </div>
+    <div class="button">
+        <button type="submit">Zaloguj</button>
+    </div>
+    <div class="registration-link">
+        <a href="registration">Załóż konto</a>
+        <a href="forgotpassword">Zapomniałem hasła</a>
+    </div>
 </form>
 
 </body>
-
 </html>

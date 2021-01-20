@@ -1,0 +1,130 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.top_container {
+    margin: 20px 0px 20px 10%;
+}
+
+.top_nav {
+    overflow: hidden;
+    background-color: white;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    z-index: 1;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%
+}
+
+.top_nav a {
+    text-decoration: none;
+    border-right: 1px solid gray;
+    padding: 20px 20px;
+    text-align: center;
+    float: left;
+    display: block;
+    color: gray;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.top_nav a.home {
+    background-color: #000080;
+    color: white;
+    margin-left: 10%;
+}
+
+.top_nav a.rejestracja {
+    background-color: red;
+    color: white;
+}
+
+.top_nav a.vip {
+    color: red;
+}
+
+.top_nav a:hover {
+    background-color: #000080;
+    color: white;
+}
+
+.top_nav input[type=text] {
+    float: right;
+    padding: 12px;
+    margin-top: 15px;
+    margin-right: 20px;
+    font-size: 16px;
+    border: 1px solid gray;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+img.avatar {
+    width: 15%;
+    border-radius: 30%;
+}
+
+.label {
+    margin-left: 10px;
+}
+
+.container input[type=text], input[type=password] {
+    width: 25%;
+    padding: 12px 20px;
+    border: 1px solid black;
+}
+
+.container {
+    padding: 12px 12px;
+    width: 50%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button {
+    margin: auto;
+    text-align: center;
+}
+
+button {
+    width: 8%;
+    padding: 12px 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid black;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #000080;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.6;
+}
+
+.registration-link {
+    text-align: center;
+    padding: 12px 12px;
+    margin: auto;
+}
+
+.registration-link a {
+    text-decoration: none;
+    font-size: 16px;
+    color: gray;
+    padding-right: 12px;
+}
+
+.registration-link a:hover {
+    color: black;
+}
