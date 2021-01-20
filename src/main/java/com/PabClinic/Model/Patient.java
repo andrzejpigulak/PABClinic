@@ -4,10 +4,13 @@ public class Patient {
 
     private String firstName;
     private String lastName;
-    private long pesel;
     private String login;
+    private String password;
     private String email;
     private int telephoneNumber;
+    private long pesel;
+
+
     private String address;
     private String postCode;
     private String city;
@@ -15,9 +18,10 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(String firstName, String lastName, long pesel, String login, String email, int telephoneNumber, String address, String postCode, String city) {
+    public Patient(String firstName, String lastName, String password, long pesel, String login, String email, int telephoneNumber, String address, String postCode, String city) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.password = password;
         this.pesel = pesel;
         this.login = login;
         this.email = email;
@@ -41,6 +45,15 @@ public class Patient {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public long getPesel() {

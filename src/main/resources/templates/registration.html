@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <title>PAB Zdrowie - Rezonans | RTG | Diagnostyka | Laboratorium</title>
+</head>
+<body>
+
+<div class="top_container">
+    <a href="index">
+        <img src="images/pab_clinic_logo.jpg" alt="Clinic logo" title="PAB CLINIC">
+    </a>
+</div>
+<div class="top_nav" id="my_top_nav">
+    <a class="home" href="index">STRONA GŁÓWNA</a>
+    <a href="services">USŁUGI</a>
+    <a href="prices">CENNIK</a>
+    <a class="vip" href="vipatient">VIPACJENT</a>
+    <a href="contact">KONTAKT</a>
+    <a class="rejestracja" href="login">REJESTRACJA ON-LINE</a>
+    <input type="text" placeholder="Szukaj">
+</div>
+
+<form action="#" th:action="@{/registration}" method="post">
+
+    <table align="center">
+        <tr>
+            <td colspan="3" style="text-align:center;">DANE PODSTAWOWE</td>
+        </tr>
+        <tr>
+            <td><br></td>
+        </tr>
+        <tr>
+            <td>Imię:</td>
+            <td>
+                <input type="text" th:field="${patient.firstName}" placeholder="Twoje imię">
+            </td>
+            <td>
+                Wymagane.
+            </td>
+        </tr>
+        <tr>
+            <td>Nazwisko:</td>
+            <td>
+                <input type="text" th:field="${patient.lastName}" placeholder="Twoje nazwisko">
+            </td>
+            <td>
+                Wymagane.
+            </td>
+        </tr>
+
+        <tr>
+            <td>Użytkownik:</td>
+            <td>
+                <input type="text" th:field="${patient.login}" placeholder="Twój login">
+            </td>
+            <td>
+                Wymagane.
+            </td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>
+                <input type="email" th:field="${patient.email}" placeholder="Twój email.">
+            </td>
+            <td>
+                Wymagane.
+            </td>
+        </tr>
+        <tr>
+            <td>Telefon kontaktowy:</td>
+            <td>
+                <input type="tel" th:field="${patient.telephoneNumber}" placeholder="Twój numer telefonu.">
+            </td>
+            <td>
+                Opcjonalne.
+            </td>
+        </tr>
+        <tr>
+            <td>Pesel:</td>
+            <td>
+                <input type="tel" th:field="${patient.pesel}" placeholder="Twój pesel.">
+            </td>
+            <td>
+                Wymagane.
+            </td>
+        </tr>
+        <tr>
+            <td><br></td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align:center;">ADRES ZAMIESZKANIA</td>
+        </tr>
+        <tr>
+            <td><br></td>
+        </tr>
+        <tr>
+            <td>Adres zamieszkania:</td>
+            <td>
+                <input type="text" th:field="${patient.address}" placeholder="Twój adres zamieszkania.">
+            </td>
+            <td>
+                Wymagane.
+            </td>
+        </tr>
+        <tr>
+            <td>Kod pocztowy:</td>
+            <td>
+                <input type="text" th:field="${patient.postCode}" placeholder="Kod pocztowy.">
+            </td>
+            <td>
+                Wymagane.
+            </td>
+        </tr>
+        <tr>
+            <td>Miejscowość:</td>
+            <td>
+                <input type="text" th:field="${patient.city}" placeholder="Miejscowość zamieszkania.">
+            </td>
+            <td>
+                Wymagane.
+            </td>
+        </tr>
+        <tr>
+            <td><br></td>
+        </tr>
+
+        <td colspan="3" align="center"><input type="submit" value="Załóż konto"></td>
+
+    </table>
+
+
+</form>
+
+</body>
+
+</html>

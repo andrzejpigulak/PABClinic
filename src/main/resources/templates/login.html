@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="loginStyle.css">
+    <title>PAB Zdrowie - Rezonans | RTG | Diagnostyka | Laboratorium</title>
+</head>
+<body>
+<div class="top_container">
+    <a href="index">
+        <img src="images/pab_clinic_logo.jpg" alt="Clinic logo" title="PAB CLINIC">
+    </a>
+</div>
+<div class="top_nav" id="my_top_nav">
+    <a class="home" href="index">STRONA GŁÓWNA</a>
+    <a href="services">USŁUGI</a>
+    <a href="prices">CENNIK</a>
+    <a class="vip" href="vipatient">VIPACJENT</a>
+    <a href="contact">KONTAKT</a>
+    <a class="rejestracja" href="login">REJESTRACJA ON-LINE</a>
+    <input type="text" placeholder="Szukaj">
+</div>
+
+<form action="#" th:action="@{/login}" method="post">
+    <label>Login lub adres e-mail. </label><br>
+    <input type="text" th:field="${patientLogin.login}"><br>
+    <label>Hasło: </label><br>
+    <input type="password" th:field="${patientLogin.password}"><br>
+    <br><input type="submit" value = "Submit">
+</form>
+
+</body>
+
+</html>
