@@ -35,56 +35,41 @@
         <tr>
             <td>Imię:</td>
             <td>
-                <input type="text" th:field="${patient.firstName}" placeholder="Twoje imię">
-            </td>
-            <td>
-                Wymagane.
+                <input type="text" th:field="${patient.firstName}" placeholder="Wymagane">
             </td>
         </tr>
         <tr>
             <td>Nazwisko:</td>
             <td>
-                <input type="text" th:field="${patient.lastName}" placeholder="Twoje nazwisko">
-            </td>
-            <td>
-                Wymagane.
+                <input type="text" th:field="${patient.lastName}" placeholder="Wymagane">
             </td>
         </tr>
 
         <tr>
             <td>Użytkownik:</td>
             <td>
-                <input type="text" th:field="${patient.login}" placeholder="Twój login">
-            </td>
-            <td>
-                Wymagane.
+                <input type="text" th:field="${patient.login}" placeholder="Wymagane">
             </td>
         </tr>
         <tr>
             <td>Email:</td>
             <td>
-                <input type="email" th:field="${patient.email}" placeholder="Twój email.">
+                <input type="email" th:field="${patient.email}" placeholder="Wymagane">
             </td>
-            <td>
-                Wymagane.
-            </td>
+
         </tr>
         <tr>
             <td>Telefon kontaktowy:</td>
             <td>
-                <input type="tel" th:field="${patient.telephoneNumber}" placeholder="Twój numer telefonu.">
-            </td>
-            <td>
-                Opcjonalne.
+                <input type="tel" th:field="${patient.telephoneNumber}" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" name="phone">
+                <small>Format: 123-456-789</small>
             </td>
         </tr>
         <tr>
             <td>Pesel:</td>
             <td>
-                <input type="tel" th:field="${patient.pesel}" placeholder="Twój pesel.">
-            </td>
-            <td>
-                Wymagane.
+                <input type="tel" th:field="${patient.pesel}" pattern="[0-9]{11}">
+                <small>Format: 11 liczb</small>
             </td>
         </tr>
         <tr>
@@ -99,28 +84,19 @@
         <tr>
             <td>Adres zamieszkania:</td>
             <td>
-                <input type="text" th:field="${patient.address}" placeholder="Twój adres zamieszkania.">
-            </td>
-            <td>
-                Wymagane.
+                <input type="text" th:field="${patient.address}" placeholder="Wymagane">
             </td>
         </tr>
         <tr>
             <td>Kod pocztowy:</td>
             <td>
-                <input type="text" th:field="${patient.postCode}" placeholder="Kod pocztowy.">
-            </td>
-            <td>
-                Wymagane.
+                <input type="text" th:field="${patient.postCode}" placeholder="Wymagane">
             </td>
         </tr>
         <tr>
             <td>Miejscowość:</td>
             <td>
-                <input type="text" th:field="${patient.city}" placeholder="Miejscowość zamieszkania.">
-            </td>
-            <td>
-                Wymagane.
+                <input type="text" th:field="${patient.city}" placeholder="Wymagane">
             </td>
         </tr>
         <tr>
