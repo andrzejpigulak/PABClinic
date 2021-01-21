@@ -3,18 +3,13 @@ package com.PabClinic.Model;
 public class ClinetContact {
 
     private String firstName;
-    private String lastName;
     private String email;
-    private int telephoneNumber;
+    private String textMessage;
 
-    public ClinetContact(String firstName, String lastName, String email, int telephoneNumber) {
+    public ClinetContact(String firstName, String email, String textMessage) {
         this.firstName = firstName;
-        this.lastName = lastName;
         this.email = email;
-        this.telephoneNumber = telephoneNumber;
-    }
-
-    public ClinetContact() {
+        this.textMessage = textMessage;
     }
 
     public String getFirstName() {
@@ -25,14 +20,6 @@ public class ClinetContact {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -41,11 +28,11 @@ public class ClinetContact {
         this.email = email;
     }
 
-    public int getTelephoneNumber() {
-        return telephoneNumber;
+    public String getTextMessage() {
+        return textMessage;
     }
 
-    public void setTelephoneNumber(int telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
+    public void setTextMessage(String textMessage) {
+        this.textMessage = textMessage;
     }
 }
