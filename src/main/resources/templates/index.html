@@ -21,21 +21,34 @@
             <a class="rejestracja" href="login">REJESTRACJA ON-LINE</a>
             <input type="text" placeholder="Szukaj">
         </div>
+
         <div class="slideshow-container">
-  <!-- Full-width images with number and caption text -->
-		  <div class="mySlides fade">
-			     <img src="images/slider-1.jpg" style="width:100%">
-		  </div>
-		  <div class="mySlides fade">
-			     <img src="images/slider-2.jpg" style="width:100%">
-		  </div>
-		  <div class="mySlides fade">
-			     <img src="images/slider-3.jpg" style="width:100%">
-		  </div>
-            <div class="text-block" >
-                <h4>Co to ma być1?</h4>
+
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 3</div>
+                <img src="images/slider-1.jpg" style="width:100%">
             </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 3</div>
+                <img src="images/slider-2.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 3</div>
+                <img src="images/slider-3.jpg" style="width:100%">
+            </div>
+
         </div>
+
+        <div style="text-align:center">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+        <div class="box3">Tutaj godziny otwarcia</div>
+        <div class="box2">Tutaj jakieś pliki do pobrania</div>
+        <div class="box1">Tutaj numery kontaktowe</div>
         <div class="content">
   <h3>On Scroll Sticky Header</h3>
   <p>The header will stick to the top when you reach its scroll position.</p>
@@ -51,28 +64,37 @@
 </div>
 
 <script>
-var slideIndex = 0;
-showSlides();
+var slideIndex = 1;
+showSlides(slideIndex);
 
-function showSlides() {
- var i;
- var slides = document.getElementsByClassName("mySlides");
- var dots = document.getElementsByClassName("dot");
-        
- for (i = 0; i < slides.length; i++) {
-  slides[i].style.display = "none";  
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
 }
- slideIndex++;
- if (slideIndex > slides.length) {slideIndex = 1}    
-  for (i = 0; i < dots.length; i++) {
-   dots[i].className = dots[i].className.replace(" active", "");
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
   }
-  slides[slideIndex-1].style.display = "block";  
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
   dots[slideIndex-1].className += " active";
-  setTimeout(showSlides, 5000); // Change image every 5 seconds
+  setTimeout(showSlides, 5000); // Change image every 2 seconds
 }
-  window.onscroll = function() {myFunction()};
 
+window.onscroll = function() {myFunction()};
 var topnav = document.getElementById("my_top_nav");
 var sticky = topnav.offsetTop;
 
