@@ -6,6 +6,10 @@ public class ClinetContact {
     private String email;
     private String textMessage;
 
+
+    public ClinetContact() {
+    }
+
     public ClinetContact(String firstName, String email, String textMessage) {
         this.firstName = firstName;
         this.email = email;

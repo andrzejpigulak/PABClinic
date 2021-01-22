@@ -1,5 +1,6 @@
 package com.PabClinic.Controller;
 
+import com.PabClinic.Model.ClinetContact;
 import com.PabClinic.Model.Patient;
 import com.PabClinic.Model.PatientFabrik;
 import com.PabClinic.Model.PatientLogin;
@@ -36,6 +37,7 @@ public class Navigation {
 
     @GetMapping("/contact")
     public String toContact(Model model) {
+        model.addAttribute("patientContact", new ClinetContact());
         return "contact";
     }
 
