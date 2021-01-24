@@ -97,6 +97,13 @@ public class Navigation {
 
     }
 
+    @GetMapping("/privacy_policy")
+    public String toPrivacyPolicy(Model model) {
+        return "privacy_policy";
+    }
+
+
+
     private String findPatientFromLogin(Model model, @ModelAttribute PatientLogin patientLogin) {
 
         for (Patient p : patientFabrik.getPatientsList()) {

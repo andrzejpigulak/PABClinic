@@ -5,12 +5,11 @@ public enum Specialisation {
     DERMATOLOG,
     GINEKOLOG,
     OKULISTA,
-    ORTIOEDA,
+    ORTIOPEDA,
     PSYCHOLOG,
     PSYCHIATRA,
     LARYNGOLOG,
     NEUROLOG,
-    UROLOG,
-    DENTYSTA;
+    UROLOG;
 
 }
