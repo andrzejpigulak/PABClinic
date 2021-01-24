@@ -21,7 +21,7 @@ public class EmailServiceImpl {
         message.setFrom(from);
         message.setSubject(subject);
         message.setTo(to);
-        message.setText("Wiadomość od: " + from + "\n\n" + text + "\n\nPozrawiam i kocham Was bardzo,\n" + name);
+        message.setText("Wiadomość od: " + from + "\n\n" + text + "\n\nPodzrawiam i kocham Was bardzo,\n" + name);
         System.out.println("wysylam sobie wiadomosc");
         emailSender.send(message);
 
