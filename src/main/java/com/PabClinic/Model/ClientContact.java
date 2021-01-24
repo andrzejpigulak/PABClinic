@@ -1,16 +1,16 @@
 package com.PabClinic.Model;
 
-public class ClinetContact {
+public class ClientContact {
 
     private String firstName;
     private String email;
     private String textMessage;
 
 
-    public ClinetContact() {
+    public ClientContact() {
     }
 
-    public ClinetContact(String firstName, String email, String textMessage) {
+    public ClientContact(String firstName, String email, String textMessage) {
         this.firstName = firstName;
         this.email = email;
         this.textMessage = textMessage;

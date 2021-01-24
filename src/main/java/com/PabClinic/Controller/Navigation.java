@@ -1,9 +1,11 @@
 package com.PabClinic.Controller;
 
-import com.PabClinic.Model.ClinetContact;
+import com.PabClinic.Model.ClientContact;
 import com.PabClinic.Model.Patient;
 import com.PabClinic.Model.PatientFabrik;
 import com.PabClinic.Model.PatientLogin;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +13,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
+@Component
 public class Navigation {
 
-    PatientFabrik patientFabrik = new PatientFabrik();
+    private final PatientFabrik patientFabrik;
+
+    private final EmailServiceImpl emailService;
+
+    @Autowired
+    public Navigation(PatientFabrik patientFabrik, EmailServiceImpl emailService) {
+        this.patientFabrik = patientFabrik;
+        this.emailService = emailService;
+    }
 
     @GetMapping("/index")
     public String toIndex(Model model) {
@@ -37,12 +48,21 @@ public class Navigation {
 
     @GetMapping("/contact")
     public String toContact(Model model) {
-        model.addAttribute("patientContact", new ClinetContact());
+        model.addAttribute("patientContact", new ClientContact());
         return "contact";
+    }
+
+    @PostMapping("/contact")
+    public String sendMailFromContact(Model Model, @ModelAttribute ClientContact clientContact) {
+        emailService.sendSimpleMessage(clientContact.getEmail(), "pabclinica@gmail.com", clientContact.getTextMessage());
+        System.out.println("wysylam wiadomosc z postmapingu");
+
+        return "redirect:/contact";
     }
 
     @GetMapping("/login")
     public String toLogin(Model model) {
+
         model.addAttribute("patientLogin", new PatientLogin());
         return "login";
     }
@@ -104,5 +124,4 @@ public class Navigation {
         }
         return "redirect:/login";
     }
-
 }
