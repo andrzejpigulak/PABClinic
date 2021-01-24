@@ -6,7 +6,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EmailServiceImpl{
+public class EmailServiceImpl {
 
     private final JavaMailSender emailSender;
 
@@ -15,12 +15,13 @@ public class EmailServiceImpl{
         this.emailSender = emailSender;
     }
 
-    public void sendSimpleMessage(String from, String to, String text) {
+    public void sendSimpleMessage(String from, String subject, String to, String text, String name) {
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
+        message.setSubject(subject);
         message.setTo(to);
-        message.setText(text);
+        message.setText("Wiadomość od: " + from + "\n\n" + text + "\n\nPozrawiam i kocham Was bardzo,\n" + name);
         System.out.println("wysylam sobie wiadomosc");
         emailSender.send(message);
 

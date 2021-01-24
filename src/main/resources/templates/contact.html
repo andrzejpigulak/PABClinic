@@ -86,7 +86,8 @@
         <div class="form-style-6">
             <h1>Skontaktuj się z nami</h1>
             <form action="#" th:action="@{/contact}" method="post">
-                <input type="text" th:field="${patientContact.firstName}" name="field1" placeholder="Twoje imię"/>
+                <input type="text" th:field="${patientContact.name}" name="field1" placeholder="Twoje imię i nazwisko"/>
+                <input type="text" th:field="${patientContact.subject}" name="field1" placeholder="Temat"/>
                 <input type="email" th:field="${patientContact.email}" name="field2" placeholder="Twój adres e-mail"/>
                 <textarea name="field3" th:field="${patientContact.textMessage}"
                           placeholder="Wprowadź wiadomość"></textarea>

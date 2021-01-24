@@ -2,26 +2,36 @@ package com.PabClinic.Model;
 
 public class ClientContact {
 
-    private String firstName;
+    private String name;
     private String email;
     private String textMessage;
+    private String subject;
 
 
     public ClientContact() {
     }
 
-    public ClientContact(String firstName, String email, String textMessage) {
-        this.firstName = firstName;
+    public ClientContact(String name, String email, String textMessage, String subject) {
+        this.name = name;
         this.email = email;
         this.textMessage = textMessage;
+        this.subject = subject;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getSubject() {
+        return subject;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

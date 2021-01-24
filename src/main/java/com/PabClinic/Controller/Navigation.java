@@ -54,7 +54,7 @@ public class Navigation {
 
     @PostMapping("/contact")
     public String sendMailFromContact(Model Model, @ModelAttribute ClientContact clientContact) {
-        emailService.sendSimpleMessage(clientContact.getEmail(), "pabclinica@gmail.com", clientContact.getTextMessage());
+        emailService.sendSimpleMessage(clientContact.getEmail(), clientContact.getSubject(), "pabclinica@gmail.com", clientContact.getTextMessage(), clientContact.getName());
         System.out.println("wysylam wiadomosc z postmapingu");
 
         return "redirect:/contact";
