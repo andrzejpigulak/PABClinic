@@ -1,10 +1,12 @@
 package com.PabClinic.Model;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 
+@Component
 public class PatientFabrik {
 
     private ArrayList<Patient> patientsList = new ArrayList<>();
-
 
     public PatientFabrik() {
         patientsList.add(new Patient("Adam", "Kowalski", "haslo", 87110725732L, "akowalski", "akowalski@mail.com", 627315621, "ul. Marszalkowska 12", "61-001", "Poznań"));

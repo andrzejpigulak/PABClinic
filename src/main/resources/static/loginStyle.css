@@ -128,3 +128,75 @@ button:hover {
 .registration-link a:hover {
     color: black;
 }
+
+.stopka_container{
+    margin-top: 50px;
+    float: left;
+    width: 100%;
+    height: 515px;
+    background-color: #3e403e;
+
+}
+
+.stopka_left{
+    width: 60%;
+    height: 95%;
+    float:left;
+}
+
+.stopka_left img{
+    width: 100%;
+}
+
+.stopka_right{
+    width: 40%;
+    height: 95%;
+    float: right;
+    text-align: left;
+    }
+
+.stopka_bottom{
+    width: 100%;
+    height: 5%;
+    float: left;
+    background-color: #242424;
+}
+
+.empty_box_stopka{
+    width:100%;
+    height: 20px;
+}
+
+.stopka_right span{
+    color: white;
+
+}.stopka_right p{
+    color: #a7aba8;
+}
+
+.stopka_right b{
+    color: #bbbfbc;
+}
+
+.stopka_right a{
+    color:white;
+}
+
+.stopka_bottom{
+    padding-top: 15px;
+    text-align: center;
+    text-color: white;
+}
+
+
+.oddzial_poznan{
+    float: left;
+    width: 50%;
+    height: 300px;
+}
+
+.oddzial_katowice{
+    float:right;
+    width: 50%;
+    height: 300px;
+}
