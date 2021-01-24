@@ -1,69 +1,215 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
-        <title>PAB Zdrowie - Rezonans | RTG | Diagnostyka | Laboratorium</title>
-    </head>
-    <body>
-        <div class="top_container">
-			<a href="index">
-				<img src="images/pab_clinic_logo.jpg" alt="Clinic logo" title="PAB CLINIC">
-			</a>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <title>PAB Zdrowie - Rezonans | RTG | Diagnostyka | Laboratorium</title>
+</head>
+<body>
+<div class="top_container">
+    <a href="index">
+        <img src="images/pab_clinic_logo.jpg" alt="Clinic logo" title="PAB CLINIC">
+    </a>
+</div>
+<div class="header" id="myHeader">
+    <a class="home" href="index">STRONA GŁÓWNA</a>
+    <a href="services">USŁUGI</a>
+    <a href="prices">CENNIK</a>
+    <a class="vip" href="vipatient">VIPACJENT</a>
+    <a href="contact">KONTAKT</a>
+    <a class="rejestracja" href="login">REJESTRACJA ON-LINE</a>
+    <input type="text" placeholder="Szukaj">
+</div>
+
+<div class="slideshow-container">
+
+    <div class="mySlides fade">
+        <img src="images/slider-1.jpg" style="width:100%">
+    </div>
+
+    <div class="mySlides fade">
+        <img src="images/slider-2.jpg" style="width:100%">
+    </div>
+
+    <div class="mySlides fade">
+        <img src="images/slider-3.jpg" style="width:100%">
+    </div>
+    <div class="box3">
+        <div class="text">
+            <h2>Godziny otwarcia:</h2>
+            <u>Oddział Poznań:</u>
+            </br>
+            Poniedziałek - Czwartek:
+            <b>8:00 - 20:00</b>
+            </br>
+            Piątek:
+            <b>8:00 - 18:00</b>
+            </br>
+            Punkt pobrań: Wtorek, Czwartek:
+            <b>7:30 - 10:00</b>
+            </br>
+            </br>
+            <u>Oddział Katowice:</u>
+            </br>
+            Poniedziałek - Wtorek:
+            <b>7:30 - 21:30</b>
+            </br>
+            Czwartek - Piątek:
+            <b>8:00 - 18:00</b>
+            </br>
+            </br>
+            Sroda:
+            <b><a href="login">E-Rejestracja</a></b>
         </div>
-        <div class="top_nav" id="my_top_nav">
-            <a class="home" href="index">STRONA GŁÓWNA</a>
-            <a href="services">USŁUGI</a>
-            <a href="prices">CENNIK</a>
-            <a class="vip" href="vipatient">VIPACJENT</a>
-            <a href="contact">KONTAKT</a>
-            <a class="rejestracja" href="login">REJESTRACJA ON-LINE</a>
-            <input type="text" placeholder="Szukaj">
+    </div>
+    <div class="box2">
+        <h2>Przed zabiegiem operacyjnym:</h2>
+        <div class="text">
+            <ul>
+                <li>
+                    <a href="/upload/ankieta_anestezjologiczna.pdf" download>Pobierz i wypełnij ankietę
+                        anastezjologiczną</a>
+                </li>
+                <li>
+                    <a href="/upload/wywiad_epidem.pdf" download>Pobierz i wypełnij formularz "wywiad epidemiologiczny"</a>
+                </li>
+                <li>
+                    <a href="/upload/oswiadczenie_pacjenta.pdf" download>Pobierz i wypełnij formularz "oświadczenie pacjenta”</a>
+                </li>
+                <li>
+                    Wyślij wypełnione dokumenty oraz wyniki badań laboratoryjnych na adres
+                    <a href="mailto:pabclinica@gmail.com">pabclinica@gmail.com</a>
+                </li>
+            </ul>
         </div>
+    </div>
+    <div class="box1">
+        <h2>Numery kontaktowe:</h2>
+        <b>Mammografia i wizyty prywatne:</b>
+        <ul>
+            <li>Poznań: 61 652 52 02</li>
+            <li>Katowice: 32 652 00 02</li>
+        </ul>
+        <b>Lekarz rodzinny i specjaliści NFZ:</b>
+        22 652 52 03
+        <b>Pielęgniarka ambolatorium:</b>
+        538 852 555
+        <b>Konsultacje przed operacjami:</b>
+        672 612 340
+        <b>Położna środowiskowa:</b>
+        791 400 112
+    </div>
+</div>
 
-        <div class="slideshow-container">
+<div style="text-align:center">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+</div>
 
-            <div class="mySlides fade">
-                <div class="numbertext">1 / 3</div>
-                <img src="images/slider-1.jpg" style="width:100%">
-            </div>
 
-            <div class="mySlides fade">
-                <div class="numbertext">2 / 3</div>
-                <img src="images/slider-2.jpg" style="width:100%">
-            </div>
+<div class="content">
+    <h3>On Scroll Sticky Header</h3>
+    <p>The header will stick to the top when you reach its scroll position.</p>
+    <p>Scroll back up to remove the sticky effect.</p>
+    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque
+        et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus
+        repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque
+        et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus
+        repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque
+        et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus
+        repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque
+        et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus
+        repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque
+        et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus
+        repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque
+        et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus
+        repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque
+        et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus
+        repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque
+        et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus
+        repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque
+        et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus
+        repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque
+        et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus
+        repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque
+        et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus
+        repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque
+        et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus
+        repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque
+        et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus
+        repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque
+        et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus
+        repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque
+        et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus
+        repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+</div>
 
-            <div class="mySlides fade">
-                <div class="numbertext">3 / 3</div>
-                <img src="images/slider-3.jpg" style="width:100%">
-            </div>
-
+<div class="stopka_container">
+    <div class="stopka_left">
+        <img src="images/stopka_zdjecie.jpg">
+    </div>
+    <div class="stopka_right">
+        <div class="empty_box_stopka"></div>
+        <span><b style="color:white;">OGÓLNOPOLSKIE CENTRA MEDYCZNE PAB CLINIC</b></span>
+        <div class="empty_box_stopka"></div>
+        <div class="oddzial_poznan">
+            <span><u>Oddział Poznań:</u></span>
+            <p>Ul. Limanowskiego 10/2<br>60-768 Poznań</p>
+            <span>Przychodnia:</span><br><br>
+            <p>Poniedziałek – Czwartek: <b>8:00 – 20:00</b><br>
+                Piątek: <b>8:00 – 18:00</b><br><br></p>
+            <span>Laboratorium</span><br>
+            <p>Wtorek: <b>7:30 – 10:00</b><br>
+                Czwartek: <b>7:30 – 10:00</b></p>
         </div>
-
-        <div style="text-align:center">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
+        <div class="oddzial_katowice">
+            <span><u>Oddział Katowice:</u></span>
+            <p>Ul. Kościuszki 92<br>40-523 Katowice</p>
+            <span>Przychodnia:</span><br><br>
+            <p>Poniedziałek – Wtorek: <b>7:30 – 21:30</b><br>
+                Czwartek - Piątek: <b>10:00 – 18:00</b><br><br></p>
+            <span>Laboratorium</span><br>
+            <p> Środa <b>7:30 - 15:00</b><br>
+                Piątek <b>8:00 - 10:00</b></p>
         </div>
-        <div class="box3">Tutaj godziny otwarcia</div>
-        <div class="box2">Tutaj jakieś pliki do pobrania</div>
-        <div class="box1">Tutaj numery kontaktowe</div>
-        <div class="content">
-  <h3>On Scroll Sticky Header</h3>
-  <p>The header will stick to the top when you reach its scroll position.</p>
-  <p>Scroll back up to remove the sticky effect.</p>
-  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p><p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p><p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p><p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p><p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+        <p><a href="registration">Zarejestruj</a> się na wizytę.</p>
+    </div>
+    <div class="stopka_bottom">
+        <a href="privacy_policy" style="color:white;">Polityka prywatności</a>
+    </div>
 </div>
 
 <script>
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
+
+
 var slideIndex = 1;
 showSlides(slideIndex);
 
@@ -94,17 +240,9 @@ function showSlides(n) {
   setTimeout(showSlides, 5000); // Change image every 2 seconds
 }
 
-window.onscroll = function() {myFunction()};
-var topnav = document.getElementById("my_top_nav");
-var sticky = topnav.offsetTop;
 
-function myFunction() {
-  if (window.pageYOffset > sticky) {
-    topnav.classList.add("sticky");
-  } else {
-    topnav.classList.remove("sticky");
-  }
-}
-		</script>
-    </body>
+
+
+</script>
+</body>
 </html>
