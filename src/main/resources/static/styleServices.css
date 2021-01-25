@@ -35,14 +35,19 @@ body {
 }
 
 .top_nav a.home {
-    background-color: #000080;
-    color: white;
+    background-color: white;
+    color: gray;
     margin-left: 10%;
 }
 
 .top_nav a.rejestracja {
     background-color: red;
     color: white;
+}
+
+.top_nav a.services{
+	background-color: #000080;
+	color: white;
 }
 
 .top_nav a.vip {
@@ -190,3 +195,7 @@ body {
 }
 
 /*koniec stopki*/
+
+.mid_container_right a:hover{
+    text-decoration: underline;
+}
