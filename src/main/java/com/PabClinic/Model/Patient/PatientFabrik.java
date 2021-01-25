@@ -1,4 +1,4 @@
-package com.PabClinic.Model;
+package com.PabClinic.Model.Patient;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

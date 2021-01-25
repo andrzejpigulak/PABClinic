@@ -1,9 +1,9 @@
 package com.PabClinic.Controller;
 
-import com.PabClinic.Model.ClientContact;
-import com.PabClinic.Model.Patient;
-import com.PabClinic.Model.PatientFabrik;
-import com.PabClinic.Model.PatientLogin;
+import com.PabClinic.Model.Client.ClientContact;
+import com.PabClinic.Model.Patient.Patient;
+import com.PabClinic.Model.Patient.PatientFabrik;
+import com.PabClinic.Model.Patient.PatientLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -92,6 +92,9 @@ public class Navigation {
         for (Patient p : patientFabrik.getPatientsList()) {
             System.out.println(p);
         }
+
+        emailService.sendMessageAfterRegistration(patient.getEmail(), patient.getFirstName(),
+                patient.getLogin(),patient.getPassword());
 
 
         return "redirect:/login";

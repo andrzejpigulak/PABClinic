@@ -1,4 +1,4 @@
-package com.PabClinic.Model;
+package com.PabClinic.Model.Client;
 
 public class ClientContact {
 
