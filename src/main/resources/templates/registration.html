@@ -70,8 +70,8 @@
         <tr>
             <td>Telefon kontaktowy:</td>
             <td>
-                <input type="tel" th:field="${patient.telephoneNumber}" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" name="phone">
-                <small>Format: 123-456-789</small>
+                <input type="tel" th:field="${patient.telephoneNumber}" pattern="[0-9]{9}" name="phone">
+                <small>Format: 123456789</small>
             </td>
         </tr>
         <tr>
