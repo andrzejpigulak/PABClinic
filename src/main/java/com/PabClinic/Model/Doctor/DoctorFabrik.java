@@ -11,7 +11,7 @@ public class DoctorFabrik {
     public DoctorFabrik() {
         doctorList.add(new Doctor("Mateusz", "Borek", "matRod", "meteuszborek", Specialisation.LEKARZRODZINNY));
         doctorList.add(new Doctor("Tomasz", "Smokowski", "tomRod", "tomaszsmokowski", Specialisation.LEKARZRODZINNY));
-        doctorList.add(new Doctor("Krzyszto", "Stanowski", "krzRod", "krzysztofstanowski", Specialisation.LEKARZRODZINNY));
+        doctorList.add(new Doctor("Krzysztof", "Stanowski", "krzRod", "krzysztofstanowski", Specialisation.LEKARZRODZINNY));
         doctorList.add(new Doctor("Michał", "Pol", "michRod", "michalpol", Specialisation.LEKARZRODZINNY));
         doctorList.add(new Doctor("Anna", "Dermatologowa", "annaDer", "annadermatologowa", Specialisation.DERMATOLOG));
         doctorList.add(new Doctor("Radosław", "Majdan", "radGin", "radoslawmajdan", Specialisation.GINEKOLOG));

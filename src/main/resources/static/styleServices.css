@@ -1,0 +1,192 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.top_container {
+    margin: 20px 0px 20px 10%;
+}
+
+.top_nav {
+    overflow: hidden;
+    background-color: white;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    z-index: 1;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%
+}
+
+.top_nav a {
+    text-decoration: none;
+    border-right: 1px solid gray;
+    padding: 20px 20px;
+    text-align: center;
+    float: left;
+    display: block;
+    color: gray;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.top_nav a.home {
+    background-color: #000080;
+    color: white;
+    margin-left: 10%;
+}
+
+.top_nav a.rejestracja {
+    background-color: red;
+    color: white;
+}
+
+.top_nav a.vip {
+    color: red;
+}
+
+.top_nav a:hover {
+    background-color: #000080;
+    color: white;
+}
+
+.top_nav input[type=text] {
+    float: right;
+    padding: 12px;
+    margin-top: 15px;
+    margin-right: 20px;
+    font-size: 16px;
+    border: 1px solid gray;
+}
+
+.mid_container{
+    width: 40%;
+    text-align:left;
+    margin-left:20%;
+    margin-top: 35px;
+    float:left;
+}
+
+.mid_container_right{
+    width:20%;
+    margin-right: 15%;
+    margin-top: 35px;
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 35px;
+    background-color: #262261 ;
+    height: 250px;
+    float: right;
+}
+
+.mid_container_right span{
+    font-size: 25px;
+    align: justify;
+    color: white;
+    align: left;
+}
+
+.mid_container_right li{
+    font-size: 15px;
+    color: white;
+    align: left;
+}
+
+.mid_container_right a{
+    text-decoration:none;
+    color: white;
+
+}
+
+
+.mid_pasek{
+    width: 30%;
+    height: 3px;
+    background-color: #2f457d;
+    float: left;
+
+}
+
+
+
+/*stopka*/
+
+.stopka_container{
+    margin-top: 50px;
+    float: left;
+    width: 100%;
+    height: 515px;
+    background-color: #3e403e;
+
+}
+
+.stopka_left{
+    width: 60%;
+    height: 95%;
+    float:left;
+}
+
+.stopka_left img{
+    width: 100%;
+}
+
+.stopka_right{
+    width: 40%;
+    height: 95%;
+    float: right;
+    text-align: left;
+    }
+
+.stopka_bottom{
+    width: 100%;
+    height: 5%;
+    float: left;
+    background-color: #242424;
+}
+
+.empty_box_stopka{
+    width:100%;
+    height: 20px;
+}
+
+.stopka_right span{
+    color: white;
+
+}
+
+.stopka_right p{
+    color: #a7aba8;
+}
+
+.stopka_right b{
+    color: #bbbfbc;
+}
+
+.stopka_right a{
+    color:white;
+}
+
+.stopka_bottom{
+    padding-top: 15px;
+    text-align: center;
+    text-color: white;
+}
+
+
+.oddzial_poznan{
+    float: left;
+    width: 50%;
+    height: 300px;
+}
+
+.oddzial_katowice{
+    float:right;
+    width: 50%;
+    height: 300px;
+}
+
+/*koniec stopki*/
