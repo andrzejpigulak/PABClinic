@@ -1,4 +1,4 @@
-package com.PabClinic.Model;
+package com.PabClinic.Model.Patient;
 
 public class Patient {
 
