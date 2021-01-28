@@ -75,7 +75,15 @@ public class Navigation {
     @PostMapping("/login")
     public String afterLogin(Model model, @ModelAttribute PatientLogin patientLogin) {
 
-        findPatientFromLogin(model, patientLogin);
+        for (Patient p : patientFabrik.getPatientsList()) {
+            if (patientLogin.getLogin().equals(p.getLogin())) {
+                System.out.println("Login pasuje");
+                if (patientLogin.getPassword().equals(p.getPassword())) {
+                    System.out.println("Login i hasło pasuje");
+                    return "redirect:/test";
+                }
+            }
+        }
         findPatientFromEmail(model, patientLogin);
         return "redirect:/login";
     }

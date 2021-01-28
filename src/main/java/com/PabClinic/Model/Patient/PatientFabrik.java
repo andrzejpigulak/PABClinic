@@ -1,7 +1,7 @@
 package com.PabClinic.Model.Patient;
 import org.springframework.stereotype.Component;
 
-package com.PabClinic.Model.Patient;
+
 import com.PabClinic.Model.Database.DBPatient;
 
 import java.util.ArrayList;

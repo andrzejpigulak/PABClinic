@@ -1,7 +1,5 @@
 package com.PabClinic.Model.Database;
-
-import com.PabClinic.Model.Patient;
-
+import com.PabClinic.Model.Patient.Patient;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -10,7 +8,8 @@ public class DBPatient {
     private static final String JDBC_DRIVER = "org.postgresql.Driver";
     private static final String URL = "jdbc:postgresql://localhost/PABClinic";
     private static final String LOGIN = "postgres";
-    private static final String PASSWORD = "Qparox123!";
+//    private static final String PASSWORD = "Qparox123!"; // Pawła hasło na postgresa
+    private static final String PASSWORD = "postgres"; // Bartka hasło na postgresa
 
 
     private Statement stmt;
