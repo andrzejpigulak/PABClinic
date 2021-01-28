@@ -2,6 +2,7 @@ package com.PabClinic.Model;
 
 public class Patient {
 
+    private int user_id;
     private String firstName;
     private String lastName;
     private String login;
@@ -18,7 +19,8 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(String firstName, String lastName, String password, long pesel, String login, String email, int telephoneNumber, String address, String postCode, String city) {
+    public Patient(int user_id, String firstName, String lastName, String password, long pesel, String login, String email, int telephoneNumber, String address, String postCode, String city) {
+        this.user_id = user_id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
@@ -29,6 +31,14 @@ public class Patient {
         this.address = address;
         this.postCode = postCode;
         this.city = city;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getFirstName() {
@@ -115,12 +125,14 @@ public class Patient {
     @Override
     public String toString() {
         return "Patient{" +
-                "name='" + firstName + '\'' +
+                "user_id=" + user_id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", pesel=" + pesel +
                 ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", telephoneNumber=" + telephoneNumber +
+                ", pesel=" + pesel +
                 ", address='" + address + '\'' +
                 ", postCode='" + postCode + '\'' +
                 ", city='" + city + '\'' +
