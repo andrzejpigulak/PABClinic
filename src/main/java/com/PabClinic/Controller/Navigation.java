@@ -75,17 +75,20 @@ public class Navigation {
     @PostMapping("/login")
     public String afterLogin(Model model, @ModelAttribute PatientLogin patientLogin) {
 
-        for (Patient p : patientFabrik.getPatientsList()) {
-            if (patientLogin.getLogin().equals(p.getLogin())) {
-                System.out.println("Login pasuje");
-                if (patientLogin.getPassword().equals(p.getPassword())) {
-                    System.out.println("Login i hasło pasuje");
-                    return "redirect:/test";
-                }
-            }
+        boolean czyLoginIHasloPasuje = patientFabrik.getPatientsList().stream()
+                .filter(patient -> (patientLogin.getLogin().equals(patient.getLogin())
+                        || patientLogin.getLogin().equals(patient.getEmail())) &&
+                        patientLogin.getPassword().equals(patient.getPassword()))
+                .peek(patient -> System.out.println("Udało Ci się zalogować za pomocą hasła i loginu"))
+                .findFirst()
+                .isPresent();
+
+        if (czyLoginIHasloPasuje) {
+            return "redirect:/test";
+        } else {
+            return "redirect:/login";
         }
-        findPatientFromEmail(model, patientLogin);
-        return "redirect:/login";
+
     }
 
     @GetMapping("/registration")
@@ -96,13 +99,15 @@ public class Navigation {
 
     @PostMapping("/registration")
     public String afterRegistration(Model model, @ModelAttribute Patient patient) {
+
         patientFabrik.getPatientsList().add(patient);
-        for (Patient p : patientFabrik.getPatientsList()) {
-            System.out.println(p);
-        }
+
+        patientFabrik.getPatientsList()
+                .stream()
+                .forEach(System.out::println);
 
         emailService.sendMessageAfterRegistration(patient.getEmail(), patient.getFirstName(),
-                patient.getLogin(),patient.getPassword());
+                patient.getLogin(), patient.getPassword());
 
 
         return "redirect:/login";
@@ -114,33 +119,4 @@ public class Navigation {
         return "privacy_policy";
     }
 
-
-
-    private String findPatientFromLogin(Model model, @ModelAttribute PatientLogin patientLogin) {
-
-        for (Patient p : patientFabrik.getPatientsList()) {
-            if (patientLogin.getLogin().equals(p.getLogin())) {
-                System.out.println("Login pasuje");
-                if (patientLogin.getPassword().equals(p.getPassword())) {
-                    System.out.println("Login i hasło pasuje");
-                    return "redirect:/test";
-                }
-            }
-        }
-        return "redirect:/login";
-    }
-
-    private String findPatientFromEmail(Model model, @ModelAttribute PatientLogin patientLogin) {
-
-        for (Patient p : patientFabrik.getPatientsList()) {
-            if (patientLogin.getLogin().equals(p.getEmail())) {
-                System.out.println("Email pasuje");
-                if (patientLogin.getPassword().equals(p.getPassword())) {
-                    System.out.println("Email i hasło pasuje");
-                    return "redirect:/test";
-                }
-            }
-        }
-        return "redirect:/login";
-    }
 }
