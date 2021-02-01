@@ -1,0 +1,44 @@
+body {
+    font-family: Arial;
+    margin: 0;
+}
+
+.header {
+    padding: 10px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    font-size: 30px;
+}
+.wrap {
+    width: 100%;
+    text-align: center;
+    display: table;
+}
+
+.fleft {
+    width: 20%;
+    background-color: lightblue;
+    display: table-cell;
+}
+
+.fright {
+    background-color: lightgreen;
+    width: 80%;
+    display: table-cell;
+}
+
+.btn-group button {
+    background-color: #4CAF50;
+    border: 1px solid green;
+    color: white;
+    padding: 10px 24px;
+    cursor: pointer;
+    width: 70%;
+    margin: 8%;
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+    background-color: #3e8e41;
+}
