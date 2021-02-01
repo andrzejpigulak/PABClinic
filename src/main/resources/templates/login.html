@@ -29,11 +29,11 @@
 <form action="#" th:action="@{/login}" method="post">
     <div class="container">
         <label class="label"><b>Login:</b></label>
-        <input type="text" th:field="${patientLogin.login}" placeholder="Podaj Login" required>
+        <input type="text" th:field="${patientLogin.login}" name=username placeholder="Podaj Login" required="">
     </div>
     <div class="container">
         <label class="label"><b>Hasło:</b></label>
-        <input type="password" th:field="${patientLogin.password}" placeholder="Podaj hasło" required>
+        <input type="password" th:field="${patientLogin.password}" name="password" placeholder="Podaj hasło" required="">
     </div>
     <div class="button">
         <button type="submit">Zaloguj</button>

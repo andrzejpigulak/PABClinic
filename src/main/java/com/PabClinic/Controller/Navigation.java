@@ -67,9 +67,9 @@ public class Navigation {
         return "login";
     }
 
-    @GetMapping("/test")
+    @GetMapping("/pageAdmin")
     public String toTest(Model model) {
-        return "test";
+        return "pageAdmin";
     }
 
     @PostMapping("/login")
@@ -84,11 +84,10 @@ public class Navigation {
                 .isPresent();
 
         if (czyLoginIHasloPasuje) {
-            return "redirect:/test";
+            return "redirect:/pageAdmin";
         } else {
             return "redirect:/login";
         }
-
     }
 
     @GetMapping("/registration")
