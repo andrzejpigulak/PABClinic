@@ -28,7 +28,7 @@ public class Navigation {
 
     @GetMapping("/index")
     public String toIndex(Model model) {
-        return "index";
+        return "redirect:/index";
     }
 
     @GetMapping("/services")
