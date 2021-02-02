@@ -72,6 +72,11 @@ public class Navigation {
         return "pageAdmin";
     }
 
+    @GetMapping("/pageDoctor")
+    public String toDoctor(Model model) {
+        return "pageDoctor";
+    }
+
     @PostMapping("/login")
     public String afterLogin(Model model, @ModelAttribute PatientLogin patientLogin) {
 
@@ -94,6 +99,13 @@ public class Navigation {
     public String toRegistration(Model model) {
         model.addAttribute("patient", new Patient());
         return "registration";
+    }
+
+    @GetMapping("/patientList")
+    public String toPatientList(Model model) {
+        model.addAttribute("patientList", patientFabrik.getPatientsList());
+
+        return "patientList";
     }
 
     @PostMapping("/registration")
