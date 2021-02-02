@@ -1,6 +1,7 @@
 package com.PabClinic.Controller;
 
 import com.PabClinic.Model.Client.ClientContact;
+import com.PabClinic.Model.Database.DBPatient;
 import com.PabClinic.Model.Patient.Patient;
 import com.PabClinic.Model.Patient.PatientFabrik;
 import com.PabClinic.Model.Patient.PatientLogin;
@@ -60,6 +61,22 @@ public class Navigation {
         return "redirect:/contact";
     }
 
+    @PostMapping("/patientList")
+    public String removePatient(Model model, @ModelAttribute Patient patient) {
+
+        DBPatient db = new DBPatient();
+        PatientFabrik patientFabrik = new PatientFabrik();
+
+        for (Patient p : patientFabrik.getPatientsList()) {
+            if (patient.getUser_id() == p.getUser_id()) {
+                db.removePatient(patient);
+            }
+        }
+
+        return "redirect:/patientList";
+
+    }
+
     @GetMapping("/login")
     public String toLogin(Model model) {
 
@@ -103,7 +120,11 @@ public class Navigation {
 
     @GetMapping("/patientList")
     public String toPatientList(Model model) {
+
+        PatientFabrik patientFabrik = new PatientFabrik();
+
         model.addAttribute("patientList", patientFabrik.getPatientsList());
+        model.addAttribute("patient", new Patient());
 
         return "patientList";
     }
@@ -111,11 +132,13 @@ public class Navigation {
     @PostMapping("/registration")
     public String afterRegistration(Model model, @ModelAttribute Patient patient) {
 
-        patientFabrik.getPatientsList().add(patient);
+        DBPatient dbPatient = new DBPatient();
 
-        patientFabrik.getPatientsList()
-                .stream()
-                .forEach(System.out::println);
+        dbPatient.registerPatient(patient);
+
+//        patientFabrik.getPatientsList()
+//                .stream()
+//                .forEach(System.out::println);
 
         emailService.sendMessageAfterRegistration(patient.getEmail(), patient.getFirstName(),
                 patient.getLogin(), patient.getPassword());
