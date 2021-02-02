@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="patientList.css">
 </head>
 <body>
+<script type="text/javascript" src="patientList.js"></script>
 
-<table border="1" style="width:50%">
+
+<form action="#" th:action="@{/patientList}" method="post">
+    <label>Id </label><br>
+    <input type="text" th:field="${patient.user_id}"><br>
+    <br><input type="submit" value = "Usuń pacjenta">
+</form>
+
+
+<table id="patientTable" border="1" style="width:50%">
+    <thead>
     <tr>
+
         <th>Imie</th>
         <th>Nazwisko</th>
         <th>Email</th>
@@ -16,11 +28,13 @@
         <th>Adres</th>
         <th>Kod pocztowy</th>
         <th>Miasto</th>
-
-
+        <th>Id</th>
     </tr>
+    </thead>
+    <tbody>
 
     <tr th:each="patient : ${patientList}">
+
         <td><p th:text="${patient.firstName}"></p></td>
         <td><p th:text="${patient.lastName}"></p></td>
         <td><p th:text="${patient.email}"></p></td>
@@ -29,9 +43,46 @@
         <td><p th:text="${patient.address}"></p></td>
         <td><p th:text="${patient.postCode}"></p></td>
         <td><p th:text="${patient.city}"></p></td>
+        <td><p th:text="${patient.user_id}"></p></td>
     </tr>
 
+    </tbody>
 </table>
 
 </body>
+
+<script>
+    var filtersConfig = {
+  // instruct TableFilter location to import ressources from
+  base_path: 'https://unpkg.com/tablefilter@latest/dist/tablefilter/',
+<!--  col_1: 'select',-->
+<!--  col_2: 'select',-->
+<!--  col_3: 'select',-->
+  alternate_rows: true,
+  rows_counter: true,
+  btn_reset: true,
+  loader: true,
+  mark_active_columns: true,
+  highlight_keywords: true,
+  no_results_message: true,
+  col_types: [
+    'string', 'string', 'string',
+    'number', 'number', 'string',
+    'string', 'string', 'number'
+  ],
+
+  col_widths: [
+    '150px', '150px', '250px',
+    '100px', '125px', '150px',
+    '85px', '100px', '60px'
+  ],
+  extensions: [{
+    name: 'sort',
+    images_path: 'https://unpkg.com/tablefilter@latest/dist/tablefilter/style/themes/'
+  }]
+};
+
+var tf = new TableFilter('patientTable', filtersConfig);
+tf.init();
+</script>
 </html>

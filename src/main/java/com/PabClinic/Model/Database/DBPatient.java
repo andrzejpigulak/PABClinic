@@ -56,21 +56,21 @@ public class DBPatient {
 
             int i = rs.getInt("count");
 
-            String queryInsert = "insert into patient (user_ID, firstName, lastName, userPassword, pesel, login, email, telephoneNumber, address, postCode, city) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String queryInsert = "insert into patient (firstName, lastName, userPassword, pesel, login, email, telephoneNumber, address, postCode, city) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = conn.prepareStatement(queryInsert);
 
-            preparedStatement.setInt(1, ++i);
-            preparedStatement.setString(2,patient.getFirstName());
-            preparedStatement.setString(3,patient.getLastName());
-            preparedStatement.setString(4,patient.getPassword());
-            preparedStatement.setLong(5,patient.getPesel());
-            preparedStatement.setString(6,patient.getLogin());
-            preparedStatement.setString(7,patient.getEmail());
-            preparedStatement.setInt(8,patient.getTelephoneNumber());
-            preparedStatement.setString(9,patient.getAddress());
-            preparedStatement.setString(10,patient.getPostCode());
-            preparedStatement.setString(11,patient.getCity());
+//            preparedStatement.setInt(1, ++i);
+            preparedStatement.setString(1,patient.getFirstName());
+            preparedStatement.setString(2,patient.getLastName());
+            preparedStatement.setString(3,patient.getPassword());
+            preparedStatement.setLong(4,patient.getPesel());
+            preparedStatement.setString(5,patient.getLogin());
+            preparedStatement.setString(6,patient.getEmail());
+            preparedStatement.setInt(7,patient.getTelephoneNumber());
+            preparedStatement.setString(8,patient.getAddress());
+            preparedStatement.setString(9,patient.getPostCode());
+            preparedStatement.setString(10,patient.getCity());
 
             preparedStatement.executeUpdate();
 
@@ -81,6 +81,29 @@ public class DBPatient {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public void removePatient(Patient patient) {
+
+        try {
+            connectToDb();
+
+            String queryRemove = "delete from patient where user_ID=?";
+
+            PreparedStatement preparedStatement = conn.prepareStatement(queryRemove);
+
+            preparedStatement.setInt(1, patient.getUser_id());
+
+            preparedStatement.executeUpdate();
+
+            disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 
     private void connectToDb() throws ClassNotFoundException, SQLException {
