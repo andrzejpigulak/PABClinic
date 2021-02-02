@@ -28,7 +28,7 @@ public class Navigation {
 
     @GetMapping("/index")
     public String toIndex(Model model) {
-        return "redirect:/index";
+        return "index";
     }
 
     @GetMapping("/services")
@@ -99,6 +99,13 @@ public class Navigation {
     public String toRegistration(Model model) {
         model.addAttribute("patient", new Patient());
         return "registration";
+    }
+
+    @GetMapping("/patientList")
+    public String toPatientList(Model model) {
+        model.addAttribute("patientList", patientFabrik.getPatientsList());
+
+        return "patientList";
     }
 
     @PostMapping("/registration")
