@@ -72,6 +72,11 @@ public class Navigation {
         return "pageAdmin";
     }
 
+    @GetMapping("/pageDoctor")
+    public String toDoctor(Model model) {
+        return "pageDoctor";
+    }
+
     @PostMapping("/login")
     public String afterLogin(Model model, @ModelAttribute PatientLogin patientLogin) {
 
