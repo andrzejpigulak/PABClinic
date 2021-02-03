@@ -1,3 +1,7 @@
+drop table if exists patient;
+drop table if exists doctor;
+drop table if exists badania;
+
 CREATE TABLE Patient(user_ID serial PRIMARY KEY, 
 firstName varchar(20) not null, 
 lastName varchar(20) NOT NULL,
@@ -8,7 +12,7 @@ email varchar(50) UNIQUE NOT NULL,
 telephoneNumber int NOT NULL,
 address varchar(50),
 postCode varchar(10),
-city varchar(20)));
+city varchar(20));
 
 CREATE TABLE Doctor(doctor_ID int UNIQUE NOT NULL,
 firstName varchar(20) not null, 
@@ -16,7 +20,7 @@ lastName varchar(20) NOT NULL,
 login varchar(20) UNIQUE NOT NULL,
 doctorPassword varchar(20) NOT NULL,
 specialisation varchar(20) NOT NULL,
-PRIMARY KEY (doctor_ID))
+PRIMARY KEY (doctor_ID));
 
 CREATE TABLE Badania(
 	badanie_ID serial PRIMARY KEY,
@@ -25,18 +29,18 @@ CREATE TABLE Badania(
 )
 
 
-INSERT INTO Patient(user_ID, firstName, lastName, userPassword, pesel, login, email, telephoneNumber, address, postCode, city )
-VALUES (1,'Adam', 'Kowalski', 'haslo', 87110725732, 'akowalski', 'akowalski@mail.com', 627315621, 'ul. Marszalkowska 12', '61-001', 'Poznań'),
-	   (2,'Katarzyna', 'Sikora','haslo',67032265927, 'ksikora', 'akowalski@mail.com', 504213521, 'ul. Grunwaldzka 25/3', '60-783', 'Poznań'),
-	   (3,'Mariusz', 'Misiorny','haslo',48072685251, 'mariuszmisiorny', 'mariusz.misiorny@gmail.com', 852451267, 'ul. Mickiewicza 55/23', '01-625', 'Warszawa'),
-	   (4,'Agnieszka', 'Sochaczewska','haslo',98122575235, 'agsoch', 'aga.socha@onet.pl', 695264216, 'ul. Alojzego Felińskiego 14', '01-513', 'Warszawa'),
-	   (5,'Katarzyna', 'Politowicz','haslo',67071975251, 'kpolitowicz', 'polkata@onet.pl', 515525623, 'ul Małeckiego 16/12', '60-707', 'Poznań'),
-	   (6,'Katarzyna', 'Cichopek','haslo',58090276921, 'kcichopek', 'k.cichopek@gmail.com', 725612562, 'ul. Małe Garbary 32', '61-756', 'Poznań'),
-	   (7,'Tomasz', 'Karolak','haslo',65111252612, 'tomciokarol', 'tomciokarol@przykladowymail.com', 725516562, 'ul. Aleje Solidarności 21/2', '61-512', 'Poznań'),
-	   (8,'Robert', 'Makłowicz','haslo',54102151362, 'kucharzmistrz', 'kucharzmistrz@maklowicz.com', 826125231, 'ul. Kucharska 21', '60-523', 'Poznań'),
-	   (9,'Snoop', 'Dog','haslo',86110425124, 'snoopie', 'snoopiedogg@gmail.com', 666666420, 'ul. Weedowa 4/20', '60-420', 'Poznań'),
-	   (10,'Edyta', 'Górniak','haslo',79041252123, 'edziaantyszczepionka', 'antyszczepionkowa@gmail.com', 752621272, 'ul. Antyszczepionkwa 21', '61-215', 'Poznań'),
-	   (11,'Iwan', 'Delfin','haslo',65050276213, 'iwanplywak', 'plywamzdelfinami@onet.eu', 627631234, 'ul. Delfiny i orki 21', '61-521', 'Poznań');
+INSERT INTO Patient(firstName, lastName, userPassword, pesel, login, email, telephoneNumber, address, postCode, city )
+VALUES ('Adam', 'Kowalski', 'haslo', 87110725732, 'akowalski', 'akowalski@mail.com', 627315621, 'ul. Marszalkowska 12', '61-001', 'Poznań'),
+	   ('Katarzyna', 'Sikora','haslo',67032265927, 'ksikora', 'akowalska@mail.com', 504213521, 'ul. Grunwaldzka 25/3', '60-783', 'Poznań'),
+	   ('Mariusz', 'Misiorny','haslo',48072685251, 'mariuszmisiorny', 'mariusz.misiorny@gmail.com', 852451267, 'ul. Mickiewicza 55/23', '01-625', 'Warszawa'),
+	   ('Agnieszka', 'Sochaczewska','haslo',98122575235, 'agsoch', 'aga.socha@onet.pl', 695264216, 'ul. Alojzego Felińskiego 14', '01-513', 'Warszawa'),
+	   ('Katarzyna', 'Politowicz','haslo',67071975251, 'kpolitowicz', 'polkata@onet.pl', 515525623, 'ul Małeckiego 16/12', '60-707', 'Poznań'),
+	   ('Katarzyna', 'Cichopek','haslo',58090276921, 'kcichopek', 'k.cichopek@gmail.com', 725612562, 'ul. Małe Garbary 32', '61-756', 'Poznań'),
+	   ('Tomasz', 'Karolak','haslo',65111252612, 'tomciokarol', 'tomciokarol@przykladowymail.com', 725516562, 'ul. Aleje Solidarności 21/2', '61-512', 'Poznań'),
+	   ('Robert', 'Makłowicz','haslo',54102151362, 'kucharzmistrz', 'kucharzmistrz@maklowicz.com', 826125231, 'ul. Kucharska 21', '60-523', 'Poznań'),
+	   ('Snoop', 'Dog','haslo',86110425124, 'snoopie', 'snoopiedogg@gmail.com', 666666420, 'ul. Weedowa 4/20', '60-420', 'Poznań'),
+	   ('Edyta', 'Górniak','haslo',79041252123, 'edziaantyszczepionka', 'antyszczepionkowa@gmail.com', 752621272, 'ul. Antyszczepionkwa 21', '61-215', 'Poznań'),
+	   ('Iwan', 'Delfin','haslo',65050276213, 'iwanplywak', 'plywamzdelfinami@onet.eu', 627631234, 'ul. Delfiny i orki 21', '61-521', 'Poznań');
 	   
 		
 INSERT INTO doctor (doctor_ID, firstName, lastName, login, doctorPassword, specialisation)

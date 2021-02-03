@@ -1,4 +1,5 @@
 package com.PabClinic.Model.Database;
+
 import com.PabClinic.Model.Doctor.Doctor;
 import com.PabClinic.Model.Patient.Patient;
 import com.PabClinic.Model.Research.Research;
@@ -11,9 +12,9 @@ public class DataBase {
     private static final String JDBC_DRIVER = "org.postgresql.Driver";
     private static final String URL = "jdbc:postgresql://localhost/PABClinic";
     private static final String LOGIN = "postgres";
-//        private static final String PASSWORD = "ANDpig1906!@"; // Andrzeja hasło na postgresa
+    private static final String PASSWORD = "ANDpig1906!@"; // Andrzeja hasło na postgresa
     //    private static final String PASSWORD = "Qparox123!"; // Pawła hasło na postgresa
-    private static final String PASSWORD = "postgres"; // Bartka hasło na postgresa
+//    private static final String PASSWORD = "postgres"; // Bartka hasło na postgresa
 
 
     private Statement stmt;
@@ -23,7 +24,7 @@ public class DataBase {
 
     }
 
-    public void getDoctors(ArrayList<Doctor> doctorList){
+    public void getDoctors(ArrayList<Doctor> doctorList) {
 
         try {
             connectToDb();
@@ -31,8 +32,8 @@ public class DataBase {
             ResultSet rs = stmt.executeQuery("select * from doctor");
 
             while (rs.next()) {
-                Doctor doctor = new Doctor(rs.getInt("doctor_id"),rs.getString("firstname"),rs.getString("lastname"),
-                        rs.getString("login"),rs.getString("doctorPassword"),rs.getString("specialisation"));
+                Doctor doctor = new Doctor(rs.getInt("doctor_id"), rs.getString("firstname"), rs.getString("lastname"),
+                        rs.getString("login"), rs.getString("doctorPassword"), rs.getString("specialisation"));
                 doctorList.add(doctor);
             }
 
@@ -45,7 +46,7 @@ public class DataBase {
         }
     }
 
-    public void getPatients(ArrayList<Patient> patientList){
+    public void getPatients(ArrayList<Patient> patientList) {
 
 
         try {
@@ -54,8 +55,8 @@ public class DataBase {
             ResultSet rs = stmt.executeQuery("select * from patient");
 
             while (rs.next()) {
-                Patient patient = new Patient(rs.getInt("user_id"),rs.getString("firstname"),rs.getString("lastname"),
-                        rs.getString("userpassword"),rs.getLong("pesel"),rs.getString("login"),rs.getString("email"),
+                Patient patient = new Patient(rs.getInt("user_id"), rs.getString("firstname"), rs.getString("lastname"),
+                        rs.getString("userpassword"), rs.getLong("pesel"), rs.getString("login"), rs.getString("email"),
                         rs.getInt("telephonenumber"), rs.getString("address"), rs.getString("postcode"), rs.getString("city"));
                 patientList.add(patient);
             }
@@ -109,17 +110,16 @@ public class DataBase {
 
             PreparedStatement preparedStatement = conn.prepareStatement(queryInsert);
 
-//            preparedStatement.setInt(1, ++i);
-            preparedStatement.setString(1,patient.getFirstName());
-            preparedStatement.setString(2,patient.getLastName());
-            preparedStatement.setString(3,patient.getPassword());
-            preparedStatement.setLong(4,patient.getPesel());
-            preparedStatement.setString(5,patient.getLogin());
-            preparedStatement.setString(6,patient.getEmail());
-            preparedStatement.setInt(7,patient.getTelephoneNumber());
-            preparedStatement.setString(8,patient.getAddress());
-            preparedStatement.setString(9,patient.getPostCode());
-            preparedStatement.setString(10,patient.getCity());
+            preparedStatement.setString(1, patient.getFirstName());
+            preparedStatement.setString(2, patient.getLastName());
+            preparedStatement.setString(3, patient.getPassword());
+            preparedStatement.setLong(4, patient.getPesel());
+            preparedStatement.setString(5, patient.getLogin());
+            preparedStatement.setString(6, patient.getEmail());
+            preparedStatement.setInt(7, patient.getTelephoneNumber());
+            preparedStatement.setString(8, patient.getAddress());
+            preparedStatement.setString(9, patient.getPostCode());
+            preparedStatement.setString(10, patient.getCity());
 
             preparedStatement.executeUpdate();
 
@@ -152,14 +152,62 @@ public class DataBase {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
 
+
+    public Patient editPatient(Patient patient) {
+
+        try {
+            connectToDb();
+
+            String queryEdit = "select * from patient where user_ID=" + patient.getUser_id();
+
+            ResultSet rs = stmt.executeQuery(queryEdit);
+
+            while (rs.next()) {
+                patient = new Patient(rs.getInt("user_id"), rs.getString("firstname"), rs.getString("lastname"),
+                        rs.getString("userpassword"), rs.getLong("pesel"), rs.getString("login"), rs.getString("email"),
+                        rs.getInt("telephonenumber"), rs.getString("address"), rs.getString("postcode"), rs.getString("city"));
+            }
+
+            disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return patient;
+    }
+
+    public void updatePatient(Patient patient) {
+
+        try {
+            connectToDb();
+
+            String queryUpdate = "update patient set firstname=" + patient.getFirstName() + " where user_ID=" + patient.getUser_id();
+
+            PreparedStatement preparedStatement = conn.prepareStatement(queryUpdate);
+
+            preparedStatement.setString(1, patient.getFirstName());
+
+            preparedStatement.executeUpdate();
+
+            disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     private void connectToDb() throws ClassNotFoundException, SQLException {
 
         Class.forName(JDBC_DRIVER);
 
-        conn = DriverManager.getConnection(URL,LOGIN,PASSWORD);
+        conn = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 
         stmt = conn.createStatement();
     }

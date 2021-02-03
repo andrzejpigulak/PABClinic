@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/adminStyle.css">
+</head>
+<body>
+
+<table>
+    <h2 style="margin: 20px">Kliknij na pole, które chcesz edytować</h2>
+</table>
+
+<form action="#">
+    <table border="1" style="width:50%; margin: 20px; text-align: center">
+        <thead>
+        <tr>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+            <th>Email</th>
+            <th>Numer telefonu</th>
+            <th>Pesel</th>
+            <th>Adres</th>
+            <th>Kod pocztowy</th>
+            <th>Miasto</th>
+            <th>Id</th>
+        </tr>
+        </thead>
+        <tr>
+            <td>
+                <div contenteditable><p th:text="${patient.firstName}"></p></div>
+            </td>
+            <td>
+                <div contenteditable><p th:text="${patient.lastName}"></p></div>
+            </td>
+            <td>
+                <div contenteditable><p th:text="${patient.email}"></p></div>
+            </td>
+            <td>
+                <div contenteditable><p th:text="${patient.telephoneNumber}"></p></div>
+            </td>
+            <td>
+                <div contenteditable><p th:text="${patient.pesel}"></p></div>
+            </td>
+            <td>
+                <div contenteditable><p th:text="${patient.address}"></p></div>
+            </td>
+            <td>
+                <div contenteditable><p th:text="${patient.postCode}"></p></div>
+            </td>
+            <td>
+                <div contenteditable><p th:text="${patient.city}"></p></div>
+            </td>
+            <td><p th:text="${patient.user_id}"></p></td>
+        </tr>
+    </table>
+    <br>
+
+    <input style="margin-left: 20px" type="submit" value="Zapisz" name="savePatient">
+</form>
+
+</body>
+</html>

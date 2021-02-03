@@ -3,23 +3,65 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="patientList.css">
+    <link rel="stylesheet" href="css/patientList.css">
 </head>
 <body>
 <script type="text/javascript" src="patientList.js"></script>
 
+<div class="addPatient">
+    <h3>DODANIE PACJENTA</h3>
+    <form action="#" th:action="@{/patientList}" method="post">
+        <label>Imię: </label>
+        <input type="text" th:field="${patient.firstName}" placeholder="Wymagane">
+        <label> Nazwisko: </label>
+        <input type="text" th:field="${patient.lastName}" placeholder="Wymagane"><br><br>
+        <label>Login: </label>
+        <input type="text" th:field="${patient.login}" placeholder="Wymagane">
+        <label> Hasło: </label>
+        <input type="text" th:field="${patient.password}" placeholder="Wymagane"><br><br>
+        <label>E-mail: </label>
+        <input type="email" th:field="${patient.email}" placeholder="Wymagane"><br><br>
+        <label>Numer telefonu: </label>
+        <input type="tel" th:field="${patient.telephoneNumber}" pattern="[0-9]{9}" name="phone">
+        <small> Format: 123456789</small><br><br>
+        <label>Numer PESEL: </label>
+        <input type="tel" th:field="${patient.pesel}" pattern="[0-9]{11}">
+        <small> Format: 11 liczb</small><br><br>
+        <label>Adres zamieszkania: </label>
+        <input type="text" th:field="${patient.address}" placeholder="Wymagane"><br><br>
+        <label>Kod pocztowy: </label>
+        <input type="text" th:field="${patient.postCode}" placeholder="Wymagane">
+        <label> Miasto: </label>
+        <input type="text" th:field="${patient.city}" placeholder="Wymagane"><br>
+        <br><input type="submit" value="Dodaj pacjenta" name="addPatient">
+    </form>
+</div>
 
-<form action="#" th:action="@{/patientList}" method="post">
-    <label>Id </label><br>
-    <input type="text" th:field="${patient.user_id}"><br>
-    <br><input type="submit" value = "Usuń pacjenta">
-</form>
+<div class="deletePatient">
+    <h3>USUNIĘCIE PACJENTA</h3>
+    <table>
+        <form action="#" th:action="@{/patientList}" method="post">
+            <label>Podaj ID pacjenta, którego chcesz usunąć:</label><br>
+            <input type="text" th:field="${patient.user_id}"><br>
+            <br><input type="submit" value="Usuń pacjenta" name="deletePatient">
+        </form>
+    </table>
+</div>
 
+<div class="editPatient">
+    <h3>EDYCJA PACJENTA</h3>
+    <table>
+        <form action="#" th:action="@{/patientList}" method="post">
+            <label>Podaj ID pacjenta, którego dane chcesz edytować:</label><br>
+            <input type="text" th:field="${patient.user_id}"><br>
+            <br><input type="submit" value="Edycja" name="editPatient">
+        </form>
+    </table>
+</div>
 
 <table id="patientTable" border="1" style="width:50%">
     <thead>
     <tr>
-
         <th>Imie</th>
         <th>Nazwisko</th>
         <th>Email</th>
@@ -31,10 +73,7 @@
         <th>Id</th>
     </tr>
     </thead>
-    <tbody>
-
     <tr th:each="patient : ${patientList}">
-
         <td><p th:text="${patient.firstName}"></p></td>
         <td><p th:text="${patient.lastName}"></p></td>
         <td><p th:text="${patient.email}"></p></td>
@@ -45,8 +84,6 @@
         <td><p th:text="${patient.city}"></p></td>
         <td><p th:text="${patient.user_id}"></p></td>
     </tr>
-
-    </tbody>
 </table>
 
 </body>
@@ -84,5 +121,8 @@
 
 var tf = new TableFilter('patientTable', filtersConfig);
 tf.init();
+
+
+
 </script>
 </html>
