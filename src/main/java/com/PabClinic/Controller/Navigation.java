@@ -13,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Component
@@ -25,14 +23,18 @@ public class Navigation {
 
     private final EmailServiceImpl emailService;
 
+    private Patient singlePatient;
+
     @Autowired
     public Navigation(PatientFabrik patientFabrik, EmailServiceImpl emailService) {
+
         this.patientFabrik = patientFabrik;
         this.emailService = emailService;
     }
 
     @GetMapping("/index")
     public String toIndex(Model model) {
+
         return "index";
     }
 
@@ -49,18 +51,20 @@ public class Navigation {
 
         model.addAttribute("researchList", researchFabrik.getResearchList());
 
-
         return "prices";
     }
 
     @GetMapping("/vipatient")
     public String toVipatient(Model model) {
+
         return "vipatient";
     }
 
     @GetMapping("/contact")
     public String toContact(Model model) {
+
         model.addAttribute("patientContact", new ClientContact());
+
         return "contact";
     }
 
@@ -72,16 +76,14 @@ public class Navigation {
         model.addAttribute("doctorList", doctorFabrik.getDoctorList());
         model.addAttribute("doctor", new Doctor());
 
-        System.out.println(doctorFabrik.getDoctorList());
-
         return "doctorList";
-
-
     }
 
     @GetMapping("/registration")
     public String toRegistration(Model model) {
+
         model.addAttribute("patient", new Patient());
+
         return "registration";
     }
 
@@ -89,16 +91,19 @@ public class Navigation {
     public String toLogin(Model model) {
 
         model.addAttribute("patientLogin", new PatientLogin());
+
         return "login";
     }
 
     @GetMapping("/pageAdmin")
     public String toTest(Model model) {
+
         return "pageAdmin";
     }
 
     @GetMapping("/pageDoctor")
     public String toDoctor(Model model) {
+
         return "pageDoctor";
     }
 
@@ -110,13 +115,12 @@ public class Navigation {
         model.addAttribute("patientList", patientFabrik.getPatientsList());
         model.addAttribute("patient", new Patient());
 
-        System.out.println(patientFabrik.getPatientsList());
-
         return "patientList";
     }
 
     @GetMapping("/privacy_policy")
     public String toPrivacyPolicy(Model model) {
+
         return "privacy_policy";
     }
 
@@ -164,31 +168,56 @@ public class Navigation {
 
         dataBase.registerPatient(patient);
 
-//        patientFabrik.getPatientsList()
-//                .stream()
-//                .forEach(System.out::println);
+        emailService.sendMessageAfterRegistration(patient.getEmail(), patient.getFirstName(),
+                patient.getLogin(), patient.getPassword());
+
+        return "redirect:/login";
+    }
+
+    @RequestMapping(value = "/patientList", params = "deletePatient", method = RequestMethod.POST)
+    public String removePatient(Model model, @ModelAttribute Patient patient) {
+
+        new DataBase().removePatient(patient);
+
+        return "redirect:/patientList";
+    }
+
+    @RequestMapping(value = "/patientList", params = "addPatient", method = RequestMethod.POST)
+    public String addPatient(Model model, @ModelAttribute Patient patient) {
+
+        DataBase dataBase = new DataBase();
+
+        dataBase.registerPatient(patient);
 
         emailService.sendMessageAfterRegistration(patient.getEmail(), patient.getFirstName(),
                 patient.getLogin(), patient.getPassword());
 
-
-        return "redirect:/login";
-
+        return "redirect:/patientList";
     }
 
-    @PostMapping("/patientList")
-    public String removePatient(Model model, @ModelAttribute Patient patient) {
+    @RequestMapping(value = "/patientList", params = "editPatient", method = RequestMethod.POST)
+    public String editPatient(Model model, @ModelAttribute Patient patient) {
 
-        DataBase db = new DataBase();
-        PatientFabrik patientFabrik = new PatientFabrik();
+        singlePatient = new DataBase().editPatient(patient);
 
-        for (Patient p : patientFabrik.getPatientsList()) {
-            if (patient.getUser_id() == p.getUser_id()) {
-                db.removePatient(patient);
-            }
-        }
+        return "redirect:/patientEdit";
+    }
+
+    @GetMapping("/patientEdit")
+    public String toPatientEdit(Model model) {
+
+        model.addAttribute("patient", singlePatient);
+
+        return "patientEdit";
+    }
+
+    @PostMapping("/patientEdit")
+    public String afterEditPatient(Model model, @ModelAttribute Patient patient) {
+
+        System.out.println("przed zmianą");
+        new DataBase().updatePatient(patient);
+        System.out.println("zmiana dokonana");
 
         return "redirect:/patientList";
-
     }
 }

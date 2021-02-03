@@ -11,7 +11,6 @@ public class PatientFabrik {
 
     private ArrayList<Patient> patientsList = new ArrayList<>();
 
-
     public PatientFabrik() {
 
         DataBase dataBase = new DataBase();

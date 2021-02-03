@@ -48,6 +48,10 @@ body {
     margin: 8%;
 }
 
+.btn-group a {
+    text-decoration: none;
+}
+
 /* Add a background color on hover */
 .btn-group button:hover {
     background-color: #3e8e41;
