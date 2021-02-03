@@ -23,6 +23,28 @@ public class DataBase {
 
     }
 
+    public void getDoctors(ArrayList<Doctor> doctorList){
+
+        try {
+            connectToDb();
+
+            ResultSet rs = stmt.executeQuery("select * from doctor");
+
+            while (rs.next()) {
+                Doctor doctor = new Doctor(rs.getInt("doctor_id"),rs.getString("firstname"),rs.getString("lastname"),
+                        rs.getString("login"),rs.getString("doctorPassword"),rs.getString("specialisation"));
+                doctorList.add(doctor);
+            }
+
+            disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     public void getPatients(ArrayList<Patient> patientList){
 
 

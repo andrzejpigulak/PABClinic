@@ -14,8 +14,8 @@ public class PatientFabrik {
 
     public PatientFabrik() {
 
-        DataBase dbPatient = new DataBase();
-        dbPatient.getPatients(patientsList);
+        DataBase dataBase = new DataBase();
+        dataBase.getPatients(patientsList);
     }
 
     public ArrayList<Patient> getPatientsList() {

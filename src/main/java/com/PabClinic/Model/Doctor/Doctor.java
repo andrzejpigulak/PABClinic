@@ -1,20 +1,36 @@
 package com.PabClinic.Model.Doctor;
 
-import com.PabClinic.Model.enums.Specialisation;
-
 public class Doctor {
 
+    private int doctor_ID;
     private String firstName;
     private String lastName;
     private String login;
     private String password;
-    private Specialisation specialisation;
+    private String specialisation;
 
-    public Doctor(String firstName, String lastName, String login, String password, Specialisation specialisation) {
+    public Doctor(int doctor_ID, String firstName, String lastName, String login, String password, String specialisation) {
+        this.doctor_ID = doctor_ID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
+        this.specialisation = specialisation;
+    }
+
+    public int getDoctor_ID() {
+        return doctor_ID;
+    }
+
+    public void setDoctor_ID(int doctor_ID) {
+        this.doctor_ID = doctor_ID;
+    }
+
+    public String getSpecialisation() {
+        return specialisation;
+    }
+
+    public void setSpecialisation(String specialisation) {
         this.specialisation = specialisation;
     }
 
@@ -53,11 +69,23 @@ public class Doctor {
         this.password = password;
     }
 
-    public Specialisation getSpecialisation() {
-        return specialisation;
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "doctor_ID=" + doctor_ID +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", specialisation='" + specialisation + '\'' +
+                '}';
     }
 
-    public void setSpecialisation(Specialisation specialisation) {
-        this.specialisation = specialisation;
-    }
+//    public Specialisation getSpecialisation() {
+//        return specialisation;
+//    }
+//
+//    public void setSpecialisation(Specialisation specialisation) {
+//        this.specialisation = specialisation;
+//    }
 }

@@ -72,6 +72,8 @@ public class Navigation {
         model.addAttribute("doctorList", doctorFabrik.getDoctorList());
         model.addAttribute("doctor", new Doctor());
 
+        System.out.println(doctorFabrik.getDoctorList());
+
         return "doctorList";
 
 
@@ -107,6 +109,8 @@ public class Navigation {
 
         model.addAttribute("patientList", patientFabrik.getPatientsList());
         model.addAttribute("patient", new Patient());
+
+        System.out.println(patientFabrik.getPatientsList());
 
         return "patientList";
     }
@@ -156,9 +160,9 @@ public class Navigation {
     @PostMapping("/registration")
     public String afterRegistration(Model model, @ModelAttribute Patient patient) {
 
-        DataBase dbPatient = new DataBase();
+        DataBase dataBase = new DataBase();
 
-        dbPatient.registerPatient(patient);
+        dataBase.registerPatient(patient);
 
 //        patientFabrik.getPatientsList()
 //                .stream()
