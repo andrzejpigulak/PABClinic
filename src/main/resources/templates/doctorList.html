@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="patientList.css">
+</head>
+<body>
+<script type="text/javascript" src="patientList.js"></script>
+
+
+<form action="#" th:action="@{/doctorList}" method="post">
+    <label>Imie </label><br>
+    <input type="text" th:field="${doctor.firstName}"><br>
+    <label>Nazwisko</label>
+    <input type="text" th:field="${doctor.lastName}"><br>
+    <label>login</label>
+    <input type="text" th:field="${doctor.login}"><br>
+    <label>password</label>
+    <input type="password" th:field="${doctor.password}"><br>
+    <label>Specjalizacja</label>
+    <select name="nazwa" multiple th:value="${doctor.specialisation}">
+        <option>LEKARZRODZINNY</option>
+        <option>DERMATOLOG</option>
+        <option>GINEKOLOG</option>
+        <option>OKULISTA</option>
+        <option>ORTOPEDA</option>
+        <option>PSYCHOLOG</option>
+        <option>PSYCHIATRA</option>
+        <option>LARYNGOLOG</option>
+        <option>NEUROLOG</option>
+        <option>UROLOG</option>
+        <option>POLOZNA</option>
+        <option>PIELEGNIARKA</option>
+    </select>
+    <br><input type="submit" value = "Dodaj lekarza">
+</form>
+
+
+<table id="doctorTable" border="1" style="width:50%">
+    <thead>
+    <tr>
+
+        <th>Imie</th>
+        <th>Nazwisko</th>
+        <th>login</th>
+        <th>hasło</th>
+        <th>Specjalizacja</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="doctor : ${doctorList}">
+
+        <td><p th:text="${doctor.firstName}"></p></td>
+        <td><p th:text="${doctor.lastName}"></p></td>
+        <td><p th:text="${doctor.login}"></p></td>
+        <td><p th:text="${doctor.password}"></p></td>
+        <td><p th:text="${doctor.specialisation}"></p></td>
+<!--        <td><p th:text="${doctor.doctor_id}"></p></td>-->
+
+    </tr>
+
+    </tbody>
+</table>
+
+</body>
+
+<script>
+    var filtersConfig = {
+  // instruct TableFilter location to import ressources from
+  base_path: 'https://unpkg.com/tablefilter@latest/dist/tablefilter/',
+<!--  col_1: 'select',-->
+<!--  col_2: 'select',-->
+<!--  col_3: 'select',-->
+  alternate_rows: true,
+  rows_counter: true,
+  btn_reset: true,
+  loader: true,
+  mark_active_columns: true,
+  highlight_keywords: true,
+  no_results_message: true,
+  col_types: [
+    'string', 'string', 'string',
+    'number', 'number', 'string',
+    'string', 'string', 'number'
+  ],
+
+  col_widths: [
+    '150px', '150px', '250px',
+    '100px', '125px', '150px',
+    '85px', '100px', '60px'
+  ],
+  extensions: [{
+    name: 'sort',
+    images_path: 'https://unpkg.com/tablefilter@latest/dist/tablefilter/style/themes/'
+  }]
+};
+
+var tf = new TableFilter('doctorTable', filtersConfig);
+tf.init();
+</script>
+</html>

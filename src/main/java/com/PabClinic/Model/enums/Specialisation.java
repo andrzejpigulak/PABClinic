@@ -1,6 +1,7 @@
 package com.PabClinic.Model.enums;
 
 public enum Specialisation {
+
     LEKARZRODZINNY,
     DERMATOLOG,
     GINEKOLOG,

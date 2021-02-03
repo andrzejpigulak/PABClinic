@@ -18,6 +18,9 @@ public class Doctor {
         this.specialisation = specialisation;
     }
 
+    public Doctor() {
+    }
+
     public String getFirstName() {
         return firstName;
     }

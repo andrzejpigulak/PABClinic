@@ -1,4 +1,5 @@
 package com.PabClinic.Model.Database;
+import com.PabClinic.Model.Doctor.Doctor;
 import com.PabClinic.Model.Patient.Patient;
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ public class DBPatient {
     Connection conn;
 
     public DBPatient() {
+
+
 
     }
 
