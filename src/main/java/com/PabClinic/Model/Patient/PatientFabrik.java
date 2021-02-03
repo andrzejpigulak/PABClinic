@@ -2,7 +2,7 @@ package com.PabClinic.Model.Patient;
 import org.springframework.stereotype.Component;
 
 
-import com.PabClinic.Model.Database.DBPatient;
+import com.PabClinic.Model.Database.DataBase;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ public class PatientFabrik {
 
     public PatientFabrik() {
 
-        DBPatient dbPatient = new DBPatient();
+        DataBase dbPatient = new DataBase();
         dbPatient.getPatients(patientsList);
     }
 

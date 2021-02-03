@@ -1,10 +1,12 @@
 package com.PabClinic.Model.Database;
 import com.PabClinic.Model.Doctor.Doctor;
 import com.PabClinic.Model.Patient.Patient;
+import com.PabClinic.Model.Research.Research;
+
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DBPatient {
+public class DataBase {
 
     private static final String JDBC_DRIVER = "org.postgresql.Driver";
     private static final String URL = "jdbc:postgresql://localhost/PABClinic";
@@ -17,9 +19,7 @@ public class DBPatient {
     private Statement stmt;
     Connection conn;
 
-    public DBPatient() {
-
-
+    public DataBase() {
 
     }
 
@@ -45,6 +45,30 @@ public class DBPatient {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public void getResearches(ArrayList<Research> researchList) {
+
+        try {
+            connectToDb();
+
+            ResultSet rs = stmt.executeQuery("select * from Badania");
+
+            while (rs.next()) {
+                Research research = new Research(rs.getInt("badanie_id"), rs.getString("nazwaBadania"), rs.getInt("cenaBadania"));
+
+                researchList.add(research);
+            }
+
+            disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
     }
 
     public void registerPatient(Patient patient) {

@@ -7,6 +7,9 @@
     <title>PAB Zdrowie - Rezonans | RTG | Diagnostyka | Laboratorium</title>
 </head>
 <body>
+
+<script type="text/javascript" src="patientList.js"></script>
+
 <div class="top_container">
     <a href="index">
         <img src="images/pab_clinic_logo.jpg" alt="Clinic logo" title="PAB CLINIC">
@@ -27,8 +30,30 @@
     <div class="mid_container_top"><span>Nasz aktualny cennik</span></div>
 
 
+    <table id="researchTable" border="1" style="width:50%">
+        <thead>
+        <tr>
 
-    <img src="images/prices.png" alt="cennik badan" title="Cennik">
+            <th>Id badania</th>
+            <th>Nazwa badania</th>
+            <th>Cena badania (w zł)</th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="research : ${researchList}">
+
+            <td><a th:text="${research.badanie_id}"></a></td>
+            <td><a th:text="${research.nazwaBadania}"></a></td>
+            <td><a th:text="${research.cenaBadania}"></a></td>
+
+        </tr>
+
+        </tbody>
+    </table>
+
+<!--    <img src="images/prices.png" alt="cennik badan" title="Cennik">-->
 
 
 </div>
@@ -81,4 +106,41 @@
 </div>
 
 </body>
+
+
+<script>
+    var filtersConfig = {
+  // instruct TableFilter location to import ressources from
+  base_path: 'https://unpkg.com/tablefilter@latest/dist/tablefilter/',
+<!--  col_1: 'select',-->
+<!--  col_2: 'select',-->
+<!--  col_3: 'select',-->
+  alternate_rows: true,
+  rows_counter: true,
+  btn_reset: true,
+  loader: true,
+  mark_active_columns: true,
+  highlight_keywords: true,
+  no_results_message: true,
+  col_types: [
+    'string', 'string', 'string',
+    'number', 'number', 'string',
+    'string', 'string', 'number'
+  ],
+
+  col_widths: [
+    '30px', '150px', '30px',
+    '100px', '125px', '150px',
+    '85px', '100px', '60px'
+  ],
+  extensions: [{
+    name: 'sort',
+    images_path: 'https://unpkg.com/tablefilter@latest/dist/tablefilter/style/themes/'
+  }]
+};
+
+var tf = new TableFilter('doctorTable', filtersConfig);
+tf.init();
+</script>
+
 </html>

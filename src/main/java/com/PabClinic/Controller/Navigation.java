@@ -1,13 +1,14 @@
 package com.PabClinic.Controller;
 
 import com.PabClinic.Model.Client.ClientContact;
-import com.PabClinic.Model.Database.DBPatient;
+import com.PabClinic.Model.Database.DataBase;
 import com.PabClinic.Model.Doctor.Doctor;
 import com.PabClinic.Model.Doctor.DoctorFabrik;
 import com.PabClinic.Model.Patient.Patient;
 import com.PabClinic.Model.Patient.PatientFabrik;
 import com.PabClinic.Model.Patient.PatientLogin;
-import com.PabClinic.Model.enums.Specialisation;
+import com.PabClinic.Model.Research.Research;
+import com.PabClinic.Model.Research.ResearchFabrik;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -37,11 +38,18 @@ public class Navigation {
 
     @GetMapping("/services")
     public String toUslugi(Model model) {
+
         return "services";
     }
 
     @GetMapping("/prices")
     public String toCennik(Model model) {
+
+        ResearchFabrik researchFabrik = new ResearchFabrik();
+
+        model.addAttribute("researchList", researchFabrik.getResearchList());
+
+
         return "prices";
     }
 
@@ -108,6 +116,17 @@ public class Navigation {
         return "privacy_policy";
     }
 
+    @GetMapping("/researchList")
+    public String toResearchList(Model model) {
+
+        ResearchFabrik researchFabrik = new ResearchFabrik();
+
+        model.addAttribute("noweBadanie", new Research());
+        model.addAttribute("researchList", researchFabrik.getResearchList());
+
+        return "researchList";
+    }
+
     @PostMapping("/contact")
     public String sendMailFromContact(Model Model, @ModelAttribute ClientContact clientContact) {
         emailService.sendSimpleMessage(clientContact.getEmail(), clientContact.getSubject(), "pabclinica@gmail.com", clientContact.getTextMessage(), clientContact.getName());
@@ -137,7 +156,7 @@ public class Navigation {
     @PostMapping("/registration")
     public String afterRegistration(Model model, @ModelAttribute Patient patient) {
 
-        DBPatient dbPatient = new DBPatient();
+        DataBase dbPatient = new DataBase();
 
         dbPatient.registerPatient(patient);
 
@@ -156,7 +175,7 @@ public class Navigation {
     @PostMapping("/patientList")
     public String removePatient(Model model, @ModelAttribute Patient patient) {
 
-        DBPatient db = new DBPatient();
+        DataBase db = new DataBase();
         PatientFabrik patientFabrik = new PatientFabrik();
 
         for (Patient p : patientFabrik.getPatientsList()) {
