@@ -7,6 +7,8 @@ import com.PabClinic.Model.Doctor.DoctorFabrik;
 import com.PabClinic.Model.Patient.Patient;
 import com.PabClinic.Model.Patient.PatientFabrik;
 import com.PabClinic.Model.Patient.PatientLogin;
+import com.PabClinic.Model.Research.Research;
+import com.PabClinic.Model.Research.ResearchFabrik;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -36,11 +38,18 @@ public class Navigation {
 
     @GetMapping("/services")
     public String toUslugi(Model model) {
+
         return "services";
     }
 
     @GetMapping("/prices")
     public String toCennik(Model model) {
+
+        ResearchFabrik researchFabrik = new ResearchFabrik();
+
+        model.addAttribute("researchList", researchFabrik.getResearchList());
+
+
         return "prices";
     }
 
@@ -109,6 +118,17 @@ public class Navigation {
     @GetMapping("/privacy_policy")
     public String toPrivacyPolicy(Model model) {
         return "privacy_policy";
+    }
+
+    @GetMapping("/researchList")
+    public String toResearchList(Model model) {
+
+        ResearchFabrik researchFabrik = new ResearchFabrik();
+
+        model.addAttribute("noweBadanie", new Research());
+        model.addAttribute("researchList", researchFabrik.getResearchList());
+
+        return "researchList";
     }
 
     @PostMapping("/contact")

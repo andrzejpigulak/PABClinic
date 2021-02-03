@@ -1,6 +1,8 @@
 package com.PabClinic.Model.Database;
 import com.PabClinic.Model.Doctor.Doctor;
 import com.PabClinic.Model.Patient.Patient;
+import com.PabClinic.Model.Research.Research;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -10,8 +12,8 @@ public class DataBase {
     private static final String URL = "jdbc:postgresql://localhost/PABClinic";
     private static final String LOGIN = "postgres";
 //        private static final String PASSWORD = "ANDpig1906!@"; // Andrzeja hasło na postgresa
-        private static final String PASSWORD = "Qparox123!"; // Pawła hasło na postgresa
-//    private static final String PASSWORD = "postgres"; // Bartka hasło na postgresa
+    //    private static final String PASSWORD = "Qparox123!"; // Pawła hasło na postgresa
+    private static final String PASSWORD = "postgres"; // Bartka hasło na postgresa
 
 
     private Statement stmt;
@@ -65,6 +67,30 @@ public class DataBase {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public void getResearches(ArrayList<Research> researchList) {
+
+        try {
+            connectToDb();
+
+            ResultSet rs = stmt.executeQuery("select * from Badania");
+
+            while (rs.next()) {
+                Research research = new Research(rs.getInt("badanie_id"), rs.getString("nazwaBadania"), rs.getInt("cenaBadania"));
+
+                researchList.add(research);
+            }
+
+            disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
     }
 
     public void registerPatient(Patient patient) {

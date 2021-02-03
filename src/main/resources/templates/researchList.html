@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="patientList.css">
+</head>
+<body>
+<script type="text/javascript" src="patientList.js"></script>
+
+<table id="researchTable" border="1" style="width:50%">
+    <thead>
+    <tr>
+
+        <th>Id badania</th>
+        <th>Nazwa badania</th>
+        <th>Cena badania (w zł)</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="research : ${researchList}">
+
+        <td><p th:text="${research.badanie_id}"></p></td>
+        <td><p th:text="${research.nazwaBadania}"></p></td>
+        <td><p th:text="${research.cenaBadania}"></p></td>
+
+    </tr>
+
+    </tbody>
+</table>
+
+</body>
+
+<script>
+    var filtersConfig = {
+  // instruct TableFilter location to import ressources from
+  base_path: 'https://unpkg.com/tablefilter@latest/dist/tablefilter/',
+<!--  col_1: 'select',-->
+<!--  col_2: 'select',-->
+<!--  col_3: 'select',-->
+  alternate_rows: true,
+  rows_counter: true,
+  btn_reset: true,
+  loader: true,
+  mark_active_columns: true,
+  highlight_keywords: true,
+  no_results_message: true,
+  col_types: [
+    'string', 'string', 'string',
+    'number', 'number', 'string',
+    'string', 'string', 'number'
+  ],
+
+  col_widths: [
+    '30px', '150px', '30px',
+    '100px', '125px', '150px',
+    '85px', '100px', '60px'
+  ],
+  extensions: [{
+    name: 'sort',
+    images_path: 'https://unpkg.com/tablefilter@latest/dist/tablefilter/style/themes/'
+  }]
+};
+
+var tf = new TableFilter('researchTable', filtersConfig);
+tf.init();
+</script>
+</html>
