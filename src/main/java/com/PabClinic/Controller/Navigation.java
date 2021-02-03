@@ -1,13 +1,12 @@
 package com.PabClinic.Controller;
 
 import com.PabClinic.Model.Client.ClientContact;
-import com.PabClinic.Model.Database.DBPatient;
+import com.PabClinic.Model.Database.DataBase;
 import com.PabClinic.Model.Doctor.Doctor;
 import com.PabClinic.Model.Doctor.DoctorFabrik;
 import com.PabClinic.Model.Patient.Patient;
 import com.PabClinic.Model.Patient.PatientFabrik;
 import com.PabClinic.Model.Patient.PatientLogin;
-import com.PabClinic.Model.enums.Specialisation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -64,6 +63,8 @@ public class Navigation {
         model.addAttribute("doctorList", doctorFabrik.getDoctorList());
         model.addAttribute("doctor", new Doctor());
 
+        System.out.println(doctorFabrik.getDoctorList());
+
         return "doctorList";
 
 
@@ -99,6 +100,8 @@ public class Navigation {
 
         model.addAttribute("patientList", patientFabrik.getPatientsList());
         model.addAttribute("patient", new Patient());
+
+        System.out.println(patientFabrik.getPatientsList());
 
         return "patientList";
     }
@@ -137,9 +140,9 @@ public class Navigation {
     @PostMapping("/registration")
     public String afterRegistration(Model model, @ModelAttribute Patient patient) {
 
-        DBPatient dbPatient = new DBPatient();
+        DataBase dataBase = new DataBase();
 
-        dbPatient.registerPatient(patient);
+        dataBase.registerPatient(patient);
 
 //        patientFabrik.getPatientsList()
 //                .stream()
@@ -156,7 +159,7 @@ public class Navigation {
     @PostMapping("/patientList")
     public String removePatient(Model model, @ModelAttribute Patient patient) {
 
-        DBPatient db = new DBPatient();
+        DataBase db = new DataBase();
         PatientFabrik patientFabrik = new PatientFabrik();
 
         for (Patient p : patientFabrik.getPatientsList()) {

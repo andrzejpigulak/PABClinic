@@ -4,23 +4,43 @@ import com.PabClinic.Model.Patient.Patient;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DBPatient {
+public class DataBase {
 
     private static final String JDBC_DRIVER = "org.postgresql.Driver";
     private static final String URL = "jdbc:postgresql://localhost/PABClinic";
     private static final String LOGIN = "postgres";
 //        private static final String PASSWORD = "ANDpig1906!@"; // Andrzeja hasło na postgresa
-    //    private static final String PASSWORD = "Qparox123!"; // Pawła hasło na postgresa
-    private static final String PASSWORD = "postgres"; // Bartka hasło na postgresa
+        private static final String PASSWORD = "Qparox123!"; // Pawła hasło na postgresa
+//    private static final String PASSWORD = "postgres"; // Bartka hasło na postgresa
 
 
     private Statement stmt;
     Connection conn;
 
-    public DBPatient() {
+    public DataBase() {
 
+    }
 
+    public void getDoctors(ArrayList<Doctor> doctorList){
 
+        try {
+            connectToDb();
+
+            ResultSet rs = stmt.executeQuery("select * from doctor");
+
+            while (rs.next()) {
+                Doctor doctor = new Doctor(rs.getInt("doctor_id"),rs.getString("firstname"),rs.getString("lastname"),
+                        rs.getString("login"),rs.getString("doctorPassword"),rs.getString("specialisation"));
+                doctorList.add(doctor);
+            }
+
+            disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public void getPatients(ArrayList<Patient> patientList){
