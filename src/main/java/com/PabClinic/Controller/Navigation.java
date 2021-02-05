@@ -146,6 +146,8 @@ public class Navigation {
     @PostMapping("/login")
     public String afterLogin(Model model, @ModelAttribute PatientLogin patientLogin) {
 
+        PatientFabrik patientFabrik = new PatientFabrik();
+
         boolean czyLoginIHasloPasuje = patientFabrik.getPatientsList().stream()
                 .filter(patient -> (patientLogin.getLogin().equals(patient.getLogin())
                         || patientLogin.getLogin().equals(patient.getEmail())) &&
@@ -211,12 +213,10 @@ public class Navigation {
         return "patientEdit";
     }
 
-    @PostMapping("/patientEdit")
-    public String afterEditPatient(Model model, @ModelAttribute Patient patient) {
+    @RequestMapping(value = "/patientList", params = "savePatient", method = RequestMethod.POST)
+    public String savePatient(Model model, @ModelAttribute Patient patient) {
 
-        System.out.println("przed zmianą");
         new DataBase().updatePatient(patient);
-        System.out.println("zmiana dokonana");
 
         return "redirect:/patientList";
     }

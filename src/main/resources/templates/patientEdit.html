@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,12 +11,14 @@
     <h2 style="margin: 20px">Kliknij na pole, które chcesz edytować</h2>
 </table>
 
-<form action="#">
+<form action="#" th:action="@{/patientList}" method="post">
     <table border="1" style="width:50%; margin: 20px; text-align: center">
         <thead>
         <tr>
             <th>Imie</th>
             <th>Nazwisko</th>
+            <th>Login</th>
+            <th>Haslo</th>
             <th>Email</th>
             <th>Numer telefonu</th>
             <th>Pesel</th>
@@ -28,30 +30,36 @@
         </thead>
         <tr>
             <td>
-                <div contenteditable><p th:text="${patient.firstName}"></p></div>
+                <input type="text" th:field="${patient.firstName}">
             </td>
             <td>
-                <div contenteditable><p th:text="${patient.lastName}"></p></div>
+                <input type="text" th:field="${patient.lastName}">
             </td>
             <td>
-                <div contenteditable><p th:text="${patient.email}"></p></div>
+                <input type="text" th:field="${patient.login}">
             </td>
             <td>
-                <div contenteditable><p th:text="${patient.telephoneNumber}"></p></div>
+                <input type="text" th:field="${patient.password}">
             </td>
             <td>
-                <div contenteditable><p th:text="${patient.pesel}"></p></div>
+                <input type="email" th:field="${patient.email}">
             </td>
             <td>
-                <div contenteditable><p th:text="${patient.address}"></p></div>
+                <input type="tel" th:field="${patient.telephoneNumber}">
             </td>
             <td>
-                <div contenteditable><p th:text="${patient.postCode}"></p></div>
+                <input type="tel" th:field="${patient.pesel}">
             </td>
             <td>
-                <div contenteditable><p th:text="${patient.city}"></p></div>
+                <input type="text" th:field="${patient.address}">
             </td>
-            <td><p th:text="${patient.user_id}"></p></td>
+            <td>
+                <input type="text" th:field="${patient.postCode}">
+            </td>
+            <td>
+                <input type="text" th:field="${patient.city}">
+            </td>
+            <td><input type="text" th:field="${patient.user_id}" readonly>
         </tr>
     </table>
     <br>

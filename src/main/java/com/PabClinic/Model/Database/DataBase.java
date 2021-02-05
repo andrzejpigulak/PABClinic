@@ -12,8 +12,8 @@ public class DataBase {
     private static final String JDBC_DRIVER = "org.postgresql.Driver";
     private static final String URL = "jdbc:postgresql://localhost/PABClinic";
     private static final String LOGIN = "postgres";
-    private static final String PASSWORD = "ANDpig1906!@"; // Andrzeja hasło na postgresa
-    //    private static final String PASSWORD = "Qparox123!"; // Pawła hasło na postgresa
+//    private static final String PASSWORD = "ANDpig1906!@"; // Andrzeja hasło na postgresa
+        private static final String PASSWORD = "Qparox123!"; // Pawła hasło na postgresa
 //    private static final String PASSWORD = "postgres"; // Bartka hasło na postgresa
 
 
@@ -186,11 +186,21 @@ public class DataBase {
         try {
             connectToDb();
 
-            String queryUpdate = "update patient set firstname=" + patient.getFirstName() + " where user_ID=" + patient.getUser_id();
+            String queryUpdate = "update patient set firstname=?, lastname=?, userpassword=?, pesel=?, login=?, email=?, telephonenumber=?, " +
+                    "address=?, postcode=?, city=? where user_ID=" + patient.getUser_id();
 
             PreparedStatement preparedStatement = conn.prepareStatement(queryUpdate);
 
             preparedStatement.setString(1, patient.getFirstName());
+            preparedStatement.setString(2, patient.getLastName());
+            preparedStatement.setString(3, patient.getPassword());
+            preparedStatement.setLong(4, patient.getPesel());
+            preparedStatement.setString(5, patient.getLogin());
+            preparedStatement.setString(6, patient.getEmail());
+            preparedStatement.setInt(7, patient.getTelephoneNumber());
+            preparedStatement.setString(8, patient.getAddress());
+            preparedStatement.setString(9, patient.getPostCode());
+            preparedStatement.setString(10, patient.getCity());
 
             preparedStatement.executeUpdate();
 
