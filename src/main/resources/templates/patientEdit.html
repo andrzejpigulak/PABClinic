@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/adminStyle.css">
+    <link rel="stylesheet" href="css/patientEditStyle.css">
 </head>
 <body>
 
@@ -19,8 +19,8 @@
             <th>Nazwisko</th>
             <th>Login</th>
             <th>Haslo</th>
-            <th>Email</th>
-            <th>Numer telefonu</th>
+            <th >Email</th>
+            <th >Numer telefonu</th>
             <th>Pesel</th>
             <th>Adres</th>
             <th>Kod pocztowy</th>
@@ -30,36 +30,36 @@
         </thead>
         <tr>
             <td>
-                <input type="text" th:field="${patient.firstName}">
+                <input class="text_size" type="text" th:field="${patient.firstName}">
             </td>
             <td>
-                <input type="text" th:field="${patient.lastName}">
+                <input class="text_size" type="text" th:field="${patient.lastName}">
             </td>
             <td>
-                <input type="text" th:field="${patient.login}">
+                <input class="text_size" type="text" th:field="${patient.login}">
             </td>
             <td>
-                <input type="text" th:field="${patient.password}">
+                <input class="text_size" type="text" th:field="${patient.password}">
             </td>
             <td>
-                <input type="email" th:field="${patient.email}">
+                <input class="email_size" type="email" th:field="${patient.email}">
             </td>
             <td>
-                <input type="tel" th:field="${patient.telephoneNumber}">
+                <input class="tel_size" type="tel" th:field="${patient.telephoneNumber}">
             </td>
             <td>
-                <input type="tel" th:field="${patient.pesel}">
+                <input class="pesel_size" type="tel" th:field="${patient.pesel}">
             </td>
             <td>
-                <input type="text" th:field="${patient.address}">
+                <input class="text_size" type="text" th:field="${patient.address}">
             </td>
             <td>
-                <input type="text" th:field="${patient.postCode}">
+                <input class="post_size" type="text" th:field="${patient.postCode}">
             </td>
             <td>
-                <input type="text" th:field="${patient.city}">
+                <input class="city_size" type="text" th:field="${patient.city}">
             </td>
-            <td><input type="text" th:field="${patient.user_id}" readonly>
+            <td><input class="id_size" type="text" th:field="${patient.user_id}" readonly>
         </tr>
     </table>
     <br>

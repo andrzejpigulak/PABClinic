@@ -1,7 +1,6 @@
 body {
     font-family: Arial;
     margin: 0;
-
 }
 
 .singlePatientTable h2 {
@@ -10,4 +9,32 @@ body {
 
 .button {
     margin-left: 20px;
+}
+
+.id_size {
+    width: 30px;
+}
+
+.text_size {
+    width: 150px;
+}
+
+.pesel_size {
+    width: 90px;
+}
+
+.tel_size {
+    width: 70px;
+}
+
+.emai_size {
+    width: 250px;
+}
+
+.post_size {
+    width: 70px;
+}
+
+.city_size {
+    width: 100px
 }
