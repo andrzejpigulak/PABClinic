@@ -4,6 +4,7 @@ import com.PabClinic.Model.Doctor.Doctor;
 import com.PabClinic.Model.Patient.Patient;
 import com.PabClinic.Model.Research.Research;
 
+import javax.print.Doc;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -22,28 +23,6 @@ public class DataBase {
 
     public DataBase() {
 
-    }
-
-    public void getDoctors(ArrayList<Doctor> doctorList) {
-
-        try {
-            connectToDb();
-
-            ResultSet rs = stmt.executeQuery("select * from doctor");
-
-            while (rs.next()) {
-                Doctor doctor = new Doctor(rs.getInt("doctor_id"), rs.getString("firstname"), rs.getString("lastname"),
-                        rs.getString("login"), rs.getString("doctorPassword"), rs.getString("specialisation"));
-                doctorList.add(doctor);
-            }
-
-            disconnectDB();
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
     }
 
     public void getPatients(ArrayList<Patient> patientList) {
@@ -213,6 +192,134 @@ public class DataBase {
         }
     }
 
+    public void getDoctors(ArrayList<Doctor> doctorList) {
+
+        try {
+            connectToDb();
+
+            ResultSet rs = stmt.executeQuery("select * from doctor");
+
+            while (rs.next()) {
+                Doctor doctor = new Doctor(rs.getInt("doctor_id"), rs.getString("firstname"), rs.getString("lastname"),
+                        rs.getString("login"), rs.getString("doctorPassword"), rs.getString("specialisation"));
+                doctorList.add(doctor);
+            }
+
+            disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void registerDoctor(Doctor doctor) {
+
+        try {
+            connectToDb();
+
+            String queryCount = "SELECT COUNT(*) from doctor";
+
+            ResultSet rs = stmt.executeQuery(queryCount);
+            rs.next();
+
+            int i = rs.getInt("count");
+
+            String queryInsert = "insert into doctor (firstName, lastName, login, doctorPassword, specialisation) values (?, ?, ?, ?, ?)";
+
+            PreparedStatement preparedStatement = conn.prepareStatement(queryInsert);
+
+            preparedStatement.setString(1, doctor.getFirstName());
+            preparedStatement.setString(2, doctor.getLastName());
+            preparedStatement.setString(3, doctor.getLogin());
+            preparedStatement.setString(4, doctor.getPassword());
+            preparedStatement.setString(5, doctor.getSpecialisation());
+
+            preparedStatement.executeUpdate();
+
+            disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void removeDoctor(Doctor doctor) {
+
+        try {
+            connectToDb();
+
+            String queryRemove = "delete from doctor where doctor_ID=?";
+
+            PreparedStatement preparedStatement = conn.prepareStatement(queryRemove);
+
+            preparedStatement.setInt(1, doctor.getDoctor_ID());
+
+            preparedStatement.executeUpdate();
+
+            disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public Doctor editDoctor(Doctor doctor) {
+
+        try {
+            connectToDb();
+
+            String queryEdit = "select * from doctor where doctor_ID=" + doctor.getDoctor_ID();
+
+            ResultSet rs = stmt.executeQuery(queryEdit);
+
+            while (rs.next()) {
+                doctor = new Doctor(rs.getInt("doctor_id"), rs.getString("firstName"), rs.getString("lastName"),
+                        rs.getString("login"), rs.getString("doctorPassword"), rs.getString("specialisation"));
+            }
+
+            disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return doctor;
+    }
+
+    public void updateDoctor(Doctor doctor) {
+
+        try {
+            connectToDb();
+
+            String queryUpdate = "update doctor set firstname=?, lastname=?, login=?, doctorPassword=?, specialisation=? where doctor_ID=" + doctor.getDoctor_ID();
+
+            PreparedStatement preparedStatement = conn.prepareStatement(queryUpdate);
+
+            preparedStatement.setString(1, doctor.getFirstName());
+            preparedStatement.setString(2, doctor.getLastName());
+            preparedStatement.setString(3, doctor.getLogin());
+            preparedStatement.setString(4, doctor.getPassword());
+            preparedStatement.setString(5, doctor.getSpecialisation());
+
+            preparedStatement.executeUpdate();
+
+            disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     private void connectToDb() throws ClassNotFoundException, SQLException {
 
         Class.forName(JDBC_DRIVER);
@@ -226,6 +333,5 @@ public class DataBase {
         stmt.close();
         conn.close();
     }
-
 
 }

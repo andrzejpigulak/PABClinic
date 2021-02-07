@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/doctorEditStyle.css">
+</head>
+<body>
+
+<table>
+    <h2 style="margin: 20px">Kliknij na pole, które chcesz edytować</h2>
+</table>
+
+<form action="#" th:action="@{/doctorList}" method="post">
+    <table border="1" style="width:50%; margin: 20px; text-align: center">
+        <thead>
+        <tr>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+            <th>Login</th>
+            <th>Haslo</th>
+            <th>Specjalizacja</th>
+            <th>Id</th>
+        </tr>
+        </thead>
+        <tr>
+            <td>
+                <input class="text_size" type="text" th:field="${doctor.firstName}">
+            </td>
+            <td>
+                <input class="text_size" type="text" th:field="${doctor.lastName}">
+            </td>
+            <td>
+                <input class="text_size" type="text" th:field="${doctor.login}">
+            </td>
+            <td>
+                <input class="text_size" type="text" th:field="${doctor.password}">
+            </td>
+            <td>
+                <input class="text_size" type="text" th:field="${doctor.specialisation}">
+            </td>
+            <td><input class="id_size" type="number" th:field="${doctor.doctor_ID}" readonly>
+        </tr>
+    </table>
+    <br>
+    <input style="margin-left: 20px" type="submit" value="Zapisz" name="saveDoctor">
+</form>
+
+</body>
+</html>

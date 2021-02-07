@@ -1,0 +1,16 @@
+body {
+    font-family: Arial;
+    margin: 0;
+}
+
+.button {
+    margin-left: 20px;
+}
+
+.id_size {
+    width: 30px;
+}
+
+.text_size {
+    width: 150px;
+}

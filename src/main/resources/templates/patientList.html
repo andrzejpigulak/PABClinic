@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/patientList.css">
+    <link rel="stylesheet" href="css/patientStyle.css">
 </head>
 <body>
 <script type="text/javascript" src="patientList.js"></script>
@@ -18,7 +18,7 @@
         <label>Login: </label>
         <input type="text" th:field="${patient.login}" placeholder="Wymagane">
         <label> Hasło: </label>
-        <input type="text" th:field="${patient.password}" placeholder="Wymagane"><br><br>
+        <input type="password" th:field="${patient.password}" placeholder="Wymagane"><br><br>
         <label>E-mail: </label>
         <input type="email" th:field="${patient.email}" placeholder="Wymagane"><br><br>
         <label>Numer telefonu: </label>

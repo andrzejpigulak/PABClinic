@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.Doc;
+
 @Controller
 @Component
 public class Navigation {
@@ -24,6 +26,8 @@ public class Navigation {
     private final EmailServiceImpl emailService;
 
     private Patient singlePatient;
+
+    private Doctor singleDoctor;
 
     @Autowired
     public Navigation(PatientFabrik patientFabrik, EmailServiceImpl emailService) {
@@ -220,4 +224,47 @@ public class Navigation {
 
         return "redirect:/patientList";
     }
+
+    @RequestMapping(value = "/doctorList", params = "addDoctor", method = RequestMethod.POST)
+    public String addDoctor(Model model, @ModelAttribute Doctor doctor) {
+
+        DataBase dataBase = new DataBase();
+
+        dataBase.registerDoctor(doctor);
+
+        return "redirect:/doctorList";
+    }
+
+    @RequestMapping(value = "/doctorList", params = "deleteDoctor", method = RequestMethod.POST)
+    public String removeDoctor(Model model, @ModelAttribute Doctor doctor) {
+
+        new DataBase().removeDoctor(doctor);
+
+        return "redirect:/doctorList";
+    }
+
+    @RequestMapping(value = "/doctorList", params = "editDoctor", method = RequestMethod.POST)
+    public String editDoctor(Model model, @ModelAttribute Doctor doctor) {
+
+        singleDoctor = new DataBase().editDoctor(doctor);
+
+        return "redirect:/doctorEdit";
+    }
+
+    @GetMapping("/doctorEdit")
+    public String toDoctorEdit(Model model) {
+
+        model.addAttribute("doctor", singleDoctor);
+
+        return "doctorEdit";
+    }
+
+    @RequestMapping(value = "/doctorList", params = "saveDoctor", method = RequestMethod.POST)
+    public String saveDoctor(Model model, @ModelAttribute Doctor doctor) {
+
+        new DataBase().updateDoctor(doctor);
+
+        return "redirect:/doctorList";
+    }
+
 }
