@@ -1,5 +1,7 @@
 package com.PabClinic.Model.Patient;
 
+import javax.xml.crypto.Data;
+
 public class Patient {
 
     private int user_id;
@@ -10,11 +12,10 @@ public class Patient {
     private String email;
     private int telephoneNumber;
     private long pesel;
-
-
     private String address;
     private String postCode;
     private String city;
+    private String datePick;
 
     public Patient() {
     }
@@ -122,6 +123,14 @@ public class Patient {
         this.city = city;
     }
 
+    public String getDatePick() {
+        return datePick;
+    }
+
+    public void setDatePick(String datePick) {
+        this.datePick = datePick;
+    }
+
     @Override
     public String toString() {
         return "Patient{" +
@@ -136,6 +145,7 @@ public class Patient {
                 ", address='" + address + '\'' +
                 ", postCode='" + postCode + '\'' +
                 ", city='" + city + '\'' +
+                ", datePick=" + datePick +
                 '}';
     }
 }
