@@ -3,10 +3,6 @@ body {
     margin: 0;
 }
 
-.singlePatientTable h2 {
-    margin-left: 20px;
-}
-
 .button {
     margin-left: 20px;
 }
@@ -27,7 +23,7 @@ body {
     width: 70px;
 }
 
-.emai_size {
+.email_size {
     width: 250px;
 }
 

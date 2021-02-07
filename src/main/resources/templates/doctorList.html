@@ -3,57 +3,69 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/patientList.css">
+    <link rel="stylesheet" href="css/doctorStyle.css">
 </head>
 <body>
-<script type="text/javascript" src="patientList.js"></script>
+<script type="text/javascript" src="doctorList.js"></script>
 
+<div class="addDoctor">
+    <h3>DODANIE LEKARZA</h3>
+    <form action="#" th:action="@{/doctorList}" method="post">
+        <label>Imię: </label>
+        <input type="text" th:field="${doctor.firstName}" placeholder="Wymagane">
+        <label> Nazwisko: </label>
+        <input type="text" th:field="${doctor.lastName}" placeholder="Wymagane"><br><br>
+        <label>Login: </label>
+        <input type="text" th:field="${doctor.login}" placeholder="Wymagane">
+        <label> Hasło: </label>
+        <input type="password" th:field="${doctor.password}" placeholder="Wymagane"><br><br>
+        <label> Specjalizacja: </label>
+        <input type="text" th:field="${doctor.specialisation}" placeholder="Wymagane"><br>
+        <br><input type="submit" value="Dodaj lekarza" name="addDoctor">
+    </form>
+</div>
 
-<form action="#" th:action="@{/doctorList}" method="post">
-    <label>Doctor_ID</label>
-    <input type = "text" th:field="${doctor.doctor_ID}"><br>
-    <label>Imie </label><br>
-    <input type="text" th:field="${doctor.firstName}"><br>
-    <label>Nazwisko</label>
-    <input type="text" th:field="${doctor.lastName}"><br>
-    <label>login</label>
-    <input type="text" th:field="${doctor.login}"><br>
-    <label>password</label>
-    <input type="password" th:field="${doctor.password}"><br>
-    <label>Specjalizacja</label>
-    <input type="specialisation" th:field="${doctor.specialisation}"><br>
-    <br><input type="submit" value = "Dodaj lekarza">
-</form>
+<div class="deleteDoctor">
+    <h3>USUNIĘCIE DOKTORA</h3>
+    <table>
+        <form action="#" th:action="@{/doctorList}" method="post">
+            <label>Podaj ID doktora, którego chcesz usunąć:</label><br>
+            <input type="text" th:field="${doctor.doctor_ID}"><br>
+            <br><input type="submit" value="Usuń doktora" name="deleteDoctor">
+        </form>
+    </table>
+</div>
 
+<div class="editDoctor">
+    <h3>EDYCJA DOKTORA</h3>
+    <table>
+        <form action="#" th:action="@{/doctorList}" method="post">
+            <label>Podaj ID doktora, którego dane chcesz edytować:</label><br>
+            <input type="text" th:field="${doctor.doctor_ID}"><br>
+            <br><input type="submit" value="Edycja" name="editDoctor">
+        </form>
+    </table>
+</div>
 
 <table id="doctorTable" border="1" style="width:50%">
     <thead>
     <tr>
-
         <th>ID</th>
         <th>Imie</th>
         <th>Nazwisko</th>
         <th>login</th>
         <th>hasło</th>
         <th>Specjalizacja</th>
-
     </tr>
     </thead>
-    <tbody>
-
     <tr th:each="doctor : ${doctorList}">
-
         <td><p th:text="${doctor.doctor_ID}"></p></td>
         <td><p th:text="${doctor.firstName}"></p></td>
         <td><p th:text="${doctor.lastName}"></p></td>
         <td><p th:text="${doctor.login}"></p></td>
         <td><p th:text="${doctor.password}"></p></td>
         <td><p th:text="${doctor.specialisation}"></p></td>
-
-
     </tr>
-
-    </tbody>
 </table>
 
 </body>
@@ -91,5 +103,8 @@
 
 var tf = new TableFilter('doctorTable', filtersConfig);
 tf.init();
+
+
+
 </script>
 </html>
