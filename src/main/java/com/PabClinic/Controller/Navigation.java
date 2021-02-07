@@ -10,12 +10,11 @@ import com.PabClinic.Model.Patient.PatientLogin;
 import com.PabClinic.Model.Research.Research;
 import com.PabClinic.Model.Research.ResearchFabrik;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.print.Doc;
 
 @Controller
 @Component
@@ -156,12 +155,14 @@ public class Navigation {
                 .filter(patient -> (patientLogin.getLogin().equals(patient.getLogin())
                         || patientLogin.getLogin().equals(patient.getEmail())) &&
                         patientLogin.getPassword().equals(patient.getPassword()))
+                .peek(patient -> singlePatient = patient)
+                .peek(patient -> System.out.println(singlePatient))
                 .peek(patient -> System.out.println("Udało Ci się zalogować za pomocą hasła i loginu"))
                 .findFirst()
                 .isPresent();
 
         if (czyLoginIHasloPasuje) {
-            return "redirect:/pageAdmin";
+            return "redirect:/kalendarz";
         } else {
             return "redirect:/login";
         }
@@ -265,6 +266,30 @@ public class Navigation {
         new DataBase().updateDoctor(doctor);
 
         return "redirect:/doctorList";
+    }
+
+    @GetMapping("/patientVisitDate")
+    public String toPatientVisitDate(Model model) {
+        return "patientVisitDate";
+    }
+
+    @GetMapping("/kalendarz")
+    public String toKalendarz(Model model) {
+
+        model.addAttribute("patient", singlePatient);
+
+        return "kalendarz";
+    }
+
+    @RequestMapping(value = "/kalendarz", params = "saveDate", method = RequestMethod.POST)
+    public String saveDate(Model model, @ModelAttribute Patient patient) {
+
+        System.out.println(singlePatient);
+        singlePatient.setDatePick(patient.getDatePick());
+        System.out.println(singlePatient);
+
+
+        return "redirect:/kalendarz";
     }
 
 }
