@@ -3,13 +3,21 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/kalendarz.css">
 </head>
 <body>
+
 <form action="#" th:action="@{/kalendarz}" method="post">
-    <input type="date" name="datePick" th:field="${patient.datePick}"
+    <input type="date" name="datePick" th:field="${visit.dateVisit}"
            value="2021-02-07"
            min="2021-01-01" max="2021-12-31">
+
+    <select>
+        <option value="">Wybierz lekarza</option>
+        <option th:each="doctor: ${doctorList}"
+                th:value="${doctor.doctor_ID}"
+                th:text="${doctor.firstName}+'  '+${doctor.lastName}+' - '+${doctor.specialisation}"></option>
+    </select>
+
     <input type="submit" value="Wybierz" name="saveDate">
 </form>
 </body>

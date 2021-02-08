@@ -1,5 +1,4 @@
 package com.PabClinic.Controller;
-
 import com.PabClinic.Model.Client.ClientContact;
 import com.PabClinic.Model.Database.DataBase;
 import com.PabClinic.Model.Doctor.Doctor;
@@ -9,18 +8,23 @@ import com.PabClinic.Model.Patient.PatientFabrik;
 import com.PabClinic.Model.Patient.PatientLogin;
 import com.PabClinic.Model.Research.Research;
 import com.PabClinic.Model.Research.ResearchFabrik;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
+import com.PabClinic.Model.Visit.Visit;
+import com.PabClinic.Model.Visit.VisitFabrik;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
 @Controller
 @Component
 public class Navigation {
 
+    private final VisitFabrik visitFabrik = new VisitFabrik();
+
     private final PatientFabrik patientFabrik;
+
+    private Visit singleVisit;
 
     private final EmailServiceImpl emailService;
 
@@ -28,9 +32,7 @@ public class Navigation {
 
     private Doctor singleDoctor;
 
-    @Autowired
     public Navigation(PatientFabrik patientFabrik, EmailServiceImpl emailService) {
-
         this.patientFabrik = patientFabrik;
         this.emailService = emailService;
     }
@@ -218,6 +220,35 @@ public class Navigation {
         return "patientEdit";
     }
 
+    @GetMapping("/patientVisitDate")
+    public String toPatientVisitDate(Model model) {
+        return "patientVisitDate";
+    }
+
+    @GetMapping("/kalendarz")
+    public String toKalendarz(Model model) {
+
+        DoctorFabrik doctorFabrik = new DoctorFabrik();
+
+        model.addAttribute("patient", singlePatient);
+
+        model.addAttribute("visit", new Visit());
+
+//        model.addAttribute("patient", patientFabrik.getPatientsList().get(0));
+
+        model.addAttribute("doctorList", doctorFabrik.getDoctorList());
+
+        return "kalendarz";
+    }
+
+    @GetMapping("/doctorEdit")
+    public String toDoctorEdit(Model model) {
+
+        model.addAttribute("doctor", singleDoctor);
+
+        return "doctorEdit";
+    }
+
     @RequestMapping(value = "/patientList", params = "savePatient", method = RequestMethod.POST)
     public String savePatient(Model model, @ModelAttribute Patient patient) {
 
@@ -252,14 +283,6 @@ public class Navigation {
         return "redirect:/doctorEdit";
     }
 
-    @GetMapping("/doctorEdit")
-    public String toDoctorEdit(Model model) {
-
-        model.addAttribute("doctor", singleDoctor);
-
-        return "doctorEdit";
-    }
-
     @RequestMapping(value = "/doctorList", params = "saveDoctor", method = RequestMethod.POST)
     public String saveDoctor(Model model, @ModelAttribute Doctor doctor) {
 
@@ -268,28 +291,58 @@ public class Navigation {
         return "redirect:/doctorList";
     }
 
-    @GetMapping("/patientVisitDate")
-    public String toPatientVisitDate(Model model) {
-        return "patientVisitDate";
-    }
+    @GetMapping("/testKalendarz")
+        public String toTestKalendarz(Model model){
+        model.addAttribute("visitTime", visitFabrik.getVisitTime());
+        model.addAttribute(singleVisit);
 
-    @GetMapping("/kalendarz")
-    public String toKalendarz(Model model) {
+        return "testKalendarz";
+        }
 
-        model.addAttribute("patient", singlePatient);
-
-        return "kalendarz";
-    }
 
     @RequestMapping(value = "/kalendarz", params = "saveDate", method = RequestMethod.POST)
-    public String saveDate(Model model, @ModelAttribute Patient patient) {
+    public String saveDate(Model model, @ModelAttribute Doctor doctor,
+                           @ModelAttribute Visit visit, @ModelAttribute DoctorFabrik doctorFabrik) {
 
-        System.out.println(singlePatient);
-        singlePatient.setDatePick(patient.getDatePick());
-        System.out.println(singlePatient);
+        visitFabrik.getVisitsList().add(new Visit("2021-02-11", "8:30", null, patientFabrik.getPatientsList().get(0)));
+        visitFabrik.getVisitsList().add(new Visit("2021-02-11", "10:00", null, patientFabrik.getPatientsList().get(0)));
+        visit.setPatient(singlePatient);
+
+        visit.setDoctor(doctor);
+
+        System.out.println("WYBIERAM DOKTORA " + doctor.getDoctor_ID() + doctor.getLastName());
+        visit.setDateVisit(visit.getDateVisit());
+        singleVisit = visit;
+        visitFabrik.addVisitToList(visit);
+        VisitFabrik dodajeGodzinyWizyt = new VisitFabrik();
 
 
-        return "redirect:/kalendarz";
+        for (Visit wizytatest : visitFabrik.getVisitTime()) {
+            System.out.println(wizytatest);
+        }
+
+        System.out.println(singleVisit);
+
+        for (Visit wizyta : visitFabrik.getVisitsList()) {
+            for (Visit wizytaCzas : visitFabrik.getVisitTime()) {
+                if (singleVisit.getDoctor().equals(wizyta.getDoctor())
+                        && singleVisit.getDateVisit().equals(wizyta.getDateVisit())
+                        && wizytaCzas.getTimeVisit().equals(wizyta.getTimeVisit())
+                ) {
+                    visitFabrik.usunGodzine(wizytaCzas);
+                }
+            }
+        }
+
+        for (Visit wizytatest : visitFabrik.getVisitTime()) {
+            System.out.println(wizytatest);
+        }
+
+        // musimy dodac przykladowe wizyty z konkretnymi lekarzami do listy wizyt,
+        // trzeba dodac mozliwosc zapisywania lekarzy
+        // sprawdzic czy dziala
+
+        return "redirect:/testKalendarz";
     }
 
 }

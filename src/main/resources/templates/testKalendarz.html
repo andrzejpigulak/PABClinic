@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<select>
+    <option value="">Wybierz godzine</option>
+    <option th:each="visit: ${visitTime}"
+            th:value="${visit.timeVisit}"
+            th:text="${visit.timeVisit}"></option>
+</select>
+
+</body>
+</html>

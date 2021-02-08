@@ -15,7 +15,6 @@ public class Patient {
     private String address;
     private String postCode;
     private String city;
-    private String datePick;
 
     public Patient() {
     }
@@ -123,13 +122,6 @@ public class Patient {
         this.city = city;
     }
 
-    public String getDatePick() {
-        return datePick;
-    }
-
-    public void setDatePick(String datePick) {
-        this.datePick = datePick;
-    }
 
     @Override
     public String toString() {
@@ -144,8 +136,7 @@ public class Patient {
                 ", pesel=" + pesel +
                 ", address='" + address + '\'' +
                 ", postCode='" + postCode + '\'' +
-                ", city='" + city + '\'' +
-                ", datePick=" + datePick +
+                ", city='" + city +
                 '}';
     }
 }
