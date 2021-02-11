@@ -20,8 +20,6 @@ public class Visit {
 
     private Patient patient;
 
-    private ArrayList<String> timeList = new ArrayList<>();
-
 
     public Visit(String timeVisit, String dateVisit, Doctor doctor, Patient patient) {
         this.timeVisit = timeVisit;

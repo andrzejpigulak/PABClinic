@@ -1,11 +1,11 @@
-package com.PabClinic.Model.serwisy;
+package com.PabClinic.Model.services;
 
 import com.PabClinic.Model.Database.DataBase;
 import com.PabClinic.Model.Patient.Patient;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class SerwisRejestracjiPacjentow {
+public class PatientRegistrationService {
 
     private DataBase dataBase = new DataBase();
 

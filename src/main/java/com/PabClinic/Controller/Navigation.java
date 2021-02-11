@@ -1,4 +1,5 @@
 package com.PabClinic.Controller;
+
 import com.PabClinic.Model.Client.ClientContact;
 import com.PabClinic.Model.Database.DataBase;
 import com.PabClinic.Model.Doctor.Doctor;
@@ -10,11 +11,16 @@ import com.PabClinic.Model.Research.Research;
 import com.PabClinic.Model.Research.ResearchFabrik;
 import com.PabClinic.Model.Visit.Visit;
 import com.PabClinic.Model.Visit.VisitFabrik;
-import com.PabClinic.Model.serwisy.SerwisRejestracjiPacjentow;
+import com.PabClinic.Model.Visit.VisitHistory;
+import com.PabClinic.Model.services.PatientRegistrationService;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 
 
 @Controller
@@ -22,8 +28,6 @@ import org.springframework.web.bind.annotation.*;
 public class Navigation {
 
     private final VisitFabrik visitFabrik = new VisitFabrik();
-
-    private final PatientFabrik patientFabrik;
 
     private Visit singleVisit;
 
@@ -33,7 +37,10 @@ public class Navigation {
 
     private Doctor singleDoctor;
 
-    private SerwisRejestracjiPacjentow serwisRejestracjiPacjentow = new SerwisRejestracjiPacjentow();
+    private PatientRegistrationService patientRegistrationService = new PatientRegistrationService();
+
+    PatientFabrik patientFabrik = new PatientFabrik();
+    DoctorFabrik doctorFabrik = new DoctorFabrik();
 
     public Navigation(PatientFabrik patientFabrik, EmailServiceImpl emailService) {
         this.patientFabrik = patientFabrik;
@@ -154,8 +161,6 @@ public class Navigation {
     @PostMapping("/login")
     public String afterLogin(Model model, @ModelAttribute PatientLogin patientLogin) {
 
-        PatientFabrik patientFabrik = new PatientFabrik();
-
         boolean czyLoginIHasloPasuje = patientFabrik.getPatientsList().stream()
                 .filter(patient -> (patientLogin.getLogin().equals(patient.getLogin())
                         || patientLogin.getLogin().equals(patient.getEmail())) &&
@@ -166,13 +171,20 @@ public class Navigation {
                 .findFirst()
                 .isPresent();
 
+        boolean czyLoginIHasloPasujeDoctor = doctorFabrik.getDoctorList().stream()
+                .filter(doctor -> (patientLogin.getLogin().equals(doctor.getLogin())
+                        && (patientLogin.getPassword().equals(doctor.getPassword()))))
+                .peek(doctor -> singleDoctor = doctor)
+                .findFirst()
+                .isPresent();
+
         if (czyLoginIHasloPasuje) {
             return "redirect:/kalendarz";
+        } else if (czyLoginIHasloPasujeDoctor) {
+            return "redirect:/pageDoctor";
         } else {
             return "redirect:/login";
         }
-
-
     }
 
     @PostMapping("/registration")
@@ -184,7 +196,7 @@ public class Navigation {
 //
 
 
-        serwisRejestracjiPacjentow.zarejestrujPacjenta(patient);
+        patientRegistrationService.zarejestrujPacjenta(patient);
 
         emailService.sendMessageAfterRegistration(patient.getEmail(), patient.getFirstName(),
                 patient.getLogin(), patient.getPassword());
@@ -230,8 +242,49 @@ public class Navigation {
         return "patientEdit";
     }
 
+    @GetMapping("/addVisitPatient")
+    public String toAddVisitPatient(Model model) {
+
+
+        ArrayList<Visit> wizytyDoktora = new ArrayList<>();
+        LocalDate localDate = LocalDate.now();
+
+        System.out.println(localDate.toString());
+
+        for (Visit visit : visitFabrik.getVisitsList()) {
+            if (visit.getDateVisit().equals(localDate.toString()) || singleDoctor.equals(visit.getDoctor())) {
+                wizytyDoktora.add(visit);
+            }
+
+            model.addAttribute("visitList", wizytyDoktora);
+            model.addAttribute("patient", new Patient());
+
+
+        }
+
+        return "addVisitPatient";
+
+    }
+
+    @PostMapping("/addVisitPatient")
+    public String afterAddingVisitPatient(@ModelAttribute Patient patient) {
+
+
+        for (Patient p : patientFabrik.getPatientsList()) {
+            if (p.getFirstName().equals(patient.getFirstName()) && p.getLastName().equals(patient.getLastName())) {
+                p.getVisitHistory().add(new VisitHistory(LocalDate.now().toString(), singleDoctor, patient.getOpis()));
+                System.out.println(p.getVisitHistory().toString());
+            }
+        }
+
+
+        return "redirect:/addVisitPatient";
+
+    }
+
     @GetMapping("/patientVisitDate")
     public String toPatientVisitDate(Model model) {
+
         return "patientVisitDate";
     }
 
@@ -314,8 +367,6 @@ public class Navigation {
     public String saveDate(Model model, @ModelAttribute Doctor doctor,
                            @ModelAttribute Visit visit, @ModelAttribute DoctorFabrik doctorFabrik) {
 
-        visitFabrik.getVisitsList().add(new Visit("2021-02-11", "8:30", null, patientFabrik.getPatientsList().get(0)));
-        visitFabrik.getVisitsList().add(new Visit("2021-02-11", "10:00", null, patientFabrik.getPatientsList().get(0)));
         visit.setPatient(singlePatient);
 
         visit.setDoctor(doctor);

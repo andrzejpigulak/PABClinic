@@ -16,4 +16,11 @@ public class Doctor {
     private String password;
     private String specialisation;
 
+    @Override
+    public String toString() {
+
+        return "Imie " + firstName + "\nNazwisko: " + lastName;
+    }
+
+
 }

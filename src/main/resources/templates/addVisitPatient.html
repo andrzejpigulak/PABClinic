@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Visit Patient</title>
+</head>
+<body>
+
+<form action="#" th:action="@{/addVisitPatient}" method="post">
+
+    <table id="patientVisitTable" border="1" style="width:50%">
+        <thead>
+        <tr>
+            <th>Data:</th>
+            <th>Godzina:</th>
+            <th>Pacjent: </th>
+        </tr>
+        </thead>
+        <tr th:each="visit : ${visitList}">
+            <td><p th:text="${visit.dateVisit}"></p></td>
+            <td><p th:text="${visit.timeVisit}"></p></td>
+            <td><p th:text="${visit.patient.firstName} + '  ' + ${visit.patient.lastName}"></p></td>
+        </tr>
+    </table>
+
+
+    <input type="text" th:field="${patient.firstName}" name="field1" placeholder="Imie Pacjenta"/>
+    <input type="text" th:field="${patient.lastName}" name="field1" placeholder="Nazwisko Pacjenta"/>
+    <textarea name="field" th:field="${patient.opis}"
+              placeholder="Wprowadź opis wizyty"></textarea>
+    <input type="submit" value="Wyślij"/>
+
+</form>
+
+
+</body>
+</html>
