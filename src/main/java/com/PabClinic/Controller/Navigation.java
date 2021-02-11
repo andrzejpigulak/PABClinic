@@ -10,6 +10,7 @@ import com.PabClinic.Model.Research.Research;
 import com.PabClinic.Model.Research.ResearchFabrik;
 import com.PabClinic.Model.Visit.Visit;
 import com.PabClinic.Model.Visit.VisitFabrik;
+import com.PabClinic.Model.serwisy.SerwisRejestracjiPacjentow;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,8 @@ public class Navigation {
     private Patient singlePatient;
 
     private Doctor singleDoctor;
+
+    private SerwisRejestracjiPacjentow serwisRejestracjiPacjentow = new SerwisRejestracjiPacjentow();
 
     public Navigation(PatientFabrik patientFabrik, EmailServiceImpl emailService) {
         this.patientFabrik = patientFabrik;
@@ -168,14 +171,20 @@ public class Navigation {
         } else {
             return "redirect:/login";
         }
+
+
     }
 
     @PostMapping("/registration")
     public String afterRegistration(Model model, @ModelAttribute Patient patient) {
 
-        DataBase dataBase = new DataBase();
+//        DataBase dataBase = new DataBase();
+//
+//        dataBase.registerPatient(patient);
+//
 
-        dataBase.registerPatient(patient);
+
+        serwisRejestracjiPacjentow.zarejestrujPacjenta(patient);
 
         emailService.sendMessageAfterRegistration(patient.getEmail(), patient.getFirstName(),
                 patient.getLogin(), patient.getPassword());
@@ -196,6 +205,7 @@ public class Navigation {
 
         DataBase dataBase = new DataBase();
 
+
         dataBase.registerPatient(patient);
 
         emailService.sendMessageAfterRegistration(patient.getEmail(), patient.getFirstName(),
@@ -204,7 +214,7 @@ public class Navigation {
         return "redirect:/patientList";
     }
 
-    @RequestMapping(value = "/patientList", params = "editPatient", method = RequestMethod.POST)
+    @PostMapping(value = "/patientList", params = "editPatient")
     public String editPatient(Model model, @ModelAttribute Patient patient) {
 
         singlePatient = new DataBase().editPatient(patient);
@@ -292,12 +302,12 @@ public class Navigation {
     }
 
     @GetMapping("/testKalendarz")
-        public String toTestKalendarz(Model model){
+    public String toTestKalendarz(Model model) {
         model.addAttribute("visitTime", visitFabrik.getVisitTime());
         model.addAttribute(singleVisit);
 
         return "testKalendarz";
-        }
+    }
 
 
     @RequestMapping(value = "/kalendarz", params = "saveDate", method = RequestMethod.POST)

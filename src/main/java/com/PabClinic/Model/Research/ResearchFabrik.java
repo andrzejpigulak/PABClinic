@@ -1,9 +1,9 @@
 package com.PabClinic.Model.Research;
-
 import com.PabClinic.Model.Database.DataBase;
-
+import lombok.Data;
 import java.util.ArrayList;
 
+@Data
 public class ResearchFabrik {
 
     ArrayList<Research> researchList = new ArrayList<>();
@@ -15,11 +15,4 @@ public class ResearchFabrik {
 
     }
 
-    public ArrayList<Research> getResearchList() {
-        return researchList;
-    }
-
-    public void setResearchList(ArrayList<Research> researchList) {
-        this.researchList = researchList;
-    }
 }

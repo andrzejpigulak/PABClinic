@@ -3,8 +3,6 @@ package com.PabClinic.Model.Database;
 import com.PabClinic.Model.Doctor.Doctor;
 import com.PabClinic.Model.Patient.Patient;
 import com.PabClinic.Model.Research.Research;
-
-import javax.print.Doc;
 import java.sql.*;
 import java.util.ArrayList;
 

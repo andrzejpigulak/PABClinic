@@ -1,4 +1,5 @@
 package com.PabClinic.Model.Patient;
+import lombok.Data;
 import org.springframework.stereotype.Component;
 
 
@@ -7,6 +8,7 @@ import com.PabClinic.Model.Database.DataBase;
 import java.util.ArrayList;
 
 @Component
+@Data
 public class PatientFabrik {
 
     private ArrayList<Patient> patientsList = new ArrayList<>();
@@ -17,11 +19,4 @@ public class PatientFabrik {
         dataBase.getPatients(patientsList);
     }
 
-    public ArrayList<Patient> getPatientsList() {
-        return patientsList;
-    }
-
-    public void setPatientsList(ArrayList<Patient> patientsList) {
-        this.patientsList = patientsList;
-    }
 }

@@ -1,8 +1,11 @@
 package com.PabClinic.Model.Visit;
 
+import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
+@Data
 public class VisitFabrik {
 
     ArrayList<Visit> visitsList = new ArrayList<>();
@@ -31,39 +34,4 @@ public class VisitFabrik {
         return visitsList;
     }
 
-    public ArrayList<Visit> getVisitsList() {
-        return visitsList;
-    }
-
-    public void setVisitsList(ArrayList<Visit> visitsList) {
-        this.visitsList = visitsList;
-    }
-
-    public ArrayList<Visit> getVisitTime() {
-        return visitTime;
-    }
-
-    public void setVisitTime(ArrayList<Visit> visitTime) {
-        this.visitTime = visitTime;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        VisitFabrik that = (VisitFabrik) o;
-        return Objects.equals(visitsList, that.visitsList);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(visitsList);
-    }
-
-    @Override
-    public String toString() {
-        return "VisitFabrik{" +
-                "visitsList=" + visitsList +
-                '}';
-    }
 }
