@@ -3,6 +3,8 @@ package com.PabClinic.Model.Database;
 import com.PabClinic.Model.Doctor.Doctor;
 import com.PabClinic.Model.Patient.Patient;
 import com.PabClinic.Model.Research.Research;
+import com.PabClinic.Model.Visit.VisitHistory;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -12,8 +14,8 @@ public class DataBase {
     private static final String URL = "jdbc:postgresql://localhost/PABClinic";
     private static final String LOGIN = "postgres";
 //    private static final String PASSWORD = "ANDpig1906!@"; // Andrzeja hasło na postgresa
-//        private static final String PASSWORD = "Qparox123!"; // Pawła hasło na postgresa
-    private static final String PASSWORD = "postgres"; // Bartka hasło na postgresa
+        private static final String PASSWORD = "Qparox123!"; // Pawła hasło na postgresa
+//    private static final String PASSWORD = "postgres"; // Bartka hasło na postgresa
 
 
     private Statement stmt;
@@ -306,6 +308,39 @@ public class DataBase {
             preparedStatement.setString(3, doctor.getLogin());
             preparedStatement.setString(4, doctor.getPassword());
             preparedStatement.setString(5, doctor.getSpecialisation());
+
+            preparedStatement.executeUpdate();
+
+            disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void addVisitHistory(VisitHistory visitHistory){
+        try {
+            connectToDb();
+
+            String queryCount = "SELECT COUNT(*) from visit";
+
+            ResultSet rs = stmt.executeQuery(queryCount);
+            rs.next();
+
+            int i = rs.getInt("count");
+
+            String queryInsert = "insert into visit (visitDate, doctorName, doctorLastName, patientName, patientLastName, visitDescription) values (?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement preparedStatement = conn.prepareStatement(queryInsert);
+
+            preparedStatement.setString(1, visitHistory.getData());
+            preparedStatement.setString(2, visitHistory.getDoctorName());
+            preparedStatement.setString(3, visitHistory.getDoctorLastName());
+            preparedStatement.setString(4, visitHistory.getPatientName());
+            preparedStatement.setString(5, visitHistory.getPatientLastName());
+            preparedStatement.setString(6, visitHistory.getVisitDescription());
 
             preparedStatement.executeUpdate();
 

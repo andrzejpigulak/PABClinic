@@ -9,7 +9,10 @@ import lombok.Data;
 public class VisitHistory {
 
     private String data;
-    private Doctor doctor;
-    private String opis;
+    private String doctorName;
+    private String doctorLastName;
+    private String patientName;
+    private String patientLastName;
+    private String visitDescription;
 
 }
