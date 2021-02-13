@@ -10,15 +10,28 @@
     <input type="date" name="datePick" th:field="${visit.dateVisit}"
            value="2021-02-07"
            min="2021-01-01" max="2021-12-31">
+    <form name="f" th:object="${doctorForm}" method="POST">
+        <table>
+            <tr>
+                <td>Wybierz Lekarza</td>
+                <td>
+                    <select th:field="*{doctor_ID}">
+                        <option value=""> --</option>
+                        <option th:each="doctor:${doctors}"
+                                th:value="${doctor.doctor_ID}"
+                                th:utext="${doctor.firstName}+'  '+${doctor.lastName}+' - '+${doctor.specialisation}"/>
+                    </select>
+                </td>
+            </tr>
 
-    <select>
-        <option value="">Wybierz lekarza</option>
-        <option th:each="doctor: ${doctorList}"
-                th:value="${doctor.doctor_ID}"
-                th:text="${doctor.firstName}+'  '+${doctor.lastName}+' - '+${doctor.specialisation}"></option>
-    </select>
+            <tr>
+                <td>
+                    <input type="submit" value="Wybierz" name="saveDate">
+                </td>
+            </tr>
+        </table>
 
-    <input type="submit" value="Wybierz" name="saveDate">
+    </form>
 </form>
 </body>
 </html>

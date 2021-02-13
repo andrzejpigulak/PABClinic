@@ -9,18 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Doctor {
 
-    private int doctor_ID;
+    private Integer doctor_ID;
     private String firstName;
     private String lastName;
     private String login;
     private String password;
     private String specialisation;
-
-    @Override
-    public String toString() {
-
-        return "Imie " + firstName + "\nNazwisko: " + lastName;
-    }
-
 
 }
