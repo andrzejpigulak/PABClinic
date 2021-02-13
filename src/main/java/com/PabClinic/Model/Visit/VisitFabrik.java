@@ -1,6 +1,7 @@
 package com.PabClinic.Model.Visit;
 
-import com.PabClinic.Model.Doctor.DoctorFabrik;
+import com.PabClinic.Model.Database.DataBase;
+import com.PabClinic.Model.Doctor.Doctor;
 import com.PabClinic.Model.Patient.PatientFabrik;
 import lombok.Data;
 
@@ -38,11 +39,7 @@ public class VisitFabrik {
         visitsList.add(new Visit("9:00", "2021-02-15", doctorList.get(4), patientFabrik.getPatientsList().get(2)));
         visitsList.add(new Visit("9:30", "2021-02-15", doctorList.get(5), patientFabrik.getPatientsList().get(3)));
         visitsList.add(new Visit("10:00", "2021-02-15", doctorList.get(8), patientFabrik.getPatientsList().get(4)));
-
-
     }
-
-
 
     public ArrayList<Visit> usunGodzine(Visit visit) {
         visitTime.remove(visit);
