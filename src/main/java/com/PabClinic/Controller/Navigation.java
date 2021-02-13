@@ -3,7 +3,8 @@ package com.PabClinic.Controller;
 import com.PabClinic.Model.Client.ClientContact;
 import com.PabClinic.Model.Database.DataBase;
 import com.PabClinic.Model.Doctor.Doctor;
-import com.PabClinic.Model.Doctor.DoctorFabrik;
+import com.PabClinic.Model.Doctor.DoctorDAO;
+import com.PabClinic.Model.Doctor.DoctorForm;
 import com.PabClinic.Model.Patient.Patient;
 import com.PabClinic.Model.Patient.PatientFabrik;
 import com.PabClinic.Model.Patient.PatientLogin;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
 
 @Controller
@@ -40,7 +41,7 @@ public class Navigation {
     private PatientRegistrationService patientRegistrationService = new PatientRegistrationService();
 
     PatientFabrik patientFabrik = new PatientFabrik();
-    DoctorFabrik doctorFabrik = new DoctorFabrik();
+    DoctorForm doctorFabrik = new DoctorForm();
 
     public Navigation(PatientFabrik patientFabrik, EmailServiceImpl emailService) {
         this.patientFabrik = patientFabrik;
@@ -86,9 +87,9 @@ public class Navigation {
     @GetMapping("/doctorList")
     public String toDoctorList(Model model) {
 
-        DoctorFabrik doctorFabrik = new DoctorFabrik();
+        DoctorForm doctorFabrik = new DoctorForm();
 
-        model.addAttribute("doctorList", doctorFabrik.getDoctorList());
+        model.addAttribute("doctorList", doctorFabrik);
         model.addAttribute("doctor", new Doctor());
 
         return "doctorList";
@@ -171,17 +172,15 @@ public class Navigation {
                 .findFirst()
                 .isPresent();
 
-        boolean czyLoginIHasloPasujeDoctor = doctorFabrik.getDoctorList().stream()
-                .filter(doctor -> (patientLogin.getLogin().equals(doctor.getLogin())
-                        && (patientLogin.getPassword().equals(doctor.getPassword()))))
-                .peek(doctor -> singleDoctor = doctor)
-                .findFirst()
-                .isPresent();
+//        boolean czyLoginIHasloPasujeDoctor = doctorFabrik.getDoctorList().stream()
+//                .filter(doctor -> (patientLogin.getLogin().equals(doctor.getLogin())
+//                        && (patientLogin.getPassword().equals(doctor.getPassword()))))
+//                .peek(doctor -> singleDoctor = doctor)
+//                .findFirst()
+//                .isPresent();
 
         if (czyLoginIHasloPasuje) {
             return "redirect:/kalendarz";
-        } else if (czyLoginIHasloPasujeDoctor) {
-            return "redirect:/pageDoctor";
         } else {
             return "redirect:/login";
         }
@@ -291,15 +290,18 @@ public class Navigation {
     @GetMapping("/kalendarz")
     public String toKalendarz(Model model) {
 
-        DoctorFabrik doctorFabrik = new DoctorFabrik();
+        DoctorForm form = new DoctorForm();
+        model.addAttribute("doctorForm", form);
 
         model.addAttribute("patient", singlePatient);
 
         model.addAttribute("visit", new Visit());
 
-//        model.addAttribute("patient", patientFabrik.getPatientsList().get(0));
+        DoctorDAO doctorDAO = new DoctorDAO();
+        List<Doctor> list = doctorDAO.getDoctors();
 
-        model.addAttribute("doctorList", doctorFabrik.getDoctorList());
+        model.addAttribute("doctors", list);
+        System.out.println(list);
 
         return "kalendarz";
     }
@@ -365,7 +367,7 @@ public class Navigation {
 
     @RequestMapping(value = "/kalendarz", params = "saveDate", method = RequestMethod.POST)
     public String saveDate(Model model, @ModelAttribute Doctor doctor,
-                           @ModelAttribute Visit visit, @ModelAttribute DoctorFabrik doctorFabrik) {
+                           @ModelAttribute Visit visit, @ModelAttribute DoctorForm doctorFabrik) {
 
         visit.setPatient(singlePatient);
 
