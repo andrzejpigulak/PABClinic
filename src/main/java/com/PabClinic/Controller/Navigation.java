@@ -32,6 +32,8 @@ public class Navigation {
 
     private Visit singleVisit;
 
+    private VisitHistory visitHistory;
+
     private final EmailServiceImpl emailService;
 
     private Patient singlePatient;
@@ -251,7 +253,7 @@ public class Navigation {
         System.out.println(localDate.toString());
 
         for (Visit visit : visitFabrik.getVisitsList()) {
-            if (visit.getDateVisit().equals(localDate.toString()) || singleDoctor.equals(visit.getDoctor())) {
+            if (visit.getDateVisit().equals(localDate.toString()) && singleDoctor.equals(visit.getDoctor())) {
                 wizytyDoktora.add(visit);
             }
 
@@ -268,13 +270,19 @@ public class Navigation {
     @PostMapping("/addVisitPatient")
     public String afterAddingVisitPatient(@ModelAttribute Patient patient) {
 
+        visitHistory = new VisitHistory(LocalDate.now().toString(), singleDoctor.getFirstName(), singleDoctor.getLastName(), patient.getFirstName(), patient.getLastName(),
+                patient.getOpis());
 
-        for (Patient p : patientFabrik.getPatientsList()) {
-            if (p.getFirstName().equals(patient.getFirstName()) && p.getLastName().equals(patient.getLastName())) {
-                p.getVisitHistory().add(new VisitHistory(LocalDate.now().toString(), singleDoctor, patient.getOpis()));
-                System.out.println(p.getVisitHistory().toString());
-            }
-        }
+        DataBase dataBase = new DataBase();
+
+        dataBase.addVisitHistory(visitHistory);
+
+//        for (Patient p : patientFabrik.getPatientsList()) {
+//            if (p.getFirstName().equals(patient.getFirstName()) && p.getLastName().equals(patient.getLastName())) {
+//                p.getVisitHistory().add(new VisitHistory(LocalDate.now().toString(), singleDoctor, patient.getOpis()));
+//                System.out.println(p.getVisitHistory().toString());
+//            }
+//        }
 
 
         return "redirect:/addVisitPatient";

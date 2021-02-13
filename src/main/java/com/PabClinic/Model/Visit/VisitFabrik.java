@@ -1,12 +1,11 @@
 package com.PabClinic.Model.Visit;
 
-import com.PabClinic.Model.Database.DataBase;
-import com.PabClinic.Model.Doctor.Doctor;
-import com.PabClinic.Model.Doctor.DoctorForm;
+import com.PabClinic.Model.Doctor.DoctorFabrik;
 import com.PabClinic.Model.Patient.PatientFabrik;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Data
 public class VisitFabrik {
