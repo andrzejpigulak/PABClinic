@@ -35,11 +35,11 @@ public class PatientRepository {
 
             while (rs.next()) {
                 PatientDTO patient = new PatientDTO(
-                        rs.getInt("user_id"),
+                        rs.getInt("id"),
                         rs.getString("firstname"),
                         rs.getString("lastname"),
-                        rs.getString("login"),
-                        rs.getString("userpassword"),
+                        rs.getString("username"),
+                        rs.getString("password"),
                         rs.getString("email"),
                         rs.getInt("telephonenumber"),
                         rs.getLong("pesel"),
@@ -125,7 +125,7 @@ public class PatientRepository {
 
             PreparedStatement preparedStatement = dataBase.getConn().prepareStatement(queryRemove);
 
-            preparedStatement.setInt(1, patient.getUser_id());
+            preparedStatement.setInt(1, patient.getId());
 
             preparedStatement.executeUpdate();
 
@@ -143,7 +143,7 @@ public class PatientRepository {
         try {
             dataBase.connectToDb();
             String queryUpdate = "update patient set firstname=?, lastname=?, password=?, pesel=?, username=?, email=?, telephonenumber=?, " +
-                    "address=?, postcode=?, city=? where user_ID=" + patient.getUser_id();
+                    "address=?, postcode=?, city=? where user_ID=" + patient.getId();
 
             PreparedStatement preparedStatement = dataBase.getConn().prepareStatement(queryUpdate);
 
@@ -174,13 +174,13 @@ public class PatientRepository {
         try {
             dataBase.connectToDb();
 
-            String queryEdit = "select * from patient where user_ID=" + patient.getUser_id();
+            String queryEdit = "select * from patient where id=" + patient.getId();
 
             ResultSet rs = dataBase.getStmt().executeQuery(queryEdit);
 
             while (rs.next()) {
                 patient = new PatientDTO(
-                        rs.getInt("user_id"),
+                        rs.getInt("id"),
                         rs.getString("firstname"),
                         rs.getString("lastname"),
                         rs.getString("username"),

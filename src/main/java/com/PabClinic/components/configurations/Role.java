@@ -10,14 +10,14 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String login;
+    private String username;
     private String role;
 
     public Role() {
     }
 
-    public Role(String login, String role) {
-        this.login = login;
+    public Role(String username, String role) {
+        this.username = username;
         this.role = role;
     }
 

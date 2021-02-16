@@ -1,6 +1,7 @@
 package com.PabClinic.components.configurations;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,6 +18,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
+    @Bean
+    public BCryptPasswordEncoder getEncoder() {
+        return new BCryptPasswordEncoder(10);
+    }
+
     @Override
     protected void configure(HttpSecurity security) throws Exception {
         security.authorizeRequests()
@@ -32,10 +38,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void securityUsers(AuthenticationManagerBuilder auth) throws Exception {
 
-        auth.jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder())
+        auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery("SELECT username, password, enabled FROM patient WHERE username=? ")
-                .authoritiesByUsernameQuery("SELECT username, role FROM roles WHERE username=? ");
+                .usersByUsernameQuery("SELECT username, password, 'true' as enabled FROM patient WHERE username = ? ")
+                .authoritiesByUsernameQuery("SELECT username, role FROM roles WHERE username=? ")
+                .passwordEncoder(getEncoder());
 
     }
 }

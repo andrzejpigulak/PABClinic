@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 public class PatientDAO {
 
 
-    private int user_id;
+    private int id;
 
     private String firstName;
     private String lastName;
@@ -22,8 +22,8 @@ public class PatientDAO {
     private String opis;
     private boolean enabled;
 
-    public PatientDAO(int user_id, String firstName, String lastName, String login, String password, String email, int telephoneNumber, long pesel, String address, String postCode, String city) {
-        this.user_id = user_id;
+    public PatientDAO(int id, String firstName, String lastName, String login, String password, String email, int telephoneNumber, long pesel, String address, String postCode, String city) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;

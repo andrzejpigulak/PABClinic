@@ -2,11 +2,19 @@ package com.PabClinic.model.dtos;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 @Data
 @NoArgsConstructor
+@Entity
 public class PatientDTO {
 
-    private int user_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private String firstName;
     private String lastName;
     private String username;
@@ -21,8 +29,8 @@ public class PatientDTO {
     private boolean enabled;
 
 
-    public PatientDTO(int user_id, String firstName, String lastName, String username, String password, String email, int telephoneNumber, long pesel, String address, String postCode, String city) {
-        this.user_id = user_id;
+    public PatientDTO(int id, String firstName, String lastName, String username, String password, String email, int telephoneNumber, long pesel, String address, String postCode, String city) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
