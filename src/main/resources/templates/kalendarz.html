@@ -7,7 +7,7 @@
 <body>
 
 <form action="#" th:action="@{/kalendarz}" method="post">
-    <input type="date" name="datePick" th:field="${visit.dateVisit}"
+    <input type="date" name="datePick" th:field="${visit.visitDate}"
            value="2021-02-07"
            min="2021-01-01" max="2021-12-31">
     <form name="f" th:object="${doctorForm}" method="POST">

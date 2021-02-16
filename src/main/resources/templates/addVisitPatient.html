@@ -18,9 +18,9 @@
         </tr>
         </thead>
         <tr th:each="visit : ${visitList}">
-            <td><p th:text="${visit.dateVisit}"></p></td>
-            <td><p th:text="${visit.timeVisit}"></p></td>
-            <td><p th:text="${visit.patient.firstName} + '  ' + ${visit.patient.lastName}"></p></td>
+            <td><p th:text="${visit.visitDate}"></p></td>
+            <td><p th:text="${visit.visitTime}"></p></td>
+            <td><p th:text="${visit.patientName} + '  ' + ${visit.patientLastName}"></p></td>
         </tr>
     </table>
 

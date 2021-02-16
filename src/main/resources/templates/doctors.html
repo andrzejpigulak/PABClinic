@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/doctorStyle.css">
+</head>
+<body>
+<script type="text/javascript" src="js/doctorList.js"></script>
+
+<div class="addDoctor">
+    <h3>DODANIE LEKARZA</h3>
+    <form action="#" th:action="@{/doctors}" method="post">
+        <label>Imię: </label>
+        <input type="text" th:field="${doctor.firstName}" placeholder="Wymagane">
+        <label> Nazwisko: </label>
+        <input type="text" th:field="${doctor.lastName}" placeholder="Wymagane"><br><br>
+        <label>Login: </label>
+        <input type="text" th:field="${doctor.login}" placeholder="Wymagane">
+        <label> Hasło: </label>
+        <input type="password" th:field="${doctor.password}" placeholder="Wymagane"><br><br>
+        <label> Specjalizacja: </label>
+        <input type="text" th:field="${doctor.specialisation}" placeholder="Wymagane"><br>
+        <br><input type="submit" value="Dodaj lekarza" name="addDoctor">
+    </form>
+</div>
+
+<div class="deleteDoctor">
+    <h3>USUNIĘCIE DOKTORA</h3>
+    <table>
+        <form action="#" th:action="@{/doctors}" method="post">
+            <label>Podaj ID doktora, którego chcesz usunąć:</label><br>
+            <input type="text" th:field="${doctor.doctor_ID}"><br>
+            <br><input type="submit" value="Usuń doktora" name="deleteDoctor">
+        </form>
+    </table>
+</div>
+
+<div class="editDoctor">
+    <h3>EDYCJA DOKTORA</h3>
+    <table>
+        <form action="#" th:action="@{/doctors}" method="post">
+            <label>Podaj ID doktora, którego dane chcesz edytować:</label><br>
+            <input type="text" th:field="${doctor.doctor_ID}"><br>
+            <br><input type="submit" value="Edycja" name="editDoctor">
+        </form>
+    </table>
+</div>
+
+<table id="doctorTable" border="1" style="width:50%">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Imie</th>
+        <th>Nazwisko</th>
+        <th>login</th>
+        <th>hasło</th>
+        <th>Specjalizacja</th>
+    </tr>
+    </thead>
+    <tr th:each="doctor : ${doctors}">
+        <td><p th:text="${doctor.doctor_ID}"></p></td>
+        <td><p th:text="${doctor.firstName}"></p></td>
+        <td><p th:text="${doctor.lastName}"></p></td>
+        <td><p th:text="${doctor.login}"></p></td>
+        <td><p th:text="${doctor.password}"></p></td>
+        <td><p th:text="${doctor.specialisation}"></p></td>
+    </tr>
+</table>
+
+</body>
+
+<script>
+    var filtersConfig = {
+  // instruct TableFilter location to import ressources from
+  base_path: 'https://unpkg.com/tablefilter@latest/dist/tablefilter/',
+<!--  col_1: 'select',-->
+<!--  col_2: 'select',-->
+<!--  col_3: 'select',-->
+  alternate_rows: true,
+  rows_counter: true,
+  btn_reset: true,
+  loader: true,
+  mark_active_columns: true,
+  highlight_keywords: true,
+  no_results_message: true,
+  col_types: [
+    'string', 'string', 'string',
+    'number', 'number', 'string',
+    'string', 'string', 'number'
+  ],
+
+  col_widths: [
+    '150px', '150px', '250px',
+    '100px', '125px', '150px',
+    '85px', '100px', '60px'
+  ],
+  extensions: [{
+    name: 'sort',
+    images_path: 'https://unpkg.com/tablefilter@latest/dist/tablefilter/style/themes/'
+  }]
+};
+
+var tf = new TableFilter('doctorTable', filtersConfig);
+tf.init();
+
+
+
+</script>
+</html>
