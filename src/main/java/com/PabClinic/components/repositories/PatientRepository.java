@@ -1,10 +1,10 @@
 package com.PabClinic.components.repositories;
 
 import com.PabClinic.components.configurations.DataBase;
-import com.PabClinic.model.daos.PatientDAO;
 import com.PabClinic.model.dtos.PatientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
@@ -63,6 +63,9 @@ public class PatientRepository {
 
     public void addPatient(PatientDTO patient) {
 
+        BCryptPasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
+        String pwd = bcryptPasswordEncoder.encode(patient.getPassword());
+
         try {
             dataBase.connectToDb();
 
@@ -79,9 +82,9 @@ public class PatientRepository {
 
             preparedStatement.setString(1, patient.getFirstName());
             preparedStatement.setString(2, patient.getLastName());
-            preparedStatement.setString(3, patient.getPassword());
+            preparedStatement.setString(3, pwd);
             preparedStatement.setLong(4, patient.getPesel());
-            preparedStatement.setString(5, patient.getLogin());
+            preparedStatement.setString(5, patient.getUsername());
             preparedStatement.setString(6, patient.getEmail());
             preparedStatement.setInt(7, patient.getTelephoneNumber());
             preparedStatement.setString(8, patient.getAddress());
@@ -90,6 +93,19 @@ public class PatientRepository {
             preparedStatement.setBoolean(11, true);
 
             preparedStatement.executeUpdate();
+
+            rs = dataBase.getStmt().executeQuery(queryCount);
+            rs.next();
+
+            queryInsert = "insert into roles (username, role) values (?, ?)";
+
+            preparedStatement = dataBase.getConn().prepareStatement(queryInsert);
+
+            preparedStatement.setString(1, patient.getUsername());
+            preparedStatement.setString(2, "USER");
+
+            preparedStatement.executeUpdate();
+
 
             dataBase.disconnectDB();
 
@@ -135,7 +151,7 @@ public class PatientRepository {
             preparedStatement.setString(2, patient.getLastName());
             preparedStatement.setString(3, patient.getPassword());
             preparedStatement.setLong(4, patient.getPesel());
-            preparedStatement.setString(5, patient.getLogin());
+            preparedStatement.setString(5, patient.getUsername());
             preparedStatement.setString(6, patient.getEmail());
             preparedStatement.setInt(7, patient.getTelephoneNumber());
             preparedStatement.setString(8, patient.getAddress());
@@ -167,8 +183,8 @@ public class PatientRepository {
                         rs.getInt("user_id"),
                         rs.getString("firstname"),
                         rs.getString("lastname"),
-                        rs.getString("login"),
-                        rs.getString("userpassword"),
+                        rs.getString("username"),
+                        rs.getString("password"),
                         rs.getString("email"),
                         rs.getInt("telephonenumber"),
                         rs.getLong("pesel"),
