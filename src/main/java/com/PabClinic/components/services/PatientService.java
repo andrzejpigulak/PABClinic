@@ -1,5 +1,4 @@
 package com.PabClinic.components.services;
-import com.PabClinic.model.daos.PatientDAO;
 import com.PabClinic.components.repositories.PatientRepository;
 import com.PabClinic.model.dtos.PatientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class PatientService {
 
         patientRepository.addPatient(patient);
 
-        emailService.sendMessageAfterRegistration(patient.getEmail(), patient.getFirstName(), patient.getLogin(), patient.getPassword());
+        emailService.sendMessageAfterRegistration(patient.getEmail(), patient.getFirstName(), patient.getUsername(), patient.getPassword());
 
     }
 

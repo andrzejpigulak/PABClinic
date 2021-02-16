@@ -9,7 +9,7 @@ public class PatientDTO {
     private int user_id;
     private String firstName;
     private String lastName;
-    private String login;
+    private String username;
     private String password;
     private String email;
     private int telephoneNumber;
@@ -21,11 +21,11 @@ public class PatientDTO {
     private boolean enabled;
 
 
-    public PatientDTO(int user_id, String firstName, String lastName, String login, String password, String email, int telephoneNumber, long pesel, String address, String postCode, String city) {
+    public PatientDTO(int user_id, String firstName, String lastName, String username, String password, String email, int telephoneNumber, long pesel, String address, String postCode, String city) {
         this.user_id = user_id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.login = login;
+        this.username = username;
         this.password = password;
         this.email = email;
         this.telephoneNumber = telephoneNumber;
