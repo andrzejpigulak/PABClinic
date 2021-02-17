@@ -65,10 +65,10 @@ CREATE TABLE Roles(
 
 
 INSERT INTO Patient(firstName, lastName, password, pesel, username, email, telephoneNumber, address, postCode, city, enabled)
-VALUES ('Adam', 'Kowalski', 'haslo', 87110725732, 'akowalski', 'akowalski@mail.com', 627315621, 'ul. Marszalkowska 12', '61-001', 'Poznań', true),
-	   ('Katarzyna', 'Sikora','haslo',67032265927, 'ksikora', 'akowalska@mail.com', 504213521, 'ul. Grunwaldzka 25/3', '60-783', 'Poznań', true),
+VALUES ('Adam', 'Kowalski', '$2a$10$9UU02QHTjSf4qBtyowylpO7053v126C9W2KYQnxrdQkQ7/WHN/C3W', 87110725732, 'akowalski', 'akowalski@mail.com', 627315621, 'ul. Marszalkowska 12', '61-001', 'Poznań', true),
+	   ('Katarzyna', 'Sikora','$2a$10$jVRlVK7bdZs4meWCxxen4ewO/rutuZZ7GxWIhDhpBJPSQLC76Iosi',67032265927, 'ksikora', 'akowalska@mail.com', 504213521, 'ul. Grunwaldzka 25/3', '60-783', 'Poznań', true),
 	   ('Mariusz', 'Misiorny','haslo',48072685251, 'mariuszmisiorny', 'mariusz.misiorny@gmail.com', 852451267, 'ul. Mickiewicza 55/23', '01-625', 'Warszawa', true),
-	   ('Agnieszka', 'Sochaczewska','haslo',98122575235, 'agsoch', 'aga.socha@onet.pl', 695264216, 'ul. Alojzego Felińskiego 14', '01-513', 'Warszawa', true),
+	   ('Agnieszka', 'Sochaczewska','$2a$10$PKJia/Bsgac1zWKcpNFUou8zDJCy7bqJHdlx1DlP/GHze9Q8zApGu',98122575235, 'agsoch', 'aga.socha@onet.pl', 695264216, 'ul. Alojzego Felińskiego 14', '01-513', 'Warszawa', true),
 	   ('Katarzyna', 'Politowicz','haslo',67071975251, 'kpolitowicz', 'polkata@onet.pl', 515525623, 'ul Małeckiego 16/12', '60-707', 'Poznań', true),
 	   ('Katarzyna', 'Cichopek','haslo',58090276921, 'kcichopek', 'k.cichopek@gmail.com', 725612562, 'ul. Małe Garbary 32', '61-756', 'Poznań', true),
 	   ('Tomasz', 'Karolak','haslo',65111252612, 'tomciokarol', 'tomciokarol@przykladowymail.com', 725516562, 'ul. Aleje Solidarności 21/2', '61-512', 'Poznań', true),
@@ -167,4 +167,9 @@ INSERT INTO VisitDao(visitTime) VALUES
 
 INSERT INTO roles(username,role)
 VALUES ('akowalski','USER'),
-('ksikora','ADMIN');
+('ksikora','ADMIN'),
+('agsoch','USER');
+
+select * from patient
+
+select * from roles
