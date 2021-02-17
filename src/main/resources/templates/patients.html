@@ -42,7 +42,7 @@
     <table>
         <form action="#" th:action="@{/patients}" method="post">
             <label>Podaj ID pacjenta, którego chcesz usunąć:</label><br>
-            <input type="text" th:field="${patient.user_id}"><br>
+            <input type="text" th:field="${patient.id}"><br>
             <br><input type="submit" value="Usuń pacjenta" name="deletePatient">
         </form>
     </table>
@@ -53,7 +53,7 @@
     <table>
         <form action="#" th:action="@{/patients}" method="post">
             <label>Podaj ID pacjenta, którego dane chcesz edytować:</label><br>
-            <input type="text" th:field="${patient.user_id}"><br>
+            <input type="text" th:field="${patient.id}"><br>
             <br><input type="submit" value="Edycja" name="editPatient">
         </form>
     </table>
@@ -82,7 +82,7 @@
         <td><p th:text="${patient.address}"></p></td>
         <td><p th:text="${patient.postCode}"></p></td>
         <td><p th:text="${patient.city}"></p></td>
-        <td><p th:text="${patient.user_id}"></p></td>
+        <td><p th:text="${patient.id}"></p></td>
     </tr>
 </table>
 

@@ -8,6 +8,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.util.matcher.AndRequestMatcher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -17,6 +20,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private DataSource dataSource;
+
+    @Autowired
+    private AuthenticationSuccessHandler successHandler;
 
     @Bean
     public BCryptPasswordEncoder getEncoder() {
@@ -28,11 +34,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         security.authorizeRequests()
                 .antMatchers("*/css/**", "/images/**", "/js/**", "/upload/**").permitAll()
                 .antMatchers("/pageAdmin").hasAuthority("ADMIN")
-                .antMatchers("/pageDoctor").hasAuthority("DOCTOR")
+                .antMatchers("/pageDoctor").hasAnyAuthority("ADMIN", "DOCTOR")
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").permitAll();
+                .formLogin().loginPage("/login").permitAll()
+                .loginProcessingUrl("/login").successHandler(successHandler)
+                .and()
+                .headers().frameOptions().disable();
     }
 
     @Autowired

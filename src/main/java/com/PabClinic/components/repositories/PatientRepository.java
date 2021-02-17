@@ -35,7 +35,7 @@ public class PatientRepository {
 
             while (rs.next()) {
                 PatientDTO patient = new PatientDTO(
-                        rs.getInt("id"),
+                        rs.getInt("user_id"),
                         rs.getString("firstname"),
                         rs.getString("lastname"),
                         rs.getString("username"),
@@ -121,7 +121,7 @@ public class PatientRepository {
         try {
             dataBase.connectToDb();
 
-            String queryRemove = "delete from patient where user_ID=?";
+            String queryRemove = "delete from patient where user_id=?";
 
             PreparedStatement preparedStatement = dataBase.getConn().prepareStatement(queryRemove);
 
@@ -143,7 +143,7 @@ public class PatientRepository {
         try {
             dataBase.connectToDb();
             String queryUpdate = "update patient set firstname=?, lastname=?, password=?, pesel=?, username=?, email=?, telephonenumber=?, " +
-                    "address=?, postcode=?, city=? where user_ID=" + patient.getId();
+                    "address=?, postcode=?, city=? where user_id=" + patient.getId();
 
             PreparedStatement preparedStatement = dataBase.getConn().prepareStatement(queryUpdate);
 
@@ -174,13 +174,13 @@ public class PatientRepository {
         try {
             dataBase.connectToDb();
 
-            String queryEdit = "select * from patient where id=" + patient.getId();
+            String queryEdit = "select * from patient where user_id=" + patient.getId();
 
             ResultSet rs = dataBase.getStmt().executeQuery(queryEdit);
 
             while (rs.next()) {
                 patient = new PatientDTO(
-                        rs.getInt("id"),
+                        rs.getInt("user_id"),
                         rs.getString("firstname"),
                         rs.getString("lastname"),
                         rs.getString("username"),

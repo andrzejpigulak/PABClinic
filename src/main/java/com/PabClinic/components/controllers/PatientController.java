@@ -87,37 +87,9 @@ public class PatientController {
     @PostMapping("/login")
     public String afterLogin(@ModelAttribute PatientLoginDTO patientLogin) {
 
-        boolean czyLoginIHasloPasuje = patientService.getAllPatients().stream()
-                .filter(patient -> (patientLogin.getUsername().equals(patient.getUsername())
-                        || patientLogin.getUsername().equals(patient.getEmail())) &&
-                        patientLogin.getPassword().equals(patient.getPassword()))
-                .peek(patient -> singlePatient = patient)
-                .peek(patient -> System.out.println(singlePatient))
-                .peek(patient -> System.out.println("Udało Ci się zalogować za pomocą hasła i loginu"))
-                .findFirst()
-                .isPresent();
-
-        boolean czyLoginIHasloPasujeDoctor = doctorService.getAllDoctors().stream()
-                .filter(doctor -> (patientLogin.getUsername().equals(doctor.getLogin())
-                        && (patientLogin.getPassword().equals(doctor.getPassword()))))
-                .peek(doctor -> singleDoctor = doctor)
-                .findFirst()
-                .isPresent();
-
-
-        if (czyLoginIHasloPasujeDoctor) {
-
-            return "redirect:/pageDoctor";
-
-        }
-
-        if (czyLoginIHasloPasuje) {
-            return "redirect:/kalendarz";
-        } else {
-
-            return "redirect:/login";
-        }
+        return "redirect:/index";
     }
+
 
     @GetMapping("/addVisitPatient")
     public String toAddVisitPatient(Model model) {
