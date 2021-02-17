@@ -136,8 +136,8 @@ public class VisitRepository {
 
             dataBase.connectToDb();
 
-            String queryCount = "SELECT * from visit where visitDate='" + LocalDate.now().toString()
-            + "' and doctorLastName='"+ doctor.getLastName() + "'";
+            String queryCount = "SELECT * from visit where visitDate=" + LocalDate.now().toString()
+            + " and doctorLastName="+ doctor.getLastName();
 
             System.out.println(queryCount);
 
