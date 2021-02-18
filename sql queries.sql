@@ -7,27 +7,22 @@ drop table if exists visitDao;
 drop table if exists visitHistory;
 
 
-CREATE TABLE Patient(user_ID SERIAL PRIMARY KEY,
+CREATE TABLE Users(
+user_ID SERIAL PRIMARY KEY,
     firstName varchar(20) not null,
     lastName varchar(20) NOT NULL,
-    password varchar(128) NOT NULL,
-    pesel bigint UNIQUE NOT NULL,
     username varchar(20) UNIQUE NOT NULL,
-    email varchar(50) UNIQUE NOT NULL,
-    telephoneNumber int NOT NULL,
+    password varchar(128) NOT NULL,
+    pesel bigint UNIQUE,
+    email varchar(50) UNIQUE,
+    telephoneNumber int,
     address varchar(50),
     postCode varchar(10),
     city varchar(20),
-    enabled BOOLEAN NOT NULL DEFAULT TRUE);
-
-
-CREATE TABLE Doctor(doctor_ID serial PRIMARY KEY,
-    firstName varchar(20) not null,
-    lastName varchar(20) NOT NULL,
-    login varchar(20) UNIQUE NOT NULL,
-    doctorPassword varchar(20) NOT NULL,
-    specialisation varchar(20) NOT NULL)
-;
+    enabled BOOLEAN NOT NULL DEFAULT TRUE,
+    specialisation varchar(20),
+    role varchar (6) NOT NULL
+    );
 
 CREATE TABLE Badania(
 	badanie_ID serial PRIMARY KEY,
@@ -58,43 +53,38 @@ CREATE TABLE VisitHistory (
     visitDescription varchar(1000)
 );
 
-CREATE TABLE Roles(
-	username varchar(20) REFERENCES patient(username) NOT NULL,
-	role varchar(20) not null
-);
+
+INSERT INTO Users(firstName, lastName, password, pesel, username, email, telephoneNumber, address, postCode, city, enabled, role)
+VALUES ('Adam', 'Kowalski', '$2a$10$9UU02QHTjSf4qBtyowylpO7053v126C9W2KYQnxrdQkQ7/WHN/C3W', 87110725732, 'akowalski', 'akowalski@mail.com', 627315621, 'ul. Marszalkowska 12', '61-001', 'Poznań', true, 'USER'),
+	   ('Katarzyna', 'Sikora','$2a$10$jVRlVK7bdZs4meWCxxen4ewO/rutuZZ7GxWIhDhpBJPSQLC76Iosi',67032265927, 'ksikora', 'akowalska@mail.com', 504213521, 'ul. Grunwaldzka 25/3', '60-783', 'Poznań', true, 'USER'),
+	   ('Mariusz', 'Misiorny','haslo',48072685251, 'mariuszmisiorny', 'mariusz.misiorny@gmail.com', 852451267, 'ul. Mickiewicza 55/23', '01-625', 'Warszawa', true, 'USER'),
+	   ('Agnieszka', 'Sochaczewska','$2a$10$PKJia/Bsgac1zWKcpNFUou8zDJCy7bqJHdlx1DlP/GHze9Q8zApGu',98122575235, 'agsoch', 'aga.socha@onet.pl', 695264216, 'ul. Alojzego Felińskiego 14', '01-513', 'Warszawa', true, 'USER'),
+	   ('Katarzyna', 'Politowicz','haslo',67071975251, 'kpolitowicz', 'polkata@onet.pl', 515525623, 'ul Małeckiego 16/12', '60-707', 'Poznań', true, 'USER'),
+	   ('Katarzyna', 'Cichopek','haslo',58090276921, 'kcichopek', 'k.cichopek@gmail.com', 725612562, 'ul. Małe Garbary 32', '61-756', 'Poznań', true, 'USER'),
+	   ('Tomasz', 'Karolak','haslo',65111252612, 'tomciokarol', 'tomciokarol@przykladowymail.com', 725516562, 'ul. Aleje Solidarności 21/2', '61-512', 'Poznań', true, 'USER'),
+	   ('Robert', 'Makłowicz','haslo',54102151362, 'kucharzmistrz', 'kucharzmistrz@maklowicz.com', 826125231, 'ul. Kucharska 21', '60-523', 'Poznań', true, 'USER'),
+	   ('Snoop', 'Dog','haslo',86110425124, 'snoopie', 'snoopiedogg@gmail.com', 666666420, 'ul. Weedowa 4/20', '60-420', 'Poznań', true, 'USER'),
+	   ('Edyta', 'Górniak','haslo',79041252123, 'edziaantyszczepionka', 'antyszczepionkowa@gmail.com', 752621272, 'ul. Antyszczepionkwa 21', '61-215', 'Poznań', true, 'USER'),
+	   ('Iwan', 'Delfin','haslo',65050276213, 'iwanplywak', 'plywamzdelfinami@onet.eu', 627631234, 'ul. Delfiny i orki 21', '61-521', 'Poznań', true, 'USER');
 
 
-INSERT INTO Patient(firstName, lastName, password, pesel, username, email, telephoneNumber, address, postCode, city, enabled)
-VALUES ('Adam', 'Kowalski', '$2a$10$9UU02QHTjSf4qBtyowylpO7053v126C9W2KYQnxrdQkQ7/WHN/C3W', 87110725732, 'akowalski', 'akowalski@mail.com', 627315621, 'ul. Marszalkowska 12', '61-001', 'Poznań', true),
-	   ('Katarzyna', 'Sikora','$2a$10$jVRlVK7bdZs4meWCxxen4ewO/rutuZZ7GxWIhDhpBJPSQLC76Iosi',67032265927, 'ksikora', 'akowalska@mail.com', 504213521, 'ul. Grunwaldzka 25/3', '60-783', 'Poznań', true),
-	   ('Mariusz', 'Misiorny','haslo',48072685251, 'mariuszmisiorny', 'mariusz.misiorny@gmail.com', 852451267, 'ul. Mickiewicza 55/23', '01-625', 'Warszawa', true),
-	   ('Agnieszka', 'Sochaczewska','$2a$10$PKJia/Bsgac1zWKcpNFUou8zDJCy7bqJHdlx1DlP/GHze9Q8zApGu',98122575235, 'agsoch', 'aga.socha@onet.pl', 695264216, 'ul. Alojzego Felińskiego 14', '01-513', 'Warszawa', true),
-	   ('Katarzyna', 'Politowicz','haslo',67071975251, 'kpolitowicz', 'polkata@onet.pl', 515525623, 'ul Małeckiego 16/12', '60-707', 'Poznań', true),
-	   ('Katarzyna', 'Cichopek','haslo',58090276921, 'kcichopek', 'k.cichopek@gmail.com', 725612562, 'ul. Małe Garbary 32', '61-756', 'Poznań', true),
-	   ('Tomasz', 'Karolak','haslo',65111252612, 'tomciokarol', 'tomciokarol@przykladowymail.com', 725516562, 'ul. Aleje Solidarności 21/2', '61-512', 'Poznań', true),
-	   ('Robert', 'Makłowicz','haslo',54102151362, 'kucharzmistrz', 'kucharzmistrz@maklowicz.com', 826125231, 'ul. Kucharska 21', '60-523', 'Poznań', true),
-	   ('Snoop', 'Dog','haslo',86110425124, 'snoopie', 'snoopiedogg@gmail.com', 666666420, 'ul. Weedowa 4/20', '60-420', 'Poznań', true),
-	   ('Edyta', 'Górniak','haslo',79041252123, 'edziaantyszczepionka', 'antyszczepionkowa@gmail.com', 752621272, 'ul. Antyszczepionkwa 21', '61-215', 'Poznań', true),
-	   ('Iwan', 'Delfin','haslo',65050276213, 'iwanplywak', 'plywamzdelfinami@onet.eu', 627631234, 'ul. Delfiny i orki 21', '61-521', 'Poznań', true);
-
-
-INSERT INTO doctor (firstName, lastName, login, doctorPassword, specialisation)
-VALUES  ('Mateusz', 'Borek', 'matRod', 'meteuszborek', 'LEKARZRODZINNY'),
-		('Tomasz', 'Smokowski', 'tomRod', 'tomaszsmokowski', 'LEKARZRODZINNY'),
-		('Krzysztof', 'Stanowski', 'krzRod', 'krzysztofstanowski', 'LEKARZRODZINNY'),
-		('Michał', 'Pol', 'michRod', 'michalpol', 'LEKARZRODZINNY'),
-		('Anna', 'Dermatologowa', 'annaDer', 'annadermatologowa','DERMATOLOG'),
-		('Radosław', 'Majdan', 'radGin', 'radoslawmajdan', 'GINEKOLOG'),
-		('Edgar', 'Davids', 'edgarOku', 'edgardavids', 'OKULISTA'),
-		('Marcin', 'Wasilewski', 'marOrt', 'marcinwasilewski', 'ORTOPEDA'),
-		('Katarzyna', 'Selwant', 'katPsy', 'katarzynaselwant', 'PSYCHOLOG'),
-		('Tomasz', 'Hajto', 'tomPsy', 'tomaszhajto', 'PSYCHIATRA'),
-		('Franz', 'Smuda', 'fraLar', 'franzsmuda', 'LARYNGOLOG'),
-		('Petr', 'Cech', 'petrNeu', 'petrcech', 'NEUROLOG'),
-		('Ewelina', 'Sterczewska', 'eweUro', 'ewasterczewska', 'UROLOG'),
-		('Zofia', 'Puk', 'zofiaPol', 'zofiapuk', 'POLOZNA'),
-		('Joanna', 'Arcykoronna', 'joaPie', 'joannaarcykoronna', 'PIELEGNIARKA'),
-		('Władysława', 'Kowalska', 'wlaPie', 'wladyslawakowalska', 'PIELEGNIARKA');
+INSERT INTO Users (firstName, lastName, username, password, specialisation, enabled, role)
+VALUES  ('Mateusz', 'Borek', 'matRod', 'meteuszborek', 'LEKARZRODZINNY',true, 'DOCTOR'),
+		('Tomasz', 'Smokowski', 'tomRod', 'tomaszsmokowski', 'LEKARZRODZINNY', true, 'DOCTOR'),
+		('Krzysztof', 'Stanowski', 'krzRod', 'krzysztofstanowski', 'LEKARZRODZINNY', true, 'DOCTOR'),
+		('Michał', 'Pol', 'michRod', 'michalpol', 'LEKARZRODZINNY', true, 'DOCTOR'),
+		('Anna', 'Dermatologowa', 'annaDer', 'annadermatologowa','DERMATOLOG', true, 'DOCTOR'),
+		('Radosław', 'Majdan', 'radGin', 'radoslawmajdan', 'GINEKOLOG', true, 'DOCTOR'),
+		('Edgar', 'Davids', 'edgarOku', 'edgardavids', 'OKULISTA', true, 'DOCTOR'),
+		('Marcin', 'Wasilewski', 'marOrt', 'marcinwasilewski', 'ORTOPEDA', true, 'DOCTOR'),
+		('Katarzyna', 'Selwant', 'katPsy', 'katarzynaselwant', 'PSYCHOLOG', true, 'DOCTOR'),
+		('Tomasz', 'Hajto', 'tomPsy', 'tomaszhajto', 'PSYCHIATRA', true, 'DOCTOR'),
+		('Franz', 'Smuda', 'fraLar', 'franzsmuda', 'LARYNGOLOG', true, 'DOCTOR'),
+		('Petr', 'Cech', 'petrNeu', 'petrcech', 'NEUROLOG', true, 'DOCTOR'),
+		('Ewelina', 'Sterczewska', 'eweUro', 'ewasterczewska', 'UROLOG', true, 'DOCTOR'),
+		('Zofia', 'Puk', 'zofiaPol', 'zofiapuk', 'POLOZNA', true, 'DOCTOR'),
+		('Joanna', 'Arcykoronna', 'joaPie', 'joannaarcykoronna', 'PIELEGNIARKA', true, 'DOCTOR'),
+		('Władysława', 'Kowalska', 'wlaPie', 'wladyslawakowalska', 'PIELEGNIARKA', true, 'DOCTOR');
 
 INSERT INTO Badania(nazwaBadania, cenaBadania)
 VALUES
@@ -165,11 +155,3 @@ INSERT INTO VisitDao(visitTime) VALUES
     ('15:30'),
     ('16:00');
 
-INSERT INTO roles(username,role)
-VALUES ('akowalski','USER'),
-('ksikora','ADMIN'),
-('agsoch','USER');
-
-select * from patient
-
-select * from roles

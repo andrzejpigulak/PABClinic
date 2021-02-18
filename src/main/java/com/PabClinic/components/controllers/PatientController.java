@@ -84,13 +84,6 @@ public class PatientController {
         return "kalendarz";
     }
 
-    @PostMapping("/login")
-    public String afterLogin(@ModelAttribute PatientLoginDTO patientLogin) {
-
-        return "redirect:/index";
-    }
-
-
     @GetMapping("/addVisitPatient")
     public String toAddVisitPatient(Model model) {
 

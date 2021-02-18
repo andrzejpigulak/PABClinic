@@ -31,7 +31,7 @@ public class PatientRepository {
         try {
             dataBase.connectToDb();
 
-            ResultSet rs = dataBase.getStmt().executeQuery("select * from patient");
+            ResultSet rs = dataBase.getStmt().executeQuery("select * from users where role='USER'");
 
             while (rs.next()) {
                 PatientDTO patient = new PatientDTO(
@@ -69,14 +69,14 @@ public class PatientRepository {
         try {
             dataBase.connectToDb();
 
-            String queryCount = "SELECT COUNT(*) from patient";
+            String queryCount = "SELECT COUNT(*) from users where role='USER'";
 
             ResultSet rs = dataBase.getStmt().executeQuery(queryCount);
             rs.next();
 
             int i = rs.getInt("count");
 
-            String queryInsert = "insert into patient (firstName, lastName, password, pesel, username, email, telephoneNumber, address, postCode, city, enabled) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String queryInsert = "insert into Users (firstName, lastName, password, pesel, username, email, telephoneNumber, address, postCode, city, enabled, role) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = dataBase.getConn().prepareStatement(queryInsert);
 
@@ -91,21 +91,12 @@ public class PatientRepository {
             preparedStatement.setString(9, patient.getPostCode());
             preparedStatement.setString(10, patient.getCity());
             preparedStatement.setBoolean(11, true);
+            preparedStatement.setString(12,"USER");
 
             preparedStatement.executeUpdate();
 
             rs = dataBase.getStmt().executeQuery(queryCount);
             rs.next();
-
-            queryInsert = "insert into roles (username, role) values (?, ?)";
-
-            preparedStatement = dataBase.getConn().prepareStatement(queryInsert);
-
-            preparedStatement.setString(1, patient.getUsername());
-            preparedStatement.setString(2, "USER");
-
-            preparedStatement.executeUpdate();
-
 
             dataBase.disconnectDB();
 
@@ -121,7 +112,7 @@ public class PatientRepository {
         try {
             dataBase.connectToDb();
 
-            String queryRemove = "delete from patient where user_id=?";
+            String queryRemove = "delete from users where user_id=?";
 
             PreparedStatement preparedStatement = dataBase.getConn().prepareStatement(queryRemove);
 
@@ -142,7 +133,7 @@ public class PatientRepository {
 
         try {
             dataBase.connectToDb();
-            String queryUpdate = "update patient set firstname=?, lastname=?, password=?, pesel=?, username=?, email=?, telephonenumber=?, " +
+            String queryUpdate = "update users set firstname=?, lastname=?, password=?, pesel=?, username=?, email=?, telephonenumber=?, " +
                     "address=?, postcode=?, city=? where user_id=" + patient.getId();
 
             PreparedStatement preparedStatement = dataBase.getConn().prepareStatement(queryUpdate);
@@ -174,7 +165,7 @@ public class PatientRepository {
         try {
             dataBase.connectToDb();
 
-            String queryEdit = "select * from patient where user_id=" + patient.getId();
+            String queryEdit = "select * from users where user_id=" + patient.getId();
 
             ResultSet rs = dataBase.getStmt().executeQuery(queryEdit);
 

@@ -7,11 +7,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AndRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 @Configuration
@@ -42,6 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login").successHandler(successHandler)
                 .and()
                 .headers().frameOptions().disable();
+
     }
 
     @Autowired
@@ -49,9 +52,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery("SELECT username, password, 'true' as enabled FROM patient WHERE username = ? ")
-                .authoritiesByUsernameQuery("SELECT username, role FROM roles WHERE username=? ")
+                .usersByUsernameQuery("SELECT username, password, 'true' as enabled FROM users WHERE username = ? ")
+                .authoritiesByUsernameQuery("SELECT username, role FROM users WHERE username=? ")
                 .passwordEncoder(getEncoder());
+
+
+
 
     }
 }
