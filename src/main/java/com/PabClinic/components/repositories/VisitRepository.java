@@ -1,9 +1,12 @@
 package com.PabClinic.components.repositories;
 import com.PabClinic.model.dtos.DoctorDTO;
+import com.PabClinic.model.dtos.UserLoginDTO;
 import com.PabClinic.model.dtos.VisitDTO;
 import com.PabClinic.model.dtos.VisitTimeDTO;
 import com.PabClinic.components.configurations.DataBase;
 import com.PabClinic.model.daos.VisitDAO;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,12 +19,14 @@ import java.util.List;
 public class VisitRepository {
 
     private DataBase dataBase;
+    private UserLoginDTO userLoginDTO;
 
-    public VisitRepository(DataBase dataBase) {
+    public VisitRepository(DataBase dataBase, UserLoginDTO userLoginDTO) {
         this.dataBase = dataBase;
+        this.userLoginDTO = userLoginDTO;
     }
 
-    public void addVisitHistory(String date, String doctorName, String doctorLastName, String patientName,
+    public void addVisitHistory(String date, String doctorName, String doctorLastName, String login, String patientName,
                                 String patientLastName, String visitDescription) {
 
         try {
@@ -34,16 +39,17 @@ public class VisitRepository {
 
             int i = rs.getInt("count");
 
-            String queryInsert = "insert into visithistory (visitDate, doctorName, doctorLastName, patientName, patientLastName, visitDescription) values (?, ?, ?, ?, ?, ?)";
+            String queryInsert = "insert into visithistory (visitDate, doctorName, doctorLastName, doctorUserName, patientName, patientLastName, visitDescription) values (?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = dataBase.getConn().prepareStatement(queryInsert);
 
             preparedStatement.setString(1, date);
             preparedStatement.setString(2, doctorName);
             preparedStatement.setString(3, doctorLastName);
-            preparedStatement.setString(4, patientName);
-            preparedStatement.setString(5, patientLastName);
-            preparedStatement.setString(6, visitDescription);
+            preparedStatement.setString(4, login);
+            preparedStatement.setString(5, patientName);
+            preparedStatement.setString(6, patientLastName);
+            preparedStatement.setString(7, visitDescription);
 
             preparedStatement.executeUpdate();
 
@@ -128,16 +134,27 @@ public class VisitRepository {
 
     }
 
-    public List<VisitDTO> findDoctorVisits(DoctorDTO doctor){
+    public List<VisitDTO> findDoctorVisits(UserLoginDTO userLoginDTO){
 
         List<VisitDTO> doctorVisits = new ArrayList<>();
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            String username = ((UserDetails)principal).getUsername();
+            userLoginDTO.setUsername(username);
+        } else {
+            String username = principal.toString();
+            userLoginDTO.setUsername(username);
+        }
+
 
         try {
 
             dataBase.connectToDb();
 
-            String queryCount = "SELECT * from visit where visitDate=" + LocalDate.now().toString()
-            + " and doctorLastName="+ doctor.getLastName();
+            String queryCount = "SELECT * from visit where visitDate='" + LocalDate.now().toString()
+            + "' and doctorUserName='"+ userLoginDTO.getUsername() +"'";
 
             System.out.println(queryCount);
 
@@ -166,5 +183,40 @@ public class VisitRepository {
         return doctorVisits;
 
 
+    }
+
+    public DoctorDTO findDoctorFromDb(UserLoginDTO userLoginDTO) {
+
+        DoctorDTO doctorDTO = null;
+
+        try {
+
+            dataBase.connectToDb();
+
+            String queryCount = "SELECT * from users where username='" + userLoginDTO.getUsername() + "'";
+
+            ResultSet rs = dataBase.getStmt().executeQuery(queryCount);
+
+            while (rs.next()) {
+
+                doctorDTO = new DoctorDTO(
+                        rs.getInt("user_id"),
+                        rs.getString("firstname"),
+                        rs.getString("lastname"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("specialisation"));
+            }
+
+
+            dataBase.disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return doctorDTO;
     }
 }

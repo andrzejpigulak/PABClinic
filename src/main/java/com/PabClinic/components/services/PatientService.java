@@ -13,6 +13,7 @@ public class PatientService {
 
     private EmailService emailService;
 
+
     @Autowired
     public PatientService(PatientRepository patientRepository, EmailService emailService) {
         this.patientRepository = patientRepository;
