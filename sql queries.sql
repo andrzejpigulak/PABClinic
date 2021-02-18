@@ -1,6 +1,4 @@
-drop table if exists roles;
-drop table if exists patient;
-drop table if exists doctor;
+drop table if exists users;
 drop table if exists badania;
 drop table if exists visit;
 drop table if exists visitDao;
@@ -30,13 +28,16 @@ CREATE TABLE Badania(
 	cenaBadania int NOT NULL
 );
 
-CREATE TABLE Visit(visit_ID serial PRIMARY KEY,
+CREATE TABLE Visit(
+	visit_ID serial PRIMARY KEY,
     visitDate varchar(20),
     visitTime varchar(20),
     doctorName varchar(20),
     doctorLastName varchar(20),
+	doctorUsername varchar(10),
     patientName varchar(20),
-    patientLastName varchar(20)
+    patientLastName varchar(20),
+	patientUsername varchar (20)
 );
 
 CREATE TABLE VisitDao(
@@ -48,8 +49,10 @@ CREATE TABLE VisitHistory (
     visitDate varchar(20),
     doctorName varchar(20),
     doctorLastName varchar(20),
+	doctorUserName varchar(7),
     patientName varchar(20),
     patientLastName varchar(20),
+	patientUserName varchar(20),
     visitDescription varchar(1000)
 );
 
@@ -71,7 +74,7 @@ VALUES ('Adam', 'Kowalski', '$2a$10$9UU02QHTjSf4qBtyowylpO7053v126C9W2KYQnxrdQkQ
 INSERT INTO Users (firstName, lastName, username, password, specialisation, enabled, role)
 VALUES  ('Mateusz', 'Borek', 'matRod', 'meteuszborek', 'LEKARZRODZINNY',true, 'DOCTOR'),
 		('Tomasz', 'Smokowski', 'tomRod', 'tomaszsmokowski', 'LEKARZRODZINNY', true, 'DOCTOR'),
-		('Krzysztof', 'Stanowski', 'krzRod', 'krzysztofstanowski', 'LEKARZRODZINNY', true, 'DOCTOR'),
+		('Krzysztof', 'Stanowski', 'krzRod', '$2a$10$AUc4o/jne0guukYoQZHuYO0NzY9NIqnU1FWAooTn4dIqPA6xFMXXq', 'LEKARZRODZINNY', true, 'DOCTOR'),
 		('Michał', 'Pol', 'michRod', 'michalpol', 'LEKARZRODZINNY', true, 'DOCTOR'),
 		('Anna', 'Dermatologowa', 'annaDer', 'annadermatologowa','DERMATOLOG', true, 'DOCTOR'),
 		('Radosław', 'Majdan', 'radGin', 'radoslawmajdan', 'GINEKOLOG', true, 'DOCTOR'),
@@ -85,6 +88,10 @@ VALUES  ('Mateusz', 'Borek', 'matRod', 'meteuszborek', 'LEKARZRODZINNY',true, 'D
 		('Zofia', 'Puk', 'zofiaPol', 'zofiapuk', 'POLOZNA', true, 'DOCTOR'),
 		('Joanna', 'Arcykoronna', 'joaPie', 'joannaarcykoronna', 'PIELEGNIARKA', true, 'DOCTOR'),
 		('Władysława', 'Kowalska', 'wlaPie', 'wladyslawakowalska', 'PIELEGNIARKA', true, 'DOCTOR');
+
+
+INSERT INTO Users (firstName, lastName, username, password, enabled, role) values
+	('adminName', 'admin lastName', 'admin', '$2a$10$x339SuMBk8CKsxFhTCilJOTkDMjHWyCbXRdtBH7B00onLCMRwHgAi', true, 'ADMIN' );
 
 INSERT INTO Badania(nazwaBadania, cenaBadania)
 VALUES
@@ -121,19 +128,19 @@ VALUES
 	('Kortyzol', 32),
 	('Insulina', 30);
 
-INSERT INTO Visit(visit_ID, visitDate, visitTime, doctorName, doctorLastName, patientName, patientLastName)
+INSERT INTO Visit(visit_ID, visitDate, visitTime, doctorName, doctorLastName, doctorUsername, patientName, patientLastName, patientUsername)
 VALUES
 
-	(1, '2021-02-16', '8:00', 'Krzysztof', 'Stanowski', 'Adam', 'Kowalski'),
-	(2, '2021-02-16','8:30', 'Krzysztof', 'Stanowski', 'Katarzyna', 'Sikora'),
-	(3, '2021-02-16','9:00', 'Krzysztof', 'Stanowski', 'Mariusz', 'Misiorny'),
-	(4, '2021-02-16','9:30', 'Katarzyna', 'Selwant', 'Adam', 'Kowalski'),
-	(5, '2021-02-16','10:00', 'Anna', 'Dermatologowa', 'Iwan', 'Delfin'),
- 	(6, '2021-02-16','10:30', 'Katarzyna', 'Selwant', 'Edyta', 'Gorniak'),
-	(7, '2021-02-16','11:00', 'Radoslaw', 'Majdan', 'Edyta', 'Gorniak'),
-	(8, '2021-02-16','11:30', 'Krzysztof', 'Stanowski', 'Snoop', 'Dogg'),
-	(9, '2021-02-16','12:00', 'Mateusz', 'Borek', 'Katarzyna', 'Politowicz'),
-	(10,'2021-02-16','12:30', 'Mateusz', 'Borek', 'Robert', 'Makłowicz');
+	(1, '2021-02-18', '8:00', 'Krzysztof', 'Stanowski', 'krzRod', 'Adam', 'Kowalski', 'akowalski'),
+	(2, '2021-02-18','8:30', 'Krzysztof', 'Stanowski', 'krzRod', 'Katarzyna', 'Sikora', 'ksikora'),
+	(3, '2021-02-18','9:00', 'Krzysztof', 'Stanowski', 'krzRod', 'Mariusz', 'Misiorny', 'mariuszmisiorny'),
+	(4, '2021-02-18','9:30', 'Katarzyna', 'Selwant', 'KatPsy', 'Adam', 'Kowalski', 'akowalski'),
+	(5, '2021-02-18','10:00', 'Anna', 'Dermatologowa', 'annaDer', 'Iwan', 'Delfin', 'iwanplywak'),
+ 	(6, '2021-02-18','10:30', 'Katarzyna', 'Selwant', 'katPsy', 'Edyta', 'Gorniak', 'edziaantyszczepionka'),
+	(7, '2021-02-18','11:00', 'Radoslaw', 'Majdan', 'radGin', 'Edyta', 'Gorniak', 'edziaantyszczepionka'),
+	(8, '2021-02-18','11:30', 'Krzysztof', 'Stanowski', 'krzRod', 'Snoop', 'Dogg', 'snoopie'),
+	(9, '2021-02-18','12:00', 'Mateusz', 'Borek', 'matRod', 'Katarzyna', 'Politowicz','kpolitowicz'),
+	(10,'2021-02-18','12:30', 'Mateusz', 'Borek', 'matRod', 'Robert', 'Makłowicz', 'kucharzmistrz');
 
 
 INSERT INTO VisitDao(visitTime) VALUES
