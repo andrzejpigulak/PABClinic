@@ -44,7 +44,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login").successHandler(successHandler)
                 .and()
                 .headers().frameOptions().disable();
-
     }
 
     @Autowired
@@ -55,9 +54,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usersByUsernameQuery("SELECT username, password, 'true' as enabled FROM users WHERE username = ? ")
                 .authoritiesByUsernameQuery("SELECT username, role FROM users WHERE username=? ")
                 .passwordEncoder(getEncoder());
-
-
-
 
     }
 }

@@ -3,6 +3,7 @@ package com.PabClinic.components.repositories;
 
 import com.PabClinic.components.configurations.DataBase;
 import com.PabClinic.model.dtos.DoctorDTO;
+import com.PabClinic.model.dtos.UserLoginDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;

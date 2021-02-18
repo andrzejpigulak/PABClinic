@@ -1,9 +1,9 @@
 package com.PabClinic.components.controllers;
-import com.PabClinic.components.repositories.VisitRepository;
 import com.PabClinic.components.services.DoctorService;
 import com.PabClinic.components.services.VisitService;
+import com.PabClinic.model.daos.PatientDAO;
 import com.PabClinic.model.dtos.DoctorDTO;
-import com.PabClinic.model.dtos.PatientLoginDTO;
+import com.PabClinic.model.dtos.UserLoginDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +18,14 @@ public class DoctorController {
 
     private VisitService visitService;
 
+    private UserLoginDTO userLoginDTO;
+
+
     @Autowired
-    public DoctorController(DoctorService doctorService, VisitService visitService) {
+    public DoctorController(DoctorService doctorService, VisitService visitService, UserLoginDTO userLoginDTO) {
         this.doctorService = doctorService;
         this.visitService = visitService;
+        this.userLoginDTO = userLoginDTO;
     }
 
     @GetMapping("/doctors")
@@ -36,15 +40,34 @@ public class DoctorController {
     @GetMapping("/pageDoctor")
     public String toDoctor() {
 
+
+
         return "pageDoctor";
     }
 
     @PostMapping("/login")
-    public String afterLogin(@ModelAttribute PatientLoginDTO patientLogin) {
+    public String afterLogin() {
 
-        System.out.println(patientLogin.getUsername());
 
         return "redirect:/index";
+    }
+
+    @GetMapping("/addVisitPatient")
+    public String toAddVisitPatient(Model model) {
+
+        visitService.showDoctorVisitsByDay(userLoginDTO, model);
+
+        return "addVisitPatient";
+
+    }
+
+    @PostMapping("/addVisitPatient")
+    public String afterAddingVisitPatient(@ModelAttribute PatientDAO patient) {
+
+        visitService.addVisit(patient, visitService.findDoctorFromDb(userLoginDTO));
+
+        return "redirect:/addVisitPatient";
+
     }
 
 

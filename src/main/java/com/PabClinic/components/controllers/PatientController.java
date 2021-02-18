@@ -27,13 +27,15 @@ public class PatientController {
 
     private DoctorService doctorService;
 
+    private UserLoginDTO userLoginDTO;
+
 
     @Autowired
-    public PatientController(PatientService patientService, VisitService visitService, DoctorService doctorService) {
+    public PatientController(PatientService patientService, VisitService visitService, DoctorService doctorService, UserLoginDTO userLoginDTO) {
         this.patientService = patientService;
         this.visitService = visitService;
         this.doctorService = doctorService;
-
+        this.userLoginDTO = userLoginDTO;
     }
 
     @GetMapping("/registration")
@@ -47,7 +49,7 @@ public class PatientController {
     @GetMapping("/login")
     public String toLogin(Model model) {
 
-        model.addAttribute("patientLogin", new PatientLoginDTO());
+        model.addAttribute("patientLogin", userLoginDTO);
 
         return "login";
     }
@@ -84,23 +86,7 @@ public class PatientController {
         return "kalendarz";
     }
 
-    @GetMapping("/addVisitPatient")
-    public String toAddVisitPatient(Model model) {
 
-        visitService.showDoctorVisitsByDay(singleDoctor, model);
-
-        return "addVisitPatient";
-
-    }
-
-    @PostMapping("/addVisitPatient")
-    public String afterAddingVisitPatient(@ModelAttribute PatientDAO patient) {
-
-        visitService.addVisit(patient, singleDoctor);
-
-        return "redirect:/addVisitPatient";
-
-    }
 
     @GetMapping("/patients")
     public String toPatients(Model model) {
