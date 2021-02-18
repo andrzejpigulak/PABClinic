@@ -84,9 +84,9 @@ VALUES  ('Mateusz', 'Borek', 'matRod', 'meteuszborek', 'LEKARZRODZINNY',true, 'D
 		('Zofia', 'Puk', 'zofiaPol', 'zofiapuk', 'POLOZNA', true, 'DOCTOR'),
 		('Joanna', 'Arcykoronna', 'joaPie', 'joannaarcykoronna', 'PIELEGNIARKA', true, 'DOCTOR'),
 		('Władysława', 'Kowalska', 'wlaPie', 'wladyslawakowalska', 'PIELEGNIARKA', true, 'DOCTOR');
-		
-		
-INSERT INTO Users (firstName, lastName, username, password, enabled, role) values 
+
+
+INSERT INTO Users (firstName, lastName, username, password, enabled, role) values
 	('adminName', 'admin lastName', 'admin', '$2a$10$x339SuMBk8CKsxFhTCilJOTkDMjHWyCbXRdtBH7B00onLCMRwHgAi', true, 'ADMIN' );
 
 INSERT INTO Badania(nazwaBadania, cenaBadania)
