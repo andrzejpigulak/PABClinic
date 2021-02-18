@@ -1,10 +1,7 @@
 package com.PabClinic.components.services;
 import com.PabClinic.model.daos.PatientDAO;
 import com.PabClinic.components.repositories.VisitRepository;
-import com.PabClinic.model.dtos.DoctorDTO;
-import com.PabClinic.model.dtos.PatientDTO;
-import com.PabClinic.model.dtos.UserLoginDTO;
-import com.PabClinic.model.dtos.VisitTimeDTO;
+import com.PabClinic.model.dtos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -27,7 +24,8 @@ public class VisitService {
 
     public void addVisit(PatientDAO patientDAO, DoctorDTO doctor){
 
-        visitRepository.addVisitHistory(LocalDate.now().toString(), doctor.getFirstName(), doctor.getLastName(), doctor.getLogin(), patientDAO.getFirstName(), patientDAO.getLastName(),
+        visitRepository.addVisitHistory(LocalDate.now().toString(), doctor.getFirstName(), doctor.getLastName(),
+                doctor.getLogin(), patientDAO.getFirstName(), patientDAO.getLastName(),
                 patientDAO.getOpis());
 
     }
@@ -47,6 +45,11 @@ public class VisitService {
 
         return visitRepository.findDoctorFromDb(userLoginDTO);
 
+    }
+
+    public List<VisitDTO> findPatientVisits(){
+
+        return visitRepository.findVisitHistory();
     }
 
 }

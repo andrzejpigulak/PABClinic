@@ -52,6 +52,12 @@ public class Navigation {
         return "vipatient";
     }
 
+    @GetMapping("/pagePatient")
+    public String toPatientPage() {
+
+        return "pagePatient";
+    }
+
     @GetMapping("/pageAdmin")
     public String toTest() {
 

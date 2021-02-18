@@ -1,5 +1,4 @@
 package com.PabClinic.model.dtos;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +21,14 @@ public class VisitDTO {
 
     private String patientLastName;
 
-    public VisitDTO(String visitDate) {
+    private String visitDescription;
+
+    public VisitDTO(String visitDate, String doctorName, String doctorLastName, String patientName, String patientLastName, String visitDescription) {
         this.visitDate = visitDate;
+        this.doctorName = doctorName;
+        this.doctorLastName = doctorLastName;
+        this.patientName = patientName;
+        this.patientLastName = patientLastName;
+        this.visitDescription = visitDescription;
     }
 }

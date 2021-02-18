@@ -105,6 +105,14 @@ public class PatientController {
         return "patientEdit";
     }
 
+    @GetMapping("/patientHistory")
+    public String toPatientHistory(Model model) {
+
+        model.addAttribute("patientVisits", visitService.findPatientVisits());
+
+        return "patientHistory";
+    }
+
     @PostMapping("/registration")
     public String afterRegistration(Model model, @ModelAttribute PatientDTO patient) {
 
