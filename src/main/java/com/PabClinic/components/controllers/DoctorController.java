@@ -55,7 +55,7 @@ public class DoctorController {
     @GetMapping("/addVisitPatient")
     public String toAddVisitPatient(Model model) {
 
-        visitService.showDoctorVisitsByDay(userLoginDTO, model);
+        visitService.showDoctorVisitsByDay(model);
 
         return "addVisitPatient";
 

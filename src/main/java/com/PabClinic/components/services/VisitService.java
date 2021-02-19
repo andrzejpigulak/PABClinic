@@ -30,9 +30,9 @@ public class VisitService {
 
     }
 
-    public void showDoctorVisitsByDay(UserLoginDTO userLoginDTO, Model model) {
+    public void showDoctorVisitsByDay(Model model) {
 
-        model.addAttribute("visitList", visitRepository.findDoctorVisits(userLoginDTO));
+        model.addAttribute("visitList", visitRepository.findDoctorVisits());
         model.addAttribute("patient", new PatientDTO());
     }
 

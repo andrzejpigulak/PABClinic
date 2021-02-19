@@ -144,19 +144,19 @@ public class VisitRepository {
 
     }
 
-    public List<VisitDTO> findDoctorVisits(UserLoginDTO userLoginDTO){
+    public List<VisitDTO> findDoctorVisits(){
 
         List<VisitDTO> doctorVisits = new ArrayList<>();
 
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        if (principal instanceof UserDetails) {
-            String username = ((UserDetails)principal).getUsername();
-            userLoginDTO.setUsername(username);
-        } else {
-            String username = principal.toString();
-            userLoginDTO.setUsername(username);
-        }
+            String username;
+
+            if (principal instanceof UserDetails) {
+                username = ((UserDetails)principal).getUsername();
+            } else {
+                username = principal.toString();
+            }
 
 
         try {
@@ -164,7 +164,7 @@ public class VisitRepository {
             dataBase.connectToDb();
 
             String queryCount = "SELECT * from visit where visitDate='" + LocalDate.now().toString()
-            + "' and doctorUserName='"+ userLoginDTO.getUsername() +"'";
+            + "' and doctorUserName='"+ username +"'";
 
             System.out.println(queryCount);
 
@@ -174,7 +174,7 @@ public class VisitRepository {
 
                 doctorVisits.add(new VisitDTO(
                         rs.getString("visitDate"),
-                        rs.getString("visitTime"),
+                        rs.getString("visittime"),
                         rs.getString("doctorName"),
                         rs.getString("doctorLastName"),
                         rs.getString("patientName"),
@@ -188,6 +188,12 @@ public class VisitRepository {
             e.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }
+
+        for (VisitDTO v : doctorVisits) {
+
+            System.out.println(v);
+
         }
 
         return doctorVisits;
@@ -253,6 +259,7 @@ public class VisitRepository {
             while (rs.next()) {
 
                 VisitDTO visit = new VisitDTO(
+                        rs.getString("visitDate"),
                         rs.getString("visitDate"),
                         rs.getString("doctorName"),
                         rs.getString("doctorLastName"),

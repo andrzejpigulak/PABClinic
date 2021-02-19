@@ -131,16 +131,16 @@ VALUES
 INSERT INTO Visit(visit_ID, visitDate, visitTime, doctorName, doctorLastName, doctorUsername, patientName, patientLastName, patientUsername)
 VALUES
 
-	(1, '2021-02-18', '8:00', 'Krzysztof', 'Stanowski', 'krzRod', 'Adam', 'Kowalski', 'akowalski'),
-	(2, '2021-02-18','8:30', 'Krzysztof', 'Stanowski', 'krzRod', 'Katarzyna', 'Sikora', 'ksikora'),
-	(3, '2021-02-18','9:00', 'Krzysztof', 'Stanowski', 'krzRod', 'Mariusz', 'Misiorny', 'mariuszmisiorny'),
-	(4, '2021-02-18','9:30', 'Katarzyna', 'Selwant', 'KatPsy', 'Adam', 'Kowalski', 'akowalski'),
-	(5, '2021-02-18','10:00', 'Anna', 'Dermatologowa', 'annaDer', 'Iwan', 'Delfin', 'iwanplywak'),
- 	(6, '2021-02-18','10:30', 'Katarzyna', 'Selwant', 'katPsy', 'Edyta', 'Gorniak', 'edziaantyszczepionka'),
-	(7, '2021-02-18','11:00', 'Radoslaw', 'Majdan', 'radGin', 'Edyta', 'Gorniak', 'edziaantyszczepionka'),
-	(8, '2021-02-18','11:30', 'Krzysztof', 'Stanowski', 'krzRod', 'Snoop', 'Dogg', 'snoopie'),
-	(9, '2021-02-18','12:00', 'Mateusz', 'Borek', 'matRod', 'Katarzyna', 'Politowicz','kpolitowicz'),
-	(10,'2021-02-18','12:30', 'Mateusz', 'Borek', 'matRod', 'Robert', 'Makłowicz', 'kucharzmistrz');
+	(1, '2021-02-19', '8:00', 'Krzysztof', 'Stanowski', 'krzRod', 'Adam', 'Kowalski', 'akowalski'),
+	(2, '2021-02-19','8:30', 'Krzysztof', 'Stanowski', 'krzRod', 'Katarzyna', 'Sikora', 'ksikora'),
+	(3, '2021-02-19','9:00', 'Krzysztof', 'Stanowski', 'krzRod', 'Mariusz', 'Misiorny', 'mariuszmisiorny'),
+	(4, '2021-02-19','9:30', 'Katarzyna', 'Selwant', 'KatPsy', 'Adam', 'Kowalski', 'akowalski'),
+	(5, '2021-02-19','10:00', 'Anna', 'Dermatologowa', 'annaDer', 'Iwan', 'Delfin', 'iwanplywak'),
+ 	(6, '2021-02-19','10:30', 'Katarzyna', 'Selwant', 'katPsy', 'Edyta', 'Gorniak', 'edziaantyszczepionka'),
+	(7, '2021-02-19','11:00', 'Radoslaw', 'Majdan', 'radGin', 'Edyta', 'Gorniak', 'edziaantyszczepionka'),
+	(8, '2021-02-19','11:30', 'Krzysztof', 'Stanowski', 'krzRod', 'Snoop', 'Dogg', 'snoopie'),
+	(9, '2021-02-19','12:00', 'Mateusz', 'Borek', 'matRod', 'Katarzyna', 'Politowicz','kpolitowicz'),
+	(10,'2021-02-19','12:30', 'Mateusz', 'Borek', 'matRod', 'Robert', 'Makłowicz', 'kucharzmistrz');
 
 
 INSERT INTO VisitDao(visitTime) VALUES
