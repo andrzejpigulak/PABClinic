@@ -30,6 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity security) throws Exception {
         security.authorizeRequests()
+
                 .antMatchers("*/css/**", "/images/**", "/js/**", "/upload/**").permitAll()
                 .antMatchers("/pageAdmin").hasAuthority("ADMIN")
                 .antMatchers("/pageDoctor").hasAnyAuthority("ADMIN", "DOCTOR")

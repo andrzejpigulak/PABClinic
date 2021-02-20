@@ -169,7 +169,6 @@ public class VisitRepository {
             String queryCount = "SELECT * from visit where visitDate='" + LocalDate.now().toString()
                     + "' and doctorUserName='" + username + "'";
 
-            System.out.println(queryCount);
 
             ResultSet rs = dataBase.getStmt().executeQuery(queryCount);
 
@@ -193,12 +192,6 @@ public class VisitRepository {
             throwables.printStackTrace();
         }
 
-        for (VisitDTO v : doctorVisits) {
-
-            System.out.println(v);
-
-        }
-
         return doctorVisits;
 
     }
@@ -207,11 +200,21 @@ public class VisitRepository {
 
         DoctorDTO doctorDTO = null;
 
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String username;
+
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
         try {
 
             dataBase.connectToDb();
 
-            String queryCount = "SELECT * from users where username='" + userLoginDTO.getUsername() + "'";
+            String queryCount = "SELECT * from users where username='" + username + "'";
 
             ResultSet rs = dataBase.getStmt().executeQuery(queryCount);
 
@@ -286,11 +289,13 @@ public class VisitRepository {
         return visits;
     }
 
-    public List<VisitDAO> addVisit() {
+    public List<VisitDAO> addVisit(VisitDTO visitDTO) {
 
         List<VisitDAO> visits = new ArrayList<>();
 
         try {
+
+            dataBase.connectToDb();
 
             String queryCount = "SELECT COUNT(*) from visit";
 
@@ -304,7 +309,7 @@ public class VisitRepository {
             PreparedStatement preparedStatement = dataBase.getConn().prepareStatement(queryInsert);
 
             preparedStatement.setString(1, singleVisitDTO.getVisitDate());
-            preparedStatement.setString(2, singleVisitDTO.getVisitTime());
+            preparedStatement.setString(2, visitDTO.getVisitTime());
             preparedStatement.setString(3, singleVisitDTO.getDoctorName());
             preparedStatement.setString(4, singleVisitDTO.getDoctorLastName());
             preparedStatement.setString(5, singleVisitDTO.getDoctorUsername());
@@ -314,11 +319,9 @@ public class VisitRepository {
 
             preparedStatement.executeUpdate();
 
-            rs = dataBase.getStmt().executeQuery(queryCount);
-
             dataBase.disconnectDB();
 
-        } catch (SQLException throwables) {
+        } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }
 

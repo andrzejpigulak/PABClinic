@@ -99,7 +99,6 @@ public class PatientRepository {
 
             preparedStatement.executeUpdate();
 
-            rs = dataBase.getStmt().executeQuery(queryCount);
 
             dataBase.disconnectDB();
 
@@ -248,15 +247,17 @@ public class PatientRepository {
     public String getEmailFromUsername() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
-        String email = "";
+        String email = null;
         if (principal instanceof UserDetails) {
             username = ((UserDetails) principal).getUsername();
         } else {
             username = principal.toString();
         }
+
+
         try {
             dataBase.connectToDb();
-            String queryEdit = "select * from users where username=" + username;
+            String queryEdit = "select * from users where username='" + username + "'";
             ResultSet rs = dataBase.getStmt().executeQuery(queryEdit);
             rs.next();
             email = rs.getString("email");

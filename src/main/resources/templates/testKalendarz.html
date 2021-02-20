@@ -5,24 +5,32 @@
     <title>Title</title>
 </head>
 <body>
-<table>
-    <tr>
-        <td>Wybierz godzinę wizyty</td>
-        <td>
-            <select>
-                <option value="">Wybierz godzine</option>
-                <option th:each="visit: ${visitsTime}"
-                        th:value="${visit.visitTime}"
-                        th:text="${visit.visitTime}"></option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <input type="submit" value="Zaplanuj wizytę" name="saveTime">
-        </td>
-    </tr>
-</table>
+
+<form action="#" th:action="@{/testKalendarz}" method="post">
+
+    <form name="f" th:object="${visitForm}" method="POST">
+
+        <table>
+            <tr>
+                <td>Wybierz godzinę wizyty</td>
+                <td>
+                    <select th:field="*{visitTime}">
+                        <option value="">Wybierz godzine</option>
+                        <option th:each="visit: ${visitsTime}"
+                                th:value="${visit.visitTime}"
+                                th:text="${visit.visitTime}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Zaplanuj wizytę" name="saveTime">
+                </td>
+            </tr>
+        </table>
+
+    </form>
+</form>
 
 </body>
 </html>

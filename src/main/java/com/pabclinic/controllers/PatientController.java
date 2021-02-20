@@ -3,9 +3,7 @@ package com.pabclinic.controllers;
 import com.pabclinic.services.DoctorService;
 import com.pabclinic.services.VisitService;
 import com.pabclinic.model.dtos.*;
-import com.pabclinic.model.daos.DoctorDAO;
 import com.pabclinic.services.PatientService;
-import com.pabclinic.model.daos.VisitDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,6 +56,8 @@ public class PatientController {
     public String toTestKalendarz(Model model) {
 
         model.addAttribute("visitsTime", visitService.getVisitsTime());
+        model.addAttribute("visitForm", new VisitDTO());
+
 
         return "testKalendarz";
     }
@@ -110,17 +110,15 @@ public class PatientController {
     public String saveDate(Model model, @ModelAttribute DoctorDTO doctorDTO,
                            @ModelAttribute VisitDTO visitDTO) {
 
-        visitService.registerSingleVisit(doctorDTO, visitDTO);
+        visitService.saveSingleVisit(doctorDTO, visitDTO);
 
         return "redirect:/testKalendarz";
     }
 
     @PostMapping(value = "/testKalendarz", params = "saveTime")
-    public String saveTime(Model model) {
+    public String saveTime(@ModelAttribute VisitDTO visitDTO) {
 
-        visitService.registerVisit();
-
-        System.out.println("bebebkerbke");
+        visitService.registerVisit(visitDTO);
 
         return "redirect:/index";
     }
