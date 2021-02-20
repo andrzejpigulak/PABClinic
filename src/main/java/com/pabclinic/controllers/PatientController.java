@@ -57,8 +57,7 @@ public class PatientController {
     @GetMapping("/testKalendarz")
     public String toTestKalendarz(Model model) {
 
-        model.addAttribute("visitTime", visitService.getVisitsTime());
-        model.addAttribute(singleVisit);
+        model.addAttribute("visitsTime", visitService.getVisitsTime());
 
         return "testKalendarz";
     }
@@ -110,8 +109,43 @@ public class PatientController {
     }
 
     @PostMapping(value = "/kalendarz", params = "saveDate")
-    public String saveDate(Model model, @ModelAttribute DoctorDAO doctor,
-                           @ModelAttribute VisitDAO visit) {
+    public String saveDate(Model model, @ModelAttribute DoctorDTO doctorDTO,
+                           @ModelAttribute VisitDTO visitDTO) {
+
+        visitService.registerVisit(doctorDTO, visitDTO);
+
+
+//        System.out.println("WYBIERAM DOKTORA " + doctorDTO.getDoctor_ID() + doctorDTO.getLastName());
+//        visit.setDateVisit(visit.getDateVisit());
+////        singleVisit = visit;
+//        visitFabrik.addVisitToList(visit);
+//        VisitFabrik dodajeGodzinyWizyt = new VisitFabrik();
+//
+//
+//        for (Visit wizytatest : visitFabrik.getVisitTime()) {
+//            System.out.println(wizytatest);
+//        }
+//
+//        System.out.println(singleVisit);
+//
+//        for (Visit wizyta : visitFabrik.getVisitsList()) {
+//            for (Visit wizytaCzas : visitFabrik.getVisitTime()) {
+//                if (singleVisit.getDoctor().equals(wizyta.getDoctor())
+//                        && singleVisit.getDateVisit().equals(wizyta.getDateVisit())
+//                        && wizytaCzas.getTimeVisit().equals(wizyta.getTimeVisit())
+//                ) {
+//                    visitFabrik.usunGodzine(wizytaCzas);
+//                }
+//            }
+//        }
+//
+//        for (Visit wizytatest : visitFabrik.getVisitTime()) {
+//            System.out.println(wizytatest);
+//        }
+
+        // musimy dodac przykladowe wizyty z konkretnymi lekarzami do listy wizyt,
+        // trzeba dodac mozliwosc zapisywania lekarzy
+        // sprawdzic czy dziala
 
         // do dodania formularz rejestracji na wizyte
 

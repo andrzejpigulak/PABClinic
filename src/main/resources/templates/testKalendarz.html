@@ -8,9 +8,9 @@
 
 <select>
     <option value="">Wybierz godzine</option>
-    <option th:each="visit: ${visitTime}"
-            th:value="${visit.timeVisit}"
-            th:text="${visit.timeVisit}"></option>
+    <option th:each="visit: ${visitsTime}"
+            th:value="${visit.visitTime}"
+            th:text="${visit.visitTime}"></option>
 </select>
 
 </body>

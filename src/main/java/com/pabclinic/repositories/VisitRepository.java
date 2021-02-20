@@ -1,8 +1,5 @@
 package com.pabclinic.repositories;
-import com.pabclinic.model.dtos.DoctorDTO;
-import com.pabclinic.model.dtos.UserLoginDTO;
-import com.pabclinic.model.dtos.VisitDTO;
-import com.pabclinic.model.dtos.VisitTimeDTO;
+import com.pabclinic.model.dtos.*;
 import com.pabclinic.configurations.DataBase;
 import com.pabclinic.model.daos.VisitDAO;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -282,4 +279,9 @@ public class VisitRepository {
 
         return visits;
     }
+
+    public void addVisit() {
+
+    }
+
 }

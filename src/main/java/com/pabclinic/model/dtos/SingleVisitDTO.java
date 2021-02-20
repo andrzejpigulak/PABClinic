@@ -9,17 +9,10 @@ public class SingleVisitDTO {
     private String visitTime;
     private String doctorName;
     private String doctorLastName;
+    private String doctorUsername;
     private String patientName;
     private String patientLastName;
-
-    public SingleVisitDTO(String visitDate, String visitTime, String doctorName, String doctorLastName, String patientName, String patientLastName) {
-        this.visitDate = visitDate;
-        this.visitTime = visitTime;
-        this.doctorName = doctorName;
-        this.doctorLastName = doctorLastName;
-        this.patientName = patientName;
-        this.patientLastName = patientLastName;
-    }
+    private String patientUsername;
 
     public String getVisitDate() {
         return visitDate;
@@ -68,4 +61,36 @@ public class SingleVisitDTO {
     public void setPatientLastName(String patientLastName) {
         this.patientLastName = patientLastName;
     }
+
+    public String getDoctorUsername() {
+        return doctorUsername;
+    }
+
+    public void setDoctorUsername(String doctorUsername) {
+        this.doctorUsername = doctorUsername;
+    }
+
+    public String getPatientUsername() {
+        return patientUsername;
+    }
+
+    public void setPatientUsername(String patientUsername) {
+        this.patientUsername = patientUsername;
+    }
+
+    @Override
+    public String toString() {
+        return "SingleVisitDTO{" +
+                "visitDate='" + visitDate + '\'' +
+                ", visitTime='" + visitTime + '\'' +
+                ", doctorName='" + doctorName + '\'' +
+                ", doctorLastName='" + doctorLastName + '\'' +
+                ", doctorUsername='" + doctorUsername + '\'' +
+                ", patientName='" + patientName + '\'' +
+                ", patientLastName='" + patientLastName + '\'' +
+                ", patientUsername='" + patientUsername + '\'' +
+                '}';
+    }
 }
+
+
