@@ -24,13 +24,16 @@ public class VisitService {
 
     private SingleVisitDTO singleVisitDTO;
 
+    private EmailService emailService;
+
     @Autowired
-    public VisitService(VisitRepository visitRepository, UserLoginDTO userLoginDTO, PatientRepository patientRepository, DoctorRepository doctorRepository, SingleVisitDTO singleVisitDTO) {
+    public VisitService(VisitRepository visitRepository, UserLoginDTO userLoginDTO, PatientRepository patientRepository, DoctorRepository doctorRepository, SingleVisitDTO singleVisitDTO, EmailService emailService) {
         this.visitRepository = visitRepository;
         this.userLoginDTO = userLoginDTO;
         this.patientRepository = patientRepository;
         this.doctorRepository = doctorRepository;
         this.singleVisitDTO = singleVisitDTO;
+        this.emailService = emailService;
     }
 
     public void addVisit(PatientDAO patientDAO, DoctorDTO doctor){
@@ -43,13 +46,13 @@ public class VisitService {
 
     public void showDoctorVisitsByDay(Model model) {
 
-        model.addAttribute("visitList", visitRepository.findDoctorVisits());
+        model.addAttribute("visitList", visitRepository.findDoctorVisitsFromUsernameSession());
         model.addAttribute("patient", new PatientDTO());
     }
 
     public List<VisitTimeDTO> getVisitsTime() {
 
-        return visitRepository.getVisitsTime();
+        return visitRepository.findDoctorVisitsFromDataBase();
     }
 
     public DoctorDTO findDoctorFromDb(UserLoginDTO userLoginDTO) {
@@ -63,10 +66,7 @@ public class VisitService {
         return visitRepository.findVisitHistory();
     }
 
-    public void registerVisit(DoctorDTO doctorDTO, VisitDTO visitDTO){
-
-        System.out.println(patientRepository.findPatientFromDbByUsername());
-        System.out.println(doctorRepository.findDoctor(doctorDTO));
+    public void registerSingleVisit(DoctorDTO doctorDTO, VisitDTO visitDTO){
 
         singleVisitDTO.setVisitDate(visitDTO.getVisitDate());
         singleVisitDTO.setDoctorName(doctorRepository.findDoctor(doctorDTO).getFirstName());
@@ -76,8 +76,17 @@ public class VisitService {
         singleVisitDTO.setPatientLastName(patientRepository.findPatientFromDbByUsername().getLastName());
         singleVisitDTO.setPatientUsername(patientRepository.findPatientFromDbByUsername().getUsername());
 
-        System.out.println(singleVisitDTO);
+    }
+
+    public void registerVisit() {
+
+        visitRepository.addVisit();
+
+        emailService.sendMessageAfterRegistrationToAVisit(patientRepository.getEmailFromUsername(), singleVisitDTO.getDoctorName(),
+                singleVisitDTO.getDoctorLastName(), singleVisitDTO.getVisitDate(), singleVisitDTO.getVisitTime() );
 
     }
+
+
 
 }

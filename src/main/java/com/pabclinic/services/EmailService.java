@@ -35,4 +35,13 @@ public class EmailService {
         emailSender.send(message);
     }
 
+    public void sendMessageAfterRegistrationToAVisit(String to, String name, String lastName, String date, String dateTime) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setSubject("Rejstracja wizyty w PABClinica");
+        message.setTo(to);
+        message.setText("Brawo, udało Ci się zarejestrować na wizytę do lekarza:\nImię lekarza: " + name + "!\nNazwisko lekarza: +" +
+                lastName + "Data: "+ date + "\nGodzina: " + dateTime + "\nW przypadku odwołania rezerwacji prosimy kontaktować się telefonicznie");
+        emailSender.send(message);
+    }
+
 }

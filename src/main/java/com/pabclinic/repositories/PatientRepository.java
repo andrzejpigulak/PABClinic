@@ -100,7 +100,6 @@ public class PatientRepository {
             preparedStatement.executeUpdate();
 
             rs = dataBase.getStmt().executeQuery(queryCount);
-            rs.next();
 
             dataBase.disconnectDB();
 
@@ -244,6 +243,30 @@ public class PatientRepository {
         return patientDTO;
 
 
+    }
+
+    public String getEmailFromUsername() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        String email = "";
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        try {
+            dataBase.connectToDb();
+            String queryEdit = "select * from users where username=" + username;
+            ResultSet rs = dataBase.getStmt().executeQuery(queryEdit);
+            rs.next();
+            email = rs.getString("email");
+            dataBase.disconnectDB();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return email;
     }
 
 }

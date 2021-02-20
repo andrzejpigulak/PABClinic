@@ -5,13 +5,24 @@
     <title>Title</title>
 </head>
 <body>
-
-<select>
-    <option value="">Wybierz godzine</option>
-    <option th:each="visit: ${visitsTime}"
-            th:value="${visit.visitTime}"
-            th:text="${visit.visitTime}"></option>
-</select>
+<table>
+    <tr>
+        <td>Wybierz godzinę wizyty</td>
+        <td>
+            <select>
+                <option value="">Wybierz godzine</option>
+                <option th:each="visit: ${visitsTime}"
+                        th:value="${visit.visitTime}"
+                        th:text="${visit.visitTime}"></option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="submit" value="Zaplanuj wizytę" name="saveTime">
+        </td>
+    </tr>
+</table>
 
 </body>
 </html>
