@@ -120,7 +120,7 @@ public class VisitRepository {
 
             dataBase.connectToDb();
 
-            String queryCount = "SELECT * from VisitDTO";
+            String queryCount = "SELECT * from VisitDAO";
 
             ResultSet rs = dataBase.getStmt().executeQuery(queryCount);
 

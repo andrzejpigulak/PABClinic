@@ -23,9 +23,9 @@ public class DoctorRepository {
         this.dataBase = dataBase;
     }
 
-    public List<com.pabclinic.model.dtos.DoctorDTO> getDoctors() {
+    public List<DoctorDTO> getDoctors() {
 
-        List<com.pabclinic.model.dtos.DoctorDTO> doctors = new ArrayList<>();
+        List<DoctorDTO> doctors = new ArrayList<>();
 
         try {
             dataBase.connectToDb();
@@ -167,10 +167,6 @@ public class DoctorRepository {
             throwables.printStackTrace();
         }
     }
-
-
-
-
 
 
 }
