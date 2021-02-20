@@ -21,7 +21,6 @@ public class EmailService {
         message.setSubject(subject);
         message.setTo(to);
         message.setText("Wiadomość od: " + from + "\n\n" + text + "\n\nPodzrawiam i kocham Was bardzo,\n" + name);
-        System.out.println("wysylam sobie wiadomosc");
         emailSender.send(message);
 
     }
@@ -39,8 +38,8 @@ public class EmailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setSubject("Rejstracja wizyty w PABClinica");
         message.setTo(to);
-        message.setText("Brawo, udało Ci się zarejestrować na wizytę do lekarza:\nImię lekarza: " + name + "!\nNazwisko lekarza: +" +
-                lastName + "Data: "+ date + "\nGodzina: " + dateTime + "\nW przypadku odwołania rezerwacji prosimy kontaktować się telefonicznie");
+        message.setText("Brawo, udało Ci się zarejestrować na wizytę do lekarza:\nImię lekarza: " + name + "\nNazwisko lekarza: " +
+                lastName + "\nData: "+ date + "\nGodzina: " + dateTime + "\nW przypadku odwołania rezerwacji prosimy kontaktować się telefonicznie");
         emailSender.send(message);
     }
 

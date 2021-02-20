@@ -66,7 +66,7 @@ public class VisitService {
         return visitRepository.findVisitHistory();
     }
 
-    public void registerSingleVisit(DoctorDTO doctorDTO, VisitDTO visitDTO){
+    public void saveSingleVisit(DoctorDTO doctorDTO, VisitDTO visitDTO){
 
         singleVisitDTO.setVisitDate(visitDTO.getVisitDate());
         singleVisitDTO.setDoctorName(doctorRepository.findDoctor(doctorDTO).getFirstName());
@@ -78,12 +78,14 @@ public class VisitService {
 
     }
 
-    public void registerVisit() {
+    public void registerVisit(VisitDTO visitDTO) {
 
-        visitRepository.addVisit();
+        visitRepository.addVisit(visitDTO);
 
         emailService.sendMessageAfterRegistrationToAVisit(patientRepository.getEmailFromUsername(), singleVisitDTO.getDoctorName(),
-                singleVisitDTO.getDoctorLastName(), singleVisitDTO.getVisitDate(), singleVisitDTO.getVisitTime() );
+                singleVisitDTO.getDoctorLastName(), singleVisitDTO.getVisitDate(), visitDTO.getVisitTime());
+
+        singleVisitDTO = null;
 
     }
 
