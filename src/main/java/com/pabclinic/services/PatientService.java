@@ -50,4 +50,6 @@ public class PatientService {
         return patientRepository.findPatientFromDb(patientDTO);
     }
 
+
+
 }

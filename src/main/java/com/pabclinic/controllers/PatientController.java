@@ -73,8 +73,6 @@ public class PatientController {
         return "kalendarz";
     }
 
-
-
     @GetMapping("/patients")
     public String toPatients(Model model) {
 
@@ -112,44 +110,19 @@ public class PatientController {
     public String saveDate(Model model, @ModelAttribute DoctorDTO doctorDTO,
                            @ModelAttribute VisitDTO visitDTO) {
 
-        visitService.registerVisit(doctorDTO, visitDTO);
-
-
-//        System.out.println("WYBIERAM DOKTORA " + doctorDTO.getDoctor_ID() + doctorDTO.getLastName());
-//        visit.setDateVisit(visit.getDateVisit());
-////        singleVisit = visit;
-//        visitFabrik.addVisitToList(visit);
-//        VisitFabrik dodajeGodzinyWizyt = new VisitFabrik();
-//
-//
-//        for (Visit wizytatest : visitFabrik.getVisitTime()) {
-//            System.out.println(wizytatest);
-//        }
-//
-//        System.out.println(singleVisit);
-//
-//        for (Visit wizyta : visitFabrik.getVisitsList()) {
-//            for (Visit wizytaCzas : visitFabrik.getVisitTime()) {
-//                if (singleVisit.getDoctor().equals(wizyta.getDoctor())
-//                        && singleVisit.getDateVisit().equals(wizyta.getDateVisit())
-//                        && wizytaCzas.getTimeVisit().equals(wizyta.getTimeVisit())
-//                ) {
-//                    visitFabrik.usunGodzine(wizytaCzas);
-//                }
-//            }
-//        }
-//
-//        for (Visit wizytatest : visitFabrik.getVisitTime()) {
-//            System.out.println(wizytatest);
-//        }
-
-        // musimy dodac przykladowe wizyty z konkretnymi lekarzami do listy wizyt,
-        // trzeba dodac mozliwosc zapisywania lekarzy
-        // sprawdzic czy dziala
-
-        // do dodania formularz rejestracji na wizyte
+        visitService.registerSingleVisit(doctorDTO, visitDTO);
 
         return "redirect:/testKalendarz";
+    }
+
+    @PostMapping(value = "/testKalendarz", params = "saveTime")
+    public String saveTime(Model model) {
+
+        visitService.registerVisit();
+
+        System.out.println("bebebkerbke");
+
+        return "redirect:/index";
     }
 
     @PostMapping(value = "/patients", params = "addPatient")

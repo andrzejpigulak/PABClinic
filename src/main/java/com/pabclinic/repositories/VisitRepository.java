@@ -1,10 +1,13 @@
 package com.pabclinic.repositories;
+
 import com.pabclinic.model.dtos.*;
 import com.pabclinic.configurations.DataBase;
 import com.pabclinic.model.daos.VisitDAO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,10 +20,13 @@ public class VisitRepository {
 
     private DataBase dataBase;
     private UserLoginDTO userLoginDTO;
+    private SingleVisitDTO singleVisitDTO;
 
-    public VisitRepository(DataBase dataBase, UserLoginDTO userLoginDTO) {
+    @Autowired
+    public VisitRepository(DataBase dataBase, UserLoginDTO userLoginDTO, SingleVisitDTO singleVisitDTO) {
         this.dataBase = dataBase;
         this.userLoginDTO = userLoginDTO;
+        this.singleVisitDTO = singleVisitDTO;
     }
 
     public void addVisitHistory(String date, String doctorName, String doctorLastName, String login, String patientName,
@@ -70,7 +76,7 @@ public class VisitRepository {
 
     }
 
-    public List<VisitDAO> getVisits(){
+    public List<VisitDAO> getVisits() {
 
         List<VisitDAO> visits = new ArrayList<>();
 
@@ -109,7 +115,7 @@ public class VisitRepository {
 
     }
 
-    public List<VisitTimeDTO> getVisitsTime(){
+    public List<VisitTimeDTO> getVisitsTime() {
 
         List<VisitTimeDTO> visitsTime = new ArrayList<>();
 
@@ -141,19 +147,19 @@ public class VisitRepository {
 
     }
 
-    public List<VisitDTO> findDoctorVisits(){
+    public List<VisitDTO> findDoctorVisitsFromUsernameSession() {
 
         List<VisitDTO> doctorVisits = new ArrayList<>();
 
-            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-            String username;
+        String username;
 
-            if (principal instanceof UserDetails) {
-                username = ((UserDetails)principal).getUsername();
-            } else {
-                username = principal.toString();
-            }
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
 
 
         try {
@@ -161,7 +167,7 @@ public class VisitRepository {
             dataBase.connectToDb();
 
             String queryCount = "SELECT * from visit where visitDate='" + LocalDate.now().toString()
-            + "' and doctorUserName='"+ username +"'";
+                    + "' and doctorUserName='" + username + "'";
 
             System.out.println(queryCount);
 
@@ -171,7 +177,7 @@ public class VisitRepository {
 
                 doctorVisits.add(new VisitDTO(
                         rs.getString("visitDate"),
-                        rs.getString("visittime"),
+                        rs.getString("visitTime"),
                         rs.getString("doctorName"),
                         rs.getString("doctorLastName"),
                         rs.getString("patientName"),
@@ -179,7 +185,7 @@ public class VisitRepository {
                 ));
             }
 
-        dataBase.disconnectDB();
+            dataBase.disconnectDB();
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -232,7 +238,7 @@ public class VisitRepository {
         return doctorDTO;
     }
 
-    public List<VisitDTO> findVisitHistory(){
+    public List<VisitDTO> findVisitHistory() {
 
         List<VisitDTO> visits = new ArrayList<>();
         String username;
@@ -240,7 +246,7 @@ public class VisitRepository {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
+            username = ((UserDetails) principal).getUsername();
         } else {
             username = principal.toString();
         }
@@ -280,7 +286,79 @@ public class VisitRepository {
         return visits;
     }
 
-    public void addVisit() {
+    public List<VisitDAO> addVisit() {
+
+        List<VisitDAO> visits = new ArrayList<>();
+
+        try {
+
+            String queryCount = "SELECT COUNT(*) from visit";
+
+            ResultSet rs = dataBase.getStmt().executeQuery(queryCount);
+            rs.next();
+
+            int i = rs.getInt("count");
+
+            String queryInsert = "insert into visit (visitDate, visitTime, doctorName, doctorLastName, doctorUsername, patientName, patientLastName, patientUsername) values (?, ?, ?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement preparedStatement = dataBase.getConn().prepareStatement(queryInsert);
+
+            preparedStatement.setString(1, singleVisitDTO.getVisitDate());
+            preparedStatement.setString(2, singleVisitDTO.getVisitTime());
+            preparedStatement.setString(3, singleVisitDTO.getDoctorName());
+            preparedStatement.setString(4, singleVisitDTO.getDoctorLastName());
+            preparedStatement.setString(5, singleVisitDTO.getDoctorUsername());
+            preparedStatement.setString(6, singleVisitDTO.getPatientName());
+            preparedStatement.setString(7, singleVisitDTO.getPatientLastName());
+            preparedStatement.setString(8, singleVisitDTO.getPatientUsername());
+
+            preparedStatement.executeUpdate();
+
+            rs = dataBase.getStmt().executeQuery(queryCount);
+
+            dataBase.disconnectDB();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return visits;
+
+    }
+
+    public List<VisitTimeDTO> findDoctorVisitsFromDataBase() {
+
+        List<VisitTimeDTO> doctorVisits = new ArrayList<>(getVisitsTime());
+
+        List<VisitTimeDTO> tempDoctorVisits = new ArrayList<>();
+
+        try {
+
+            dataBase.connectToDb();
+
+            String queryCount = "SELECT * from visit where visitDate='" + singleVisitDTO.getVisitDate()
+                    + "' and doctorUserName='" + singleVisitDTO.getDoctorUsername() + "'";
+
+            ResultSet rs = dataBase.getStmt().executeQuery(queryCount);
+
+            while (rs.next()) {
+
+                tempDoctorVisits.add(new VisitTimeDTO(
+                        rs.getString("visitTime")
+                ));
+            }
+
+            doctorVisits.removeAll(tempDoctorVisits);
+
+            dataBase.disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return doctorVisits;
 
     }
 
