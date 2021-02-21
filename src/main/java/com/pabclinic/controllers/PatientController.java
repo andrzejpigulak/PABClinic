@@ -131,10 +131,10 @@ public class PatientController {
         return "redirect:/patients";
     }
 
-    @PostMapping(value = "/patients", params = "editPatient")
-    public String editPatient(@ModelAttribute PatientDTO patient) {
+    @PostMapping(value = "/editPatient", params = "edit_patient")
+    public String editPatient(@RequestParam String id) {
 
-        singlePatient = patientService.findPatientFromDb(patient);
+        singlePatient = patientService.findPatientFromDb(id);
 
         return "redirect:/patientEdit";
     }
