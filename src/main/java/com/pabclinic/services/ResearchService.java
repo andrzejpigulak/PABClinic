@@ -22,4 +22,10 @@ public class ResearchService {
         return researchRepository.getResearches();
 
     }
+
+    public void removeResearch(String researchName){
+
+        researchRepository.removeResearch(researchName);
+
+    }
 }

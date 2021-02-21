@@ -74,6 +74,15 @@ public class AdminController {
 
     }
 
+    @PostMapping(value = "/deleteResearch", params="delete_researchName")
+    private String deleteResearch(@RequestParam String researchName) {
+
+        System.out.println(researchName);
+        researchService.removeResearch(researchName);
+
+        return "redirect:/researchList";
+
+    }
 
 
 

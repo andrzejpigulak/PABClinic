@@ -36,18 +36,6 @@
         <br><input type="submit" value="Dodaj pacjenta" name="addPatient">
     </form>
 </div>
-
-<div class="deletePatient">
-    <h3>USUNIĘCIE PACJENTA</h3>
-    <table>
-        <form action="#" th:action="@{/patients}" method="post">
-            <label>Podaj ID pacjenta, którego chcesz usunąć:</label><br>
-            <input type="text" th:field="${patient.id}"><br>
-            <br><input type="submit" value="Usuń pacjenta" name="deletePatient">
-        </form>
-    </table>
-</div>
-
 <div class="editPatient">
     <h3>EDYCJA PACJENTA</h3>
     <table>
@@ -71,6 +59,7 @@
         <th>Kod pocztowy</th>
         <th>Miasto</th>
         <th>Id</th>
+        <th>Usuń</th>
     </tr>
     </thead>
     <tr th:each="patient : ${patients}">
@@ -83,6 +72,12 @@
         <td><p th:text="${patient.postCode}"></p></td>
         <td><p th:text="${patient.city}"></p></td>
         <td><p th:text="${patient.id}"></p></td>
+        <td>
+            <form th:action="@{deletePatient}" method="post">
+                <input type="hidden" name="login" th:value="${patient.username}" />
+                <input type="submit" value="Delete" name="delete_patient"  />
+            </form>
+        </td>
     </tr>
 </table>
 
@@ -105,13 +100,15 @@
   col_types: [
     'string', 'string', 'string',
     'number', 'number', 'string',
-    'string', 'string', 'number'
+    'string', 'string', 'number',
+    'string'
   ],
 
   col_widths: [
     '150px', '150px', '250px',
     '100px', '125px', '150px',
-    '85px', '100px', '60px'
+    '85px', '100px', '60px',
+    '100px'
   ],
   extensions: [{
     name: 'sort',

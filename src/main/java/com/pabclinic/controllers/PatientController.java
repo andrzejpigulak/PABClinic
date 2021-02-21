@@ -147,11 +147,13 @@ public class PatientController {
         return "redirect:/patients";
     }
 
-    @PostMapping(value = "/patients", params = "deletePatient")
-    public String removePatient(@ModelAttribute PatientDTO patient) {
+    @PostMapping(value = "/deletePatient", params="delete_patient")
+    private String deleteUser(@RequestParam String login) {
 
-        patientService.removePatient(patient);
+        System.out.println("Username " + login);
+        patientService.removePatient(login);
 
         return "redirect:/patients";
+
     }
 }

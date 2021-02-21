@@ -109,16 +109,16 @@ public class PatientRepository {
         }
     }
 
-    public void removePatient(PatientDTO patient) {
+    public void removePatient(String login) {
 
         try {
             dataBase.connectToDb();
 
-            String queryRemove = "delete from users where user_id=?";
+            String queryRemove = "delete from users where username=?";
 
             PreparedStatement preparedStatement = dataBase.getConn().prepareStatement(queryRemove);
 
-            preparedStatement.setInt(1, patient.getId());
+            preparedStatement.setString(1, login);
 
             preparedStatement.executeUpdate();
 

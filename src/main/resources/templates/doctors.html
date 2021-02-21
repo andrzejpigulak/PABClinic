@@ -25,17 +25,6 @@
     </form>
 </div>
 
-<div class="deleteDoctor">
-    <h3>USUNIĘCIE DOKTORA</h3>
-    <table>
-        <form action="#" th:action="@{/doctors}" method="post">
-            <label>Podaj ID doktora, którego chcesz usunąć:</label><br>
-            <input type="text" th:field="${doctor.doctor_ID}"><br>
-            <br><input type="submit" value="Usuń doktora" name="deleteDoctor">
-        </form>
-    </table>
-</div>
-
 <div class="editDoctor">
     <h3>EDYCJA DOKTORA</h3>
     <table>
