@@ -81,5 +81,4 @@ public class Navigation {
         return "redirect:/contact";
     }
 
-
 }

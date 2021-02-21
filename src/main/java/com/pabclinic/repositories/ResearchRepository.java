@@ -4,6 +4,7 @@ import com.pabclinic.model.dtos.ResearchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -45,6 +46,26 @@ public class ResearchRepository {
 
     }
 
+    public void removeResearch(String researchName) {
 
+        try {
+            dataBase.connectToDb();
+
+            String queryRemove = "delete from badania where nazwaBadania=?";
+
+            PreparedStatement preparedStatement = dataBase.getConn().prepareStatement(queryRemove);
+
+            preparedStatement.setString(1, researchName);
+
+            preparedStatement.executeUpdate();
+
+            dataBase.disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
 }
