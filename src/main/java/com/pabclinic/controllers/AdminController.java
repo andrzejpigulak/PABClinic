@@ -48,13 +48,13 @@ public class AdminController {
         return "redirect:/doctors";
     }
 
-    @PostMapping(value = "/doctors", params = "editDoctor")
-    public String editDoctor(@ModelAttribute DoctorDTO doctorDTO) {
-
-        singleDoctor = doctorService.findDoctor(doctorDTO);
-
-        return "redirect:/doctorEdit";
-    }
+//    @PostMapping(value = "/doctors", params = "editDoctor")
+//    public String editDoctor(@ModelAttribute DoctorDTO doctorDTO) {
+//
+//        singleDoctor = doctorService.findDoctor(doctorDTO);
+//
+//        return "redirect:/doctorEdit";
+//    }
 
     @PostMapping(value = "/doctors", params = "saveDoctor")
     public String saveDoctor(@ModelAttribute DoctorDTO doctorDTO) {
@@ -74,5 +74,13 @@ public class AdminController {
 
     }
 
+    @PostMapping(value = "/editDoctor", params = "edit_doctor")
+    public String editPatient(@RequestParam String login) {
+
+        System.out.println(login);
+         singleDoctor = doctorService.findDoctorByUsername(login);
+
+        return "redirect:/doctorEdit";
+    }
 
 }

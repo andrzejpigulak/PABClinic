@@ -38,6 +38,11 @@ public class DoctorService {
         return doctorRepository.findDoctor(doctorDTO);
     }
 
+    public DoctorDTO findDoctorByUsername(String login) {
+
+        return doctorRepository.findDoctorByUsernameFromDb(login);
+    }
+
     public void editDoctor(DoctorDTO doctorDTO) {
 
         doctorRepository.updateDoctor(doctorDTO);

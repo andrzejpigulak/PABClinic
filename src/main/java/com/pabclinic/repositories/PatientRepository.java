@@ -164,7 +164,7 @@ public class PatientRepository {
 
     public PatientDTO findPatientFromDb(String id) {
 
-        PatientDTO patient = new PatientDTO();
+        PatientDTO patient = null;
 
         try {
             dataBase.connectToDb();
