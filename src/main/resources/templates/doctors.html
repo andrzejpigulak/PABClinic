@@ -45,6 +45,7 @@
         <th>login</th>
         <th>Specjalizacja</th>
         <th>Usuń</th>
+        <th>Edytuj</th>
     </tr>
     </thead>
     <tr th:each="doctor : ${doctors}">
@@ -55,8 +56,14 @@
         <td><p th:text="${doctor.specialisation}"></p></td>
         <td>
             <form th:action="@{delete}" method="post">
-                <input type="hidden" name="login" th:value="${doctor.login}" />
-                <input type="submit" value="Delete" name="delete_user"  />
+                <input type="hidden" name="login" th:value="${doctor.login}"/>
+                <input type="submit" value="Delete" name="delete_user"/>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{editDoctor}" method="post">
+                <input type="hidden" name="login" th:value="${doctor.login}"/>
+                <input type="submit" value="Edit" name="edit_doctor"/>
             </form>
         </td>
     </tr>
@@ -97,6 +104,7 @@
 
 var tf = new TableFilter('doctorTable', filtersConfig);
 tf.init();
+
 
 
 

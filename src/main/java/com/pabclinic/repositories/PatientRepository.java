@@ -162,12 +162,14 @@ public class PatientRepository {
         }
     }
 
-    public PatientDTO findPatientFromDb(PatientDTO patient) {
+    public PatientDTO findPatientFromDb(String id) {
+
+        PatientDTO patient = null;
 
         try {
             dataBase.connectToDb();
 
-            String queryEdit = "select * from users where user_id=" + patient.getId();
+            String queryEdit = "select * from users where user_id=" + id;
 
             ResultSet rs = dataBase.getStmt().executeQuery(queryEdit);
 

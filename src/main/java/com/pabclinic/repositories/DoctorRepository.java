@@ -168,5 +168,32 @@ public class DoctorRepository {
         }
     }
 
+    public DoctorDTO findDoctorByUsernameFromDb(String login) {
+
+        DoctorDTO doctor= null;
+
+        try {
+            dataBase.connectToDb();
+
+            String queryEdit = "select * from users where username='" + login + "'";
+
+            ResultSet rs = dataBase.getStmt().executeQuery(queryEdit);
+
+            while (rs.next()) {
+                doctor = new DoctorDTO(rs.getInt("user_id"), rs.getString("firstName"), rs.getString("lastName"),
+                        rs.getString("username"), rs.getString("password"), rs.getString("specialisation"));
+            }
+
+            dataBase.disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return doctor;
+    }
+
 
 }

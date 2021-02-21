@@ -36,17 +36,6 @@
         <br><input type="submit" value="Dodaj pacjenta" name="addPatient">
     </form>
 </div>
-<div class="editPatient">
-    <h3>EDYCJA PACJENTA</h3>
-    <table>
-        <form action="#" th:action="@{/patients}" method="post">
-            <label>Podaj ID pacjenta, którego dane chcesz edytować:</label><br>
-            <input type="text" th:field="${patient.id}"><br>
-            <br><input type="submit" value="Edycja" name="editPatient">
-        </form>
-    </table>
-</div>
-
 <table id="patientTable" border="1" style="width:50%">
     <thead>
     <tr>
@@ -59,7 +48,6 @@
         <th>Kod pocztowy</th>
         <th>Miasto</th>
         <th>Id</th>
-        <th>Usuń</th>
     </tr>
     </thead>
     <tr th:each="patient : ${patients}">
@@ -76,6 +64,12 @@
             <form th:action="@{deletePatient}" method="post">
                 <input type="hidden" name="login" th:value="${patient.username}" />
                 <input type="submit" value="Delete" name="delete_patient"  />
+            </form>
+        </td>
+        <td>
+            <form th:action="@{editPatient}" method="post">
+                <input type="hidden" name="id" th:value="${patient.id}"/>
+                <input type="submit" value="Edit" name="edit_patient"/>
             </form>
         </td>
     </tr>
@@ -101,14 +95,14 @@
     'string', 'string', 'string',
     'number', 'number', 'string',
     'string', 'string', 'number',
-    'string'
+    'string', 'string'
   ],
 
   col_widths: [
     '150px', '150px', '250px',
     '100px', '125px', '150px',
     '85px', '100px', '60px',
-    '100px'
+    '60px','60px'
   ],
   extensions: [{
     name: 'sort',
