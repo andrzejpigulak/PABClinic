@@ -54,8 +54,8 @@
         <th>Imie</th>
         <th>Nazwisko</th>
         <th>login</th>
-        <th>hasło</th>
         <th>Specjalizacja</th>
+        <th>Usuń</th>
     </tr>
     </thead>
     <tr th:each="doctor : ${doctors}">
@@ -63,8 +63,13 @@
         <td><p th:text="${doctor.firstName}"></p></td>
         <td><p th:text="${doctor.lastName}"></p></td>
         <td><p th:text="${doctor.login}"></p></td>
-        <td><p th:text="${doctor.password}"></p></td>
         <td><p th:text="${doctor.specialisation}"></p></td>
+        <td>
+            <form th:action="@{delete}" method="post">
+                <input type="hidden" name="login" th:value="${doctor.login}" />
+                <input type="submit" value="Delete" name="delete_user"  />
+            </form>
+        </td>
     </tr>
 </table>
 

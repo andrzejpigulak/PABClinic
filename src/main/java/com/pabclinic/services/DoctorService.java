@@ -27,9 +27,9 @@ public class DoctorService {
 
     }
 
-    public void removeDoctor(DoctorDTO doctorDTO){
+    public void removeDoctor(String login){
 
-        doctorRepository.removeDoctor(doctorDTO);
+        doctorRepository.removeDoctor(login);
 
     }
 

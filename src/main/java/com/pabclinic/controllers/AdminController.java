@@ -48,14 +48,6 @@ public class AdminController {
         return "redirect:/doctors";
     }
 
-    @PostMapping(value = "/doctors", params = "deleteDoctor")
-    public String removeDoctor(@ModelAttribute DoctorDTO doctorDTO) {
-
-        doctorService.removeDoctor(doctorDTO);
-
-        return "redirect:/doctors";
-    }
-
     @PostMapping(value = "/doctors", params = "editDoctor")
     public String editDoctor(@ModelAttribute DoctorDTO doctorDTO) {
 
@@ -70,6 +62,16 @@ public class AdminController {
        doctorService.editDoctor(doctorDTO);
 
         return "redirect:/doctors";
+    }
+
+    @PostMapping(value = "/delete", params="delete_user")
+    private String deleteUser(@RequestParam String login) {
+
+        System.out.println("Username " + login);
+        doctorService.removeDoctor(login);
+
+        return "redirect:/doctors";
+
     }
 
 
