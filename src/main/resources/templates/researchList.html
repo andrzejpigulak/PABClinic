@@ -11,23 +11,25 @@
 <table id="researchTable" border="1" style="width:50%">
     <thead>
     <tr>
-
         <th>Id badania</th>
         <th>Nazwa badania</th>
         <th>Cena badania (w zł)</th>
-
+        <th>Usuń</th>
     </tr>
     </thead>
     <tbody>
 
     <tr th:each="research : ${researchList}">
-
         <td><p th:text="${research.research_id}"></p></td>
         <td><p th:text="${research.researchName}"></p></td>
         <td><p th:text="${research.researchPrice}"></p></td>
-
+        <td>
+            <form th:action="@{deleteResearch}" method="post">
+                <input type="hidden" name="researchName" th:value="${research.researchName}" />
+                <input type="submit" value="Delete" name="delete_researchName"  />
+            </form>
+        </td>
     </tr>
-
     </tbody>
 </table>
 
@@ -66,5 +68,7 @@
 
 var tf = new TableFilter('researchTable', filtersConfig);
 tf.init();
+
+
 </script>
 </html>

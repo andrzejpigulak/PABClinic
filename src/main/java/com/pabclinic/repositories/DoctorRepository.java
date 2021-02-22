@@ -23,9 +23,9 @@ public class DoctorRepository {
         this.dataBase = dataBase;
     }
 
-    public List<com.pabclinic.model.dtos.DoctorDTO> getDoctors() {
+    public List<DoctorDTO> getDoctors() {
 
-        List<com.pabclinic.model.dtos.DoctorDTO> doctors = new ArrayList<>();
+        List<DoctorDTO> doctors = new ArrayList<>();
 
         try {
             dataBase.connectToDb();
@@ -92,16 +92,16 @@ public class DoctorRepository {
         }
     }
 
-    public void removeDoctor(DoctorDTO doctor) {
+    public void removeDoctor(String login) {
 
         try {
             dataBase.connectToDb();
 
-            String queryRemove = "delete from users where user_id=?";
+            String queryRemove = "delete from users where username=?";
 
             PreparedStatement preparedStatement = dataBase.getConn().prepareStatement(queryRemove);
 
-            preparedStatement.setInt(1, doctor.getDoctor_ID());
+            preparedStatement.setString(1, login);
 
             preparedStatement.executeUpdate();
 
@@ -168,9 +168,32 @@ public class DoctorRepository {
         }
     }
 
+    public DoctorDTO findDoctorByUsernameFromDb(String login) {
 
+        DoctorDTO doctor= null;
 
+        try {
+            dataBase.connectToDb();
 
+            String queryEdit = "select * from users where username='" + login + "'";
+
+            ResultSet rs = dataBase.getStmt().executeQuery(queryEdit);
+
+            while (rs.next()) {
+                doctor = new DoctorDTO(rs.getInt("user_id"), rs.getString("firstName"), rs.getString("lastName"),
+                        rs.getString("username"), rs.getString("password"), rs.getString("specialisation"));
+            }
+
+            dataBase.disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return doctor;
+    }
 
 
 }

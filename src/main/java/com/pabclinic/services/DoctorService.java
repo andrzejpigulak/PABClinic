@@ -27,15 +27,20 @@ public class DoctorService {
 
     }
 
-    public void removeDoctor(DoctorDTO doctorDTO){
+    public void removeDoctor(String login){
 
-        doctorRepository.removeDoctor(doctorDTO);
+        doctorRepository.removeDoctor(login);
 
     }
 
     public DoctorDTO findDoctor(DoctorDTO doctorDTO) {
 
         return doctorRepository.findDoctor(doctorDTO);
+    }
+
+    public DoctorDTO findDoctorByUsername(String login) {
+
+        return doctorRepository.findDoctorByUsernameFromDb(login);
     }
 
     public void editDoctor(DoctorDTO doctorDTO) {

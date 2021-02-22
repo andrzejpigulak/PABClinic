@@ -2,14 +2,18 @@ package com.pabclinic.repositories;
 
 import com.pabclinic.configurations.DataBase;
 import com.pabclinic.model.dtos.PatientDTO;
+import com.pabclinic.model.dtos.VisitDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,12 +95,10 @@ public class PatientRepository {
             preparedStatement.setString(9, patient.getPostCode());
             preparedStatement.setString(10, patient.getCity());
             preparedStatement.setBoolean(11, true);
-            preparedStatement.setString(12,"USER");
+            preparedStatement.setString(12, "USER");
 
             preparedStatement.executeUpdate();
 
-            rs = dataBase.getStmt().executeQuery(queryCount);
-            rs.next();
 
             dataBase.disconnectDB();
 
@@ -107,16 +109,16 @@ public class PatientRepository {
         }
     }
 
-    public void removePatient(PatientDTO patient) {
+    public void removePatient(String login) {
 
         try {
             dataBase.connectToDb();
 
-            String queryRemove = "delete from users where user_id=?";
+            String queryRemove = "delete from users where username=?";
 
             PreparedStatement preparedStatement = dataBase.getConn().prepareStatement(queryRemove);
 
-            preparedStatement.setInt(1, patient.getId());
+            preparedStatement.setString(1, login);
 
             preparedStatement.executeUpdate();
 
@@ -160,12 +162,14 @@ public class PatientRepository {
         }
     }
 
-    public PatientDTO findPatientFromDb(PatientDTO patient) {
+    public PatientDTO findPatientFromDb(String id) {
+
+        PatientDTO patient = null;
 
         try {
             dataBase.connectToDb();
 
-            String queryEdit = "select * from users where user_id=" + patient.getId();
+            String queryEdit = "select * from users where user_id=" + id;
 
             ResultSet rs = dataBase.getStmt().executeQuery(queryEdit);
 
@@ -181,7 +185,8 @@ public class PatientRepository {
                         rs.getLong("pesel"),
                         rs.getString("address"),
                         rs.getString("postcode"),
-                        rs.getString("city"));;
+                        rs.getString("city"));
+                ;
             }
 
             dataBase.disconnectDB();
@@ -193,6 +198,78 @@ public class PatientRepository {
         }
 
         return patient;
+    }
+
+    public PatientDTO findPatientFromDbByUsername() {
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String username;
+
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+        PatientDTO patientDTO = null;
+
+        try {
+
+            dataBase.connectToDb();
+
+            String queryCount = "SELECT * from users where username='" + username + "'";
+
+            ResultSet rs = dataBase.getStmt().executeQuery(queryCount);
+
+            while (rs.next()) {
+
+                patientDTO = new PatientDTO(
+                        rs.getString("firstname"),
+                        rs.getString("lastname"),
+                        rs.getString("username")
+                );
+
+
+            }
+
+            dataBase.disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return patientDTO;
+
+
+    }
+
+    public String getEmailFromUsername() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        String email = null;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+
+        try {
+            dataBase.connectToDb();
+            String queryEdit = "select * from users where username='" + username + "'";
+            ResultSet rs = dataBase.getStmt().executeQuery(queryEdit);
+            rs.next();
+            email = rs.getString("email");
+            dataBase.disconnectDB();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return email;
     }
 
 }

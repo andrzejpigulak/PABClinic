@@ -28,9 +28,9 @@ public class PatientService {
 
     }
 
-    public void removePatient(PatientDTO patient){
+    public void removePatient(String login){
 
-        patientRepository.removePatient(patient);
+        patientRepository.removePatient(login);
 
     }
 
@@ -45,9 +45,11 @@ public class PatientService {
         patientRepository.updatePatient(patientDTO);
     }
 
-    public PatientDTO findPatientFromDb(PatientDTO patientDTO) {
+    public PatientDTO findPatientFromDb(String id) {
 
-        return patientRepository.findPatientFromDb(patientDTO);
+        return patientRepository.findPatientFromDb(id);
     }
+
+
 
 }

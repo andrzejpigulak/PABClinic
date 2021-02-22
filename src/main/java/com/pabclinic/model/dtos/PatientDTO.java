@@ -43,4 +43,10 @@ public class PatientDTO {
         this.city = city;
         this.enabled = true;
     }
+
+    public PatientDTO(String firstName, String lastName, String username) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+    }
 }

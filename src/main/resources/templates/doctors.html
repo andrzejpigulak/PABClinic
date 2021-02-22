@@ -25,17 +25,6 @@
     </form>
 </div>
 
-<div class="deleteDoctor">
-    <h3>USUNIĘCIE DOKTORA</h3>
-    <table>
-        <form action="#" th:action="@{/doctors}" method="post">
-            <label>Podaj ID doktora, którego chcesz usunąć:</label><br>
-            <input type="text" th:field="${doctor.doctor_ID}"><br>
-            <br><input type="submit" value="Usuń doktora" name="deleteDoctor">
-        </form>
-    </table>
-</div>
-
 <div class="editDoctor">
     <h3>EDYCJA DOKTORA</h3>
     <table>
@@ -54,8 +43,9 @@
         <th>Imie</th>
         <th>Nazwisko</th>
         <th>login</th>
-        <th>hasło</th>
         <th>Specjalizacja</th>
+        <th>Usuń</th>
+        <th>Edytuj</th>
     </tr>
     </thead>
     <tr th:each="doctor : ${doctors}">
@@ -63,8 +53,19 @@
         <td><p th:text="${doctor.firstName}"></p></td>
         <td><p th:text="${doctor.lastName}"></p></td>
         <td><p th:text="${doctor.login}"></p></td>
-        <td><p th:text="${doctor.password}"></p></td>
         <td><p th:text="${doctor.specialisation}"></p></td>
+        <td>
+            <form th:action="@{delete}" method="post">
+                <input type="hidden" name="login" th:value="${doctor.login}"/>
+                <input type="submit" value="Delete" name="delete_user"/>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{editDoctor}" method="post">
+                <input type="hidden" name="login" th:value="${doctor.login}"/>
+                <input type="submit" value="Edit" name="edit_doctor"/>
+            </form>
+        </td>
     </tr>
 </table>
 
@@ -103,6 +104,7 @@
 
 var tf = new TableFilter('doctorTable', filtersConfig);
 tf.init();
+
 
 
 

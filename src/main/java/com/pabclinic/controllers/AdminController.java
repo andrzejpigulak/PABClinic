@@ -48,21 +48,13 @@ public class AdminController {
         return "redirect:/doctors";
     }
 
-    @PostMapping(value = "/doctors", params = "deleteDoctor")
-    public String removeDoctor(@ModelAttribute DoctorDTO doctorDTO) {
-
-        doctorService.removeDoctor(doctorDTO);
-
-        return "redirect:/doctors";
-    }
-
-    @PostMapping(value = "/doctors", params = "editDoctor")
-    public String editDoctor(@ModelAttribute DoctorDTO doctorDTO) {
-
-        singleDoctor = doctorService.findDoctor(doctorDTO);
-
-        return "redirect:/doctorEdit";
-    }
+//    @PostMapping(value = "/doctors", params = "editDoctor")
+//    public String editDoctor(@ModelAttribute DoctorDTO doctorDTO) {
+//
+//        singleDoctor = doctorService.findDoctor(doctorDTO);
+//
+//        return "redirect:/doctorEdit";
+//    }
 
     @PostMapping(value = "/doctors", params = "saveDoctor")
     public String saveDoctor(@ModelAttribute DoctorDTO doctorDTO) {
@@ -72,7 +64,33 @@ public class AdminController {
         return "redirect:/doctors";
     }
 
+    @PostMapping(value = "/delete", params="delete_user")
+    private String deleteUser(@RequestParam String login) {
 
+        System.out.println("Username " + login);
+        doctorService.removeDoctor(login);
 
+        return "redirect:/doctors";
+
+    }
+
+    @PostMapping(value = "/deleteResearch", params="delete_researchName")
+    private String deleteResearch(@RequestParam String researchName) {
+
+        System.out.println(researchName);
+        researchService.removeResearch(researchName);
+
+        return "redirect:/researchList";
+
+    }
+
+    @PostMapping(value = "/editDoctor", params = "edit_doctor")
+    public String editPatient(@RequestParam String login) {
+
+        System.out.println(login);
+         singleDoctor = doctorService.findDoctorByUsername(login);
+
+        return "redirect:/doctorEdit";
+    }
 
 }

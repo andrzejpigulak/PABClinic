@@ -3,9 +3,7 @@ package com.pabclinic.controllers;
 import com.pabclinic.services.DoctorService;
 import com.pabclinic.services.VisitService;
 import com.pabclinic.model.dtos.*;
-import com.pabclinic.model.daos.DoctorDAO;
 import com.pabclinic.services.PatientService;
-import com.pabclinic.model.daos.VisitDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,8 +55,9 @@ public class PatientController {
     @GetMapping("/testKalendarz")
     public String toTestKalendarz(Model model) {
 
-        model.addAttribute("visitTime", visitService.getVisitsTime());
-        model.addAttribute(singleVisit);
+        model.addAttribute("visitsTime", visitService.getVisitsTime());
+        model.addAttribute("visitForm", new VisitDTO());
+
 
         return "testKalendarz";
     }
@@ -73,8 +72,6 @@ public class PatientController {
 
         return "kalendarz";
     }
-
-
 
     @GetMapping("/patients")
     public String toPatients(Model model) {
@@ -110,12 +107,20 @@ public class PatientController {
     }
 
     @PostMapping(value = "/kalendarz", params = "saveDate")
-    public String saveDate(Model model, @ModelAttribute DoctorDAO doctor,
-                           @ModelAttribute VisitDAO visit) {
+    public String saveDate(Model model, @ModelAttribute DoctorDTO doctorDTO,
+                           @ModelAttribute VisitDTO visitDTO) {
 
-        // do dodania formularz rejestracji na wizyte
+        visitService.saveSingleVisit(doctorDTO, visitDTO);
 
         return "redirect:/testKalendarz";
+    }
+
+    @PostMapping(value = "/testKalendarz", params = "saveTime")
+    public String saveTime(@ModelAttribute VisitDTO visitDTO) {
+
+        visitService.registerVisit(visitDTO);
+
+        return "redirect:/index";
     }
 
     @PostMapping(value = "/patients", params = "addPatient")
@@ -126,10 +131,10 @@ public class PatientController {
         return "redirect:/patients";
     }
 
-    @PostMapping(value = "/patients", params = "editPatient")
-    public String editPatient(@ModelAttribute PatientDTO patient) {
+    @PostMapping(value = "/editPatient", params = "edit_patient")
+    public String editPatient(@RequestParam String id) {
 
-        singlePatient = patientService.findPatientFromDb(patient);
+        singlePatient = patientService.findPatientFromDb(id);
 
         return "redirect:/patientEdit";
     }
@@ -142,11 +147,13 @@ public class PatientController {
         return "redirect:/patients";
     }
 
-    @PostMapping(value = "/patients", params = "deletePatient")
-    public String removePatient(@ModelAttribute PatientDTO patient) {
+    @PostMapping(value = "/deletePatient", params="delete_patient")
+    private String deleteUser(@RequestParam String login) {
 
-        patientService.removePatient(patient);
+        System.out.println("Username " + login);
+        patientService.removePatient(login);
 
         return "redirect:/patients";
+
     }
 }

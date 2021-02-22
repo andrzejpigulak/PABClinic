@@ -128,19 +128,19 @@ VALUES
 	('Kortyzol', 32),
 	('Insulina', 30);
 
-INSERT INTO Visit(visitDate, visitTime, doctorName, doctorLastName, doctorUsername, patientName, patientLastName, patientUsername)
+INSERT INTO Visit(visit_ID, visitDate, visitTime, doctorName, doctorLastName, doctorUsername, patientName, patientLastName, patientUsername)
 VALUES
 
-	('2021-02-20', '8:00', 'Krzysztof', 'Stanowski', 'krzRod', 'Adam', 'Kowalski', 'akowalski'),
-	('2021-02-20','8:30', 'Krzysztof', 'Stanowski', 'krzRod', 'Katarzyna', 'Sikora', 'ksikora'),
-	('2021-02-20','9:00', 'Krzysztof', 'Stanowski', 'krzRod', 'Mariusz', 'Misiorny', 'mariuszmisiorny'),
-	('2021-02-20','9:30', 'Katarzyna', 'Selwant', 'KatPsy', 'Adam', 'Kowalski', 'akowalski'),
-	('2021-02-20','10:00', 'Anna', 'Dermatologowa', 'annaDer', 'Iwan', 'Delfin', 'iwanplywak'),
- 	('2021-02-20','10:30', 'Katarzyna', 'Selwant', 'katPsy', 'Edyta', 'Gorniak', 'edziaantyszczepionka'),
-	('2021-02-20','11:00', 'Radoslaw', 'Majdan', 'radGin', 'Edyta', 'Gorniak', 'edziaantyszczepionka'),
-	('2021-02-20','11:30', 'Krzysztof', 'Stanowski', 'krzRod', 'Snoop', 'Dogg', 'snoopie'),
-	('2021-02-20','12:00', 'Mateusz', 'Borek', 'matRod', 'Katarzyna', 'Politowicz','kpolitowicz'),
-	('2021-02-20','12:30', 'Mateusz', 'Borek', 'matRod', 'Robert', 'Makłowicz', 'kucharzmistrz');
+	(1, '2021-02-21', '8:00', 'Krzysztof', 'Stanowski', 'krzRod', 'Adam', 'Kowalski', 'akowalski'),
+	(2, '2021-02-21','8:30', 'Krzysztof', 'Stanowski', 'krzRod', 'Katarzyna', 'Sikora', 'ksikora'),
+	(3, '2021-02-21','9:00', 'Krzysztof', 'Stanowski', 'krzRod', 'Mariusz', 'Misiorny', 'mariuszmisiorny'),
+	(4, '2021-02-21','9:30', 'Katarzyna', 'Selwant', 'KatPsy', 'Adam', 'Kowalski', 'akowalski'),
+	(5, '2021-02-21','10:00', 'Anna', 'Dermatologowa', 'annaDer', 'Iwan', 'Delfin', 'iwanplywak'),
+ 	(6, '2021-02-21','10:30', 'Katarzyna', 'Selwant', 'katPsy', 'Edyta', 'Gorniak', 'edziaantyszczepionka'),
+	(7, '2021-02-21','11:00', 'Radoslaw', 'Majdan', 'radGin', 'Edyta', 'Gorniak', 'edziaantyszczepionka'),
+	(8, '2021-02-21','11:30', 'Krzysztof', 'Stanowski', 'krzRod', 'Snoop', 'Dogg', 'snoopie'),
+	(9, '2021-02-21','12:00', 'Mateusz', 'Borek', 'matRod', 'Katarzyna', 'Politowicz','kpolitowicz'),
+	(10,'2021-02-21','12:30', 'Mateusz', 'Borek', 'matRod', 'Robert', 'Makłowicz', 'kucharzmistrz');
 
 
 INSERT INTO VisitDao(visitTime) VALUES
@@ -157,7 +157,6 @@ INSERT INTO VisitDao(visitTime) VALUES
     ('12:30'),
     ('13:00'),
     ('13:30'),
-    ('14:00'),
     ('14:30'),
     ('15:00'),
     ('15:30'),
