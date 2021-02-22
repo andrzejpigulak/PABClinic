@@ -82,3 +82,27 @@ a.navi:hover{
     font-weight: 800;
     vertical-align:top;
 }
+
+.addDoctor {
+    padding: 10px 12px;
+    border: 1px solid black;
+    margin: 20px 10px 20px 20px;
+    width: 38%;
+    float: left;
+}
+
+.deleteDoctor {
+    padding: 10px 12px;
+    margin: 20px 10px 0px 10px;
+    border: 1px solid black;
+    width: 20%;
+    float: left;
+}
+
+.editDoctor {
+    padding: 10px 12px;
+    margin: 20px 0px 0px 10px;
+    border: 1px solid black;
+    width: 20%;
+    float: left;
+}

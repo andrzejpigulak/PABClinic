@@ -1,0 +1,14 @@
+body {
+    font-family: Arial;
+    margin: 0;
+    background: #e8e8e8;
+}
+
+#patientVisitTable{
+    margin-left: auto;
+    margin-right:auto;
+}
+
+.visitInput{
+    text-align: center;
+}

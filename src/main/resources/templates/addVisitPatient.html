@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/addVisitPatient.css">
     <title>Add Visit Patient</title>
 </head>
 <body>
@@ -22,14 +23,15 @@
             <td><p th:text="${visit.visitTime}"></p></td>
             <td><p th:text="${visit.patientName} + '  ' + ${visit.patientLastName}"></p></td>
         </tr>
-    </table>
+    </table> <br><br><br>
 
-
-    <input type="text" th:field="${patient.firstName}" name="field1" placeholder="Imie Pacjenta"/>
-    <input type="text" th:field="${patient.lastName}" name="field1" placeholder="Nazwisko Pacjenta"/>
+<div class="visitInput">
+    <input type="text" th:field="${patient.firstName}" name="field1" placeholder="Imie Pacjenta"/><br><br>
+    <input type="text" th:field="${patient.lastName}" name="field1" placeholder="Nazwisko Pacjenta"/><br><br>
     <textarea name="field" th:field="${patient.opis}"
-              placeholder="Wprowadź opis wizyty"></textarea>
+              placeholder="Wprowadź opis wizyty"></textarea><br><br>
     <input type="submit" value="Wyślij"/>
+</div>
 
 </form>
 
