@@ -1,16 +1,34 @@
 body {
     font-family: Arial;
     margin: 0;
+    background: #00395c;
 
 }
 
 .header {
-    padding: 10px;
     text-align: center;
-    background: #1abc9c;
     color: white;
-    font-size: 30px;
+    font-size: 20px;
 }
+
+.clinicLogo {
+    padding-left: 0.5%;
+    float: left;
+    width: 30%
+    height: 30%
+    opacity: 0.5;
+    border-radius: 2px;
+    border: 1px solid #214b80;
+}
+
+.topParagraph {
+    padding-top: 0.2%;
+    margin: 0px;
+    font-weight: 800;
+    text-align: center;
+    color: #DAA520;
+}
+
 .wrap {
     width: 100%;
     text-align: center;
@@ -18,16 +36,33 @@ body {
     height: 700px;
 }
 
+a.navi {
+  color: white;
+  text-align: left;
+  text-decoration: none;
+  display:inline-block;
+  width:100%;
+  height:100%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  border-bottom: 1px solid black;
+}
+
+a.navi:hover{
+    background-color:#00275e;
+}
+
 .fleft {
-    width: 20%;
-    background-color: lightblue;
-    display: table-cell;
+    width: 15%;
+    height: 100%;
+    display: inline-block;
 }
 
 .fright {
-    background-color: lightgreen;
-    width: 80%;
+
+    width: 82%;
     height:100%;
+    float:right;
     display: table-cell;
 }
 
@@ -38,41 +73,12 @@ body {
 }
 
 
-.btn-group button {
-    background-color: #4CAF50;
-    border: 1px solid green;
+.nav-group {
+    text-decoration: none;
     color: white;
-    padding: 10px 24px;
     cursor: pointer;
-    width: 70%;
-    margin: 8%;
-}
-
-/* Add a background color on hover */
-.btn-group button:hover {
-    background-color: #3e8e41;
-}
-
-.addDoctor {
-    padding: 10px 12px;
-    border: 1px solid black;
-    margin: 20px 10px 20px 20px;
-    width: 38%;
     float: left;
-}
-
-.deleteDoctor {
-    padding: 10px 12px;
-    margin: 20px 10px 0px 10px;
-    border: 1px solid black;
-    width: 20%;
-    float: left;
-}
-
-.editDoctor {
-    padding: 10px 12px;
-    margin: 20px 0px 0px 10px;
-    border: 1px solid black;
-    width: 20%;
-    float: left;
+    color: white;
+    font-weight: 800;
+    vertical-align:top;
 }

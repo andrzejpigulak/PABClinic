@@ -8,20 +8,22 @@
 <body>
 
 <div class="header">
-    <h1>Strona Lekarza</h1>
-    <p>Panel lekarza, możliwoość dodawania historii chorób.</p>
+    <a href="pageAdmin">
+        <img class="clinicLogo" src="images/pab_mini_logo2.png" alt="Clinic logo" title="PAB CLINIC">
+    </a>
+    <p class="topParagraph">PANEL LEKARZA</p>
 </div>
 
 <div class="wrap">
     <div class="fleft">
-        <div class="btn-group">
-            <button><a href="addVisitPatient" target="ramkaStrona">Pacjenci</a></button>
-            <button><a href="researchList" target="ramkaStrona">Zabiegi</a></button>
-            <button><form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+        <div class="nav-group">
+            <a class="navi" href="addVisitPatient" target="ramkaStrona">Pacjenci</a>
+            <a class="navi" href="researchList" target="ramkaStrona">Zabiegi</a>
+            <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
                 <input type="submit" value="Logout" />
 
             </form>
-                <a href="javascript: document.logoutForm.submit()">Logout</a></button>
+            <a class="navi" href="javascript: document.logoutForm.submit()">Logout</a>
 
         </div>
     </div>

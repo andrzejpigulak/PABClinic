@@ -3,25 +3,27 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/doctorStyle.css">
+    <link rel="stylesheet" href="css/patientPanel.css">
 </head>
 <body>
 
 <div class="header">
-    <h1>Strona pacjenta</h1>
-    <p>Panel pacjenta, możliwość logowania i wyświetlania wizyt.</p>
+    <a href="pagePatient">
+        <img class="clinicLogo" src="images/pab_mini_logo2.png" alt="Clinic logo" title="PAB CLINIC">
+    </a>
+    <p class="topParagraph">PANEL PACJENTA</p>
 </div>
 
 <div class="wrap">
     <div class="fleft">
-        <div class="btn-group">
-            <button><a href="kalendarz" target="ramkaStrona">Zapisz się na wizytę</a></button>
-            <button><a href="patientHistory" target="ramkaStrona">Wyświetl historię wizyt.</a></button>
-            <button><form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+        <div class="nav-group">
+            <a class="navi" classhref="kalendarz" target="ramkaStrona">Umów Wizytę</a>
+            <a class="navi" href="patientHistory" target="ramkaStrona">Historia Wizyt</a>
+            <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
                 <input type="submit" value="Logout" />
 
             </form>
-                <a href="javascript: document.logoutForm.submit()">Logout</a></button>
+                <a class="navi" href="javascript: document.logoutForm.submit()">Wyloguj</a>
 
         </div>
     </div>
