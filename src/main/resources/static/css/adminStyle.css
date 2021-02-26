@@ -9,31 +9,29 @@ body {
     text-align: center;
     color: white;
     font-size: 20px;
-}
-
-.clinicLogo {
     padding-left: 0.5%;
-    float: left;
-    width: 30%
-    height: 30%
-    opacity: 0.5;
-    border-radius: 2px;
-    border: 1px solid #214b80;
-}
-
-.topParagraph {
     padding-top: 0.2%;
     margin: 0px;
     font-weight: 800;
     text-align: center;
     color: #DAA520;
+    opacity:0.9;
 }
+
+.clinicLogo {
+    float: left;
+    opacity: 0.9;
+    border-radius: 2px;
+    border: 1px solid #214b80;
+
+}
+
 
 .wrap {
     width: 100%;
     text-align: center;
     display: table;
-    height: 700px;
+    height: 95vh;
 }
 
 a.navi {
@@ -53,17 +51,19 @@ a.navi:hover{
 }
 
 .fleft {
-    width: 15%;
+    width: 12%;
     height: 100%;
     display: inline-block;
+    margin-left: 0px;
+    float: left;
+    margin-right: 30px;
 }
 
 .fright {
-
-    width: 82%;
+    width: 85%;
     height:100%;
-    float:right;
-    display: table-cell;
+    float:left;
+    display: table;
 }
 
 .fright iframe{
@@ -79,6 +79,8 @@ a.navi:hover{
     cursor: pointer;
     float: left;
     color: white;
-    font-weight: 800;
+    font-weight: 650;
     vertical-align:top;
+    padding-left: 10px;
+    opacity:0.9;
 }
