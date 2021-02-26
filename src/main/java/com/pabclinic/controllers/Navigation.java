@@ -29,6 +29,24 @@ public class Navigation {
         return "index";
     }
 
+    @GetMapping("/patientFramePanel")
+    public String toPatientFramePanel(){
+
+        return "patientFramePanel";
+    }
+
+    @GetMapping("/doctorFramePanel")
+    public String toDoctorFramePanel(){
+
+        return "doctorFramePanel";
+    }
+
+    @GetMapping("/adminFramePanel")
+    public String toAdminFramePanel(){
+
+        return "adminFramePanel";
+    }
+
     @GetMapping("/services")
     public String toUslugi() {
 
