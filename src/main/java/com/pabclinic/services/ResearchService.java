@@ -28,4 +28,10 @@ public class ResearchService {
         researchRepository.removeResearch(researchName);
 
     }
+
+    public void addResearch(ResearchDTO researchDTO) {
+
+        researchRepository.addResearchToDb(researchDTO);
+
+    }
 }

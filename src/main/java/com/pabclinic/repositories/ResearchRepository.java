@@ -1,6 +1,9 @@
 package com.pabclinic.repositories;
+
 import com.pabclinic.configurations.DataBase;
+import com.pabclinic.model.dtos.PatientDTO;
 import com.pabclinic.model.dtos.ResearchDTO;
+import com.pabclinic.model.dtos.VisitDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -68,4 +71,35 @@ public class ResearchRepository {
         }
     }
 
+    public void addResearchToDb(ResearchDTO researchDTO) {
+
+        try {
+            dataBase.connectToDb();
+
+            String queryCount = "SELECT COUNT(*) from badania";
+
+            ResultSet rs = dataBase.getStmt().executeQuery(queryCount);
+            rs.next();
+
+            int i = rs.getInt("count");
+
+            String queryInsert = "insert into badania (nazwabadania, cenabadania) values (?, ?)";
+
+            PreparedStatement preparedStatement = dataBase.getConn().prepareStatement(queryInsert);
+
+            preparedStatement.setString(1, researchDTO.getResearchName());
+            preparedStatement.setInt(2, researchDTO.getResearchPrice());
+
+            preparedStatement.executeUpdate();
+
+            dataBase.disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
 }
+
