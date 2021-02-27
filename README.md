@@ -18,13 +18,23 @@ Screenshots:
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/bszymkowiak/PABClinic/main/src/main/resources/static/images/readme/page_1.jpg">
+  <br>
   <img src="https://raw.githubusercontent.com/bszymkowiak/PABClinic/main/src/main/resources/static/images/readme/page_2.jpg">
+    <br>
   <img src="https://raw.githubusercontent.com/bszymkowiak/PABClinic/main/src/main/resources/static/images/readme/page_3.jpg">
+    <br>
   <img src="https://raw.githubusercontent.com/bszymkowiak/PABClinic/main/src/main/resources/static/images/readme/page_4.jpg">
+    <br>
   <img src="https://raw.githubusercontent.com/bszymkowiak/PABClinic/main/src/main/resources/static/images/readme/page_5.jpg">
+    <br>
   <img src="https://raw.githubusercontent.com/bszymkowiak/PABClinic/main/src/main/resources/static/images/readme/panel_1.jpg">
+    <br>
     <img src="https://raw.githubusercontent.com/bszymkowiak/PABClinic/main/src/main/resources/static/images/readme/panel_12.jpg">
+    <br>
       <img src="https://raw.githubusercontent.com/bszymkowiak/PABClinic/main/src/main/resources/static/images/readme/panel_2.jpg">
+    <br>
         <img src="https://raw.githubusercontent.com/bszymkowiak/PABClinic/main/src/main/resources/static/images/readme/panel_21.jpg">
+    <br>
           <img src="https://raw.githubusercontent.com/bszymkowiak/PABClinic/main/src/main/resources/static/images/readme/panel_31.jpg">
+    <br>
 </p>
