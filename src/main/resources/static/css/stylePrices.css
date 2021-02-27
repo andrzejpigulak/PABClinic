@@ -22,6 +22,10 @@ body {
     width: 100%
 }
 
+#researchTable {
+    margin: auto;
+}
+
 .top_nav a {
     text-decoration: none;
     border-right: 1px solid gray;
@@ -35,8 +39,8 @@ body {
 }
 
 .top_nav a.home {
-    background-color: #000080;
-    color: white;
+    background-color: white;
+    color: gray;
     margin-left: 10%;
 }
 
@@ -45,8 +49,18 @@ body {
     color: white;
 }
 
+.top_nav a.prices{
+	background-color: #000080;
+	color: white;
+}
+
 .top_nav a.vip {
     color: red;
+}
+
+.top_nav a:hover {
+    background-color: #000080;
+    color: white;
 }
 
 .top_nav a:hover {

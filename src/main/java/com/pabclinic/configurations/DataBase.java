@@ -10,8 +10,8 @@ public class DataBase {
     private static final String URL = "jdbc:postgresql://localhost/PABClinic";
     private static final String LOGIN = "postgres";
 //    private static final String PASSWORD = "ANDpig1906!@"; // Andrzeja hasło na postgresa
-        private static final String PASSWORD = "Qparox123!"; // Pawła hasło na postgresa
-//    private static final String PASSWORD = "postgres"; // Bartka hasło na postgresa
+//        private static final String PASSWORD = "Qparox123!"; // Pawła hasło na postgresa
+    private static final String PASSWORD = "postgres"; // Bartka hasło na postgresa
 
     private Statement stmt;
     private Connection conn;
