@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
 
     private DoctorDTO singleDoctor;
+    private ResearchDTO singleResearch;
     private ResearchService researchService;
     private DoctorService doctorService;
 
@@ -41,6 +42,15 @@ public class AdminController {
         return "doctorEdit";
     }
 
+    @GetMapping("/researchEdit")
+    public String toResearchEdit(Model model) {
+
+        System.out.println(singleResearch);
+        model.addAttribute("research", singleResearch);
+
+        return "researchEdit";
+    }
+
     @PostMapping(value = "/doctors", params = "addDoctor")
     public String addDoctor(@ModelAttribute DoctorDTO doctorDTO) {
 
@@ -54,7 +64,7 @@ public class AdminController {
 
         researchService.addResearch(researchDTO);
 
-        return "redirect:/adminFramePanel";
+        return "redirect:/researchList";
     }
 
     @PostMapping(value = "/doctors", params = "saveDoctor")
@@ -85,8 +95,26 @@ public class AdminController {
 
     }
 
+    @PostMapping(value = "/editResearch", params = "edit_research")
+    public String editResearch(@RequestParam String researchName) {
+
+        System.out.println(researchName);
+        singleResearch = researchService.findResearchByName(researchName);
+
+        return "redirect:/researchEdit";
+    }
+
+    @PostMapping(value = "/researchList", params = "saveResearch")
+    public String saveResearch(@ModelAttribute ResearchDTO researchDTO) {
+
+        System.out.println(researchDTO);
+        researchService.editResearch(researchDTO);
+
+        return "redirect:/researchList";
+    }
+
     @PostMapping(value = "/editDoctor", params = "edit_doctor")
-    public String editPatient(@RequestParam String login) {
+    public String editDoctor(@RequestParam String login) {
 
         System.out.println(login);
          singleDoctor = doctorService.findDoctorByUsername(login);

@@ -6,3 +6,10 @@ body {
     margin-left: auto;
     margin-right:auto;
 }
+
+.addResearch {
+    padding: 10px 12px;
+    border: 1px solid black;
+    margin: 10px auto;
+    width: 38%;
+}

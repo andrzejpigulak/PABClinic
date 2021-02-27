@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/researchEditStyle.css">
+</head>
+<body>
+
+<table>
+    <h2 style="margin: 20px">Kliknij na pole, które chcesz edytować</h2>
+</table>
+
+<form action="#" th:action="@{/researchList}" method="post">
+    <table border="1" style="width:50%; margin: 20px; text-align: center">
+        <thead>
+        <tr>
+            <th>Nazwa badania</th>
+            <th>Cena</th>
+            <th>Id</th>
+        </tr>
+        </thead>
+        <tr>
+            <td>
+                <input class="text_size" type="text" th:field="${research.researchName}">
+            </td>
+            <td>
+                <input class="id_size" type="number" th:field="${research.researchPrice}">
+            </td>
+            <td>
+                <input class="id_size" type="number" th:field="${research.research_id}" readonly>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <input style="margin-left: 20px" type="submit" value="Zapisz" name="saveResearch">
+</form>
+
+</body>
+</html>

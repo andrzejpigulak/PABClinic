@@ -7,6 +7,7 @@
 </head>
 <body>
 <script type="text/javascript" src="js/patientList.js"></script>
+
 <div class="addPatient">
     <h3>DODANIE PACJENTA</h3>
     <form action="#" th:action="@{/patients}" method="post">
@@ -75,7 +76,9 @@
         </td>
     </tr>
 </table>
+
 </body>
+
 <script>
     var filtersConfig = {
   // instruct TableFilter location to import ressources from
@@ -96,6 +99,7 @@
     'string', 'string', 'number',
     'string', 'string'
   ],
+
   col_widths: [
     '150px', '150px', '250px',
     '100px', '125px', '150px',
@@ -107,6 +111,7 @@
     images_path: 'https://unpkg.com/tablefilter@latest/dist/tablefilter/style/themes/'
   }]
 };
+
 var tf = new TableFilter('patientTable', filtersConfig);
 tf.init();
 </script>

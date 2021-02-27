@@ -8,36 +8,42 @@
 <body>
 <script type="text/javascript" src="patientList.js"></script>
 
+<div class="addResearch">
+    <h3>DODANIE BADANIA/ZABIEGU</h3>
+    <form action="#" th:action="@{/researchList}" method="post">
+        <label>Nazwa badania: </label>
+        <input type="text" th:field="${research.researchName}" placeholder="Wymagane">
+        <label> Cena badania: </label>
+        <input type="number" th:field="${research.researchPrice}" placeholder="Wymagane"><br><br>
+        <br><input type="submit" value="Dodaj badania/zabieg" name="addResearch">
+    </form>
+</div>
+
 <table id="researchTable" border="1" style="width:50%">
     <thead>
     <tr>
         <th>Id badania</th>
         <th>Nazwa badania</th>
         <th>Cena badania (w zł)</th>
-        <th>Usuń</th>
+        <th>Usunięcie</th>
+        <th>Edycja</th>
     </tr>
     </thead>
     <tbody>
-
-    <div class="addResearch">
-        <h3>DODANIE LEKARZA</h3>
-        <form action="#" th:action="@{/researchList}" method="post">
-            <label>Nazwa badania: </label>
-            <input type="text" th:field="${research.researchName}" placeholder="Wymagane">
-            <label> Cena badania: </label>
-            <input type="number" th:field="${research.researchPrice}" placeholder="Wymagane"><br><br>
-            <br><input type="submit" value="Dodaj badanie" name="addResearch">
-        </form>
-    </div>
-
     <tr th:each="research : ${researchList}">
         <td><p th:text="${research.research_id}"></p></td>
         <td><p th:text="${research.researchName}"></p></td>
         <td><p th:text="${research.researchPrice}"></p></td>
-        <td>
+        <td style="text-align: center">
             <form th:action="@{deleteResearch}" method="post">
-                <input type="hidden" name="researchName" th:value="${research.researchName}" />
-                <input type="submit" value="Delete" name="delete_researchName"  />
+                <input type="hidden" name="researchName" th:value="${research.researchName}"/>
+                <input type="submit" value="Delete" name="delete_researchName"/>
+            </form>
+        </td>
+        <td style="text-align: center">
+            <form th:action="@{editResearch}" method="post">
+                <input type="hidden" name="researchName" th:value="${research.researchName}"/>
+                <input type="submit" value="Edit" name="edit_research"/>
             </form>
         </td>
     </tr>
@@ -79,6 +85,8 @@
 
 var tf = new TableFilter('researchTable', filtersConfig);
 tf.init();
+
+
 
 
 </script>
