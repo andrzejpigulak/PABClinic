@@ -2,6 +2,11 @@ body{
     background:#e8e8e8;
 }
 
+.container{
+  display: flex;
+  justify-content: center;
+}
+
 label {
     display: block;
     font: 1rem 'Fira Sans', sans-serif;
@@ -9,4 +14,16 @@ label {
 
 input, label {
     margin: .4rem 0;
+}
+
+input[type=submit]{
+    background-color: #479ded;
+    font-size: 16px;
+    color:black;
+    font-weight:500;
+}
+
+input[type=submit]:hover{
+    background-color: #00275e;
+    color:white;
 }
