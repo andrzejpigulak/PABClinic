@@ -7,7 +7,6 @@
 </head>
 <body>
 <script type="text/javascript" src="js/patientList.js"></script>
-
 <div class="addPatient">
     <h3>DODANIE PACJENTA</h3>
     <form action="#" th:action="@{/patients}" method="post">
@@ -36,7 +35,7 @@
         <br><input type="submit" value="Dodaj pacjenta" name="addPatient">
     </form>
 </div>
-<table id="patientTable" border="1" style="width:50%">
+<table id="patientTable" border="1" style="width:50%; margin: auto;">
     <thead>
     <tr>
         <th>Imie</th>
@@ -48,6 +47,8 @@
         <th>Kod pocztowy</th>
         <th>Miasto</th>
         <th>Id</th>
+        <th>Usunięcie</th>
+        <th>Edycja</th>
     </tr>
     </thead>
     <tr th:each="patient : ${patients}">
@@ -60,13 +61,13 @@
         <td><p th:text="${patient.postCode}"></p></td>
         <td><p th:text="${patient.city}"></p></td>
         <td><p th:text="${patient.id}"></p></td>
-        <td>
+        <td style="text-align: center">
             <form th:action="@{deletePatient}" method="post">
-                <input type="hidden" name="login" th:value="${patient.username}" />
-                <input type="submit" value="Delete" name="delete_patient"  />
+                <input type="hidden" name="login" th:value="${patient.username}"/>
+                <input type="submit" value="Delete" name="delete_patient"/>
             </form>
         </td>
-        <td>
+        <td style="text-align: center">
             <form th:action="@{editPatient}" method="post">
                 <input type="hidden" name="id" th:value="${patient.id}"/>
                 <input type="submit" value="Edit" name="edit_patient"/>
@@ -74,9 +75,7 @@
         </td>
     </tr>
 </table>
-
 </body>
-
 <script>
     var filtersConfig = {
   // instruct TableFilter location to import ressources from
@@ -97,23 +96,18 @@
     'string', 'string', 'number',
     'string', 'string'
   ],
-
   col_widths: [
     '150px', '150px', '250px',
     '100px', '125px', '150px',
     '85px', '100px', '60px',
-    '60px','60px'
+    '80px','80px'
   ],
   extensions: [{
     name: 'sort',
     images_path: 'https://unpkg.com/tablefilter@latest/dist/tablefilter/style/themes/'
   }]
 };
-
 var tf = new TableFilter('patientTable', filtersConfig);
 tf.init();
-
-
-
 </script>
 </html>
