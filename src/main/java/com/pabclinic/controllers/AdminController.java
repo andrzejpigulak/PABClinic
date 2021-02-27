@@ -1,4 +1,5 @@
 package com.pabclinic.controllers;
+import com.pabclinic.model.dtos.VisitDTO;
 import com.pabclinic.services.DoctorService;
 import com.pabclinic.services.ResearchService;
 import com.pabclinic.model.dtos.DoctorDTO;
@@ -26,7 +27,7 @@ public class AdminController {
     @GetMapping("/researchList")
     public String toResearchList(Model model) {
 
-        model.addAttribute("newResearch", new ResearchDTO());
+        model.addAttribute("research", new ResearchDTO());
         model.addAttribute("researchList", researchService.getAllResearches());
 
         return "researchList";
@@ -48,13 +49,13 @@ public class AdminController {
         return "redirect:/doctors";
     }
 
-//    @PostMapping(value = "/doctors", params = "editDoctor")
-//    public String editDoctor(@ModelAttribute DoctorDTO doctorDTO) {
-//
-//        singleDoctor = doctorService.findDoctor(doctorDTO);
-//
-//        return "redirect:/doctorEdit";
-//    }
+    @PostMapping(value = "/researchList", params = "addResearch")
+    public String addResearch(@ModelAttribute ResearchDTO researchDTO) {
+
+        researchService.addResearch(researchDTO);
+
+        return "redirect:/adminFramePanel";
+    }
 
     @PostMapping(value = "/doctors", params = "saveDoctor")
     public String saveDoctor(@ModelAttribute DoctorDTO doctorDTO) {

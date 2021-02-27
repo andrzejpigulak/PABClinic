@@ -19,6 +19,17 @@
     </thead>
     <tbody>
 
+    <div class="addResearch">
+        <h3>DODANIE LEKARZA</h3>
+        <form action="#" th:action="@{/researchList}" method="post">
+            <label>Nazwa badania: </label>
+            <input type="text" th:field="${research.researchName}" placeholder="Wymagane">
+            <label> Cena badania: </label>
+            <input type="number" th:field="${research.researchPrice}" placeholder="Wymagane"><br><br>
+            <br><input type="submit" value="Dodaj badanie" name="addResearch">
+        </form>
+    </div>
+
     <tr th:each="research : ${researchList}">
         <td><p th:text="${research.research_id}"></p></td>
         <td><p th:text="${research.researchName}"></p></td>

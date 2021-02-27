@@ -41,12 +41,6 @@ public class DoctorController {
         return "pageDoctor";
     }
 
-    @PostMapping("/login")
-    public String afterLogin() {
-
-        return "redirect:/index";
-    }
-
     @GetMapping("/addVisitPatient")
     public String toAddVisitPatient(Model model) {
 

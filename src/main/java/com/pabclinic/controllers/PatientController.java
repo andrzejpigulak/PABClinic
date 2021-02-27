@@ -120,7 +120,7 @@ public class PatientController {
 
         visitService.registerVisit(visitDTO);
 
-        return "redirect:/index";
+        return "redirect:/patientFramePanel";
     }
 
     @PostMapping(value = "/patients", params = "addPatient")

@@ -85,7 +85,7 @@ public class VisitService {
         emailService.sendMessageAfterRegistrationToAVisit(patientRepository.getEmailFromUsername(), singleVisitDTO.getDoctorName(),
                 singleVisitDTO.getDoctorLastName(), singleVisitDTO.getVisitDate(), visitDTO.getVisitTime());
 
-        singleVisitDTO = null;
+        singleVisitDTO = new SingleVisitDTO();
 
     }
 
