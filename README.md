@@ -1,7 +1,7 @@
-This application was created by Bartosz Szymkowiak, Andrzej Pigulak and Paweł Gwizadała as a seccond project for 
+This application was created by Bartosz Szymkowiak, Andrzej Pigulak and Paweł Gwizdała as a seccond project for 
 Software Development Academy Course.
 
-This application is designed for Medical Clinic, where Patients can register to their account and to register to a doctor.
+This application is designed for Medical Clinic, where Patients can register to their account and to register to a visit to doctors.
 There are also special panels for Patient, Doctors and Admin.
 
 We used:
