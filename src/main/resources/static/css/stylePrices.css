@@ -35,7 +35,6 @@ body {
 }
 
 .top_nav a.home {
-    background-color: #000080;
     color: white;
     margin-left: 10%;
 }
@@ -87,6 +86,9 @@ body {
     text-align: justify;
 }
 
+#researchTable {
+    margin: auto;
+}
 
 
 /*stopka*/

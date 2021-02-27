@@ -1,10 +1,12 @@
 package com.pabclinic.repositories;
 
 import com.pabclinic.configurations.DataBase;
+import com.pabclinic.model.dtos.DoctorDTO;
 import com.pabclinic.model.dtos.PatientDTO;
 import com.pabclinic.model.dtos.ResearchDTO;
 import com.pabclinic.model.dtos.VisitDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
@@ -89,6 +91,56 @@ public class ResearchRepository {
 
             preparedStatement.setString(1, researchDTO.getResearchName());
             preparedStatement.setInt(2, researchDTO.getResearchPrice());
+
+            preparedStatement.executeUpdate();
+
+            dataBase.disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public ResearchDTO findResearchByNameFromDb(String researchName) {
+
+        ResearchDTO research= null;
+
+        try {
+            dataBase.connectToDb();
+
+            String queryEdit = "select * from badania where nazwaBadania='" + researchName + "'";
+
+            ResultSet rs = dataBase.getStmt().executeQuery(queryEdit);
+
+            while (rs.next()) {
+                research = new ResearchDTO(rs.getInt("badanie_ID"), rs.getString("nazwaBadania"), rs.getInt("cenaBadania"));
+            }
+
+            dataBase.disconnectDB();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return research;
+    }
+
+    public void updateResearch(ResearchDTO research) {
+
+        try {
+            dataBase.connectToDb();
+
+            String queryUpdate = "update badania set nazwaBadania=?, cenaBadania=? where badanie_ID=" + research.getResearch_id();
+            System.out.println(queryUpdate);
+
+            PreparedStatement preparedStatement = dataBase.getConn().prepareStatement(queryUpdate);
+
+            preparedStatement.setString(1, research.getResearchName());
+            preparedStatement.setInt(2, research.getResearchPrice());
 
             preparedStatement.executeUpdate();
 

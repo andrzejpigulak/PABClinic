@@ -1,5 +1,6 @@
 package com.pabclinic.services;
 
+import com.pabclinic.model.dtos.DoctorDTO;
 import com.pabclinic.repositories.ResearchRepository;
 import com.pabclinic.model.dtos.ResearchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,15 @@ public class ResearchService {
 
         researchRepository.addResearchToDb(researchDTO);
 
+    }
+
+    public ResearchDTO findResearchByName(String researchName) {
+
+        return researchRepository.findResearchByNameFromDb(researchName);
+    }
+
+    public void editResearch(ResearchDTO researchDTO) {
+
+        researchRepository.updateResearch(researchDTO);
     }
 }
