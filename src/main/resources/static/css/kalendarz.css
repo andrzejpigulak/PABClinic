@@ -17,13 +17,13 @@ input, label {
 }
 
 input[type=submit]{
-    background-color: #479ded;
-    font-size: 16px;
+    background-color: #c9c9c9;
+    font-size: 14px;
     color:black;
     font-weight:500;
 }
 
 input[type=submit]:hover{
-    background-color: #00275e;
+    background-color: #a3a3a3;
     color:white;
 }

@@ -35,3 +35,15 @@ body {
 .city_size {
     width: 100px
 }
+
+input[type=submit]{
+    background-color: #c9c9c9;
+    font-size: 14px;
+    color:black;
+    font-weight:500;
+}
+
+input[type=submit]:hover{
+    background-color: #a3a3a3;
+    color:white;
+}
